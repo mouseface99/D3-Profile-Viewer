@@ -1,5 +1,6 @@
-package net.mf99.d3profileviewer;
+package net.mf99.d3viewer.ui;
 
+import net.mf99.d3viewer.R;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;

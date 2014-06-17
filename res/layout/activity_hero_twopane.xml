@@ -8,7 +8,7 @@
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
     android:showDividers="middle"
-    tools:context="net.mf99.d3profileviewer.HeroListActivity" >
+    tools:context="net.mf99.d3viewer.ui.HeroListActivity" >
 
     <!--
     This layout is a two-pane layout for the Heros
@@ -23,7 +23,7 @@
 
     <fragment
         android:id="@+id/hero_list"
-        android:name="net.mf99.d3profileviewer.HeroListFragment"
+        android:name="net.mf99.d3viewer.ui.HeroListFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"

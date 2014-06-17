@@ -1,4 +1,4 @@
-package net.mf99.d3profileviewer;
+package net.mf99.d3viewer.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,8 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import net.mf99.d3profileviewer.dummy.DummyContent;
+import net.mf99.d3viewer.R;
+import net.mf99.d3viewer.data.DummyContent;
 
 /**
  * A fragment representing a single Hero detail screen.

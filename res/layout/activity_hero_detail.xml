@@ -3,5 +3,5 @@
     android:id="@+id/hero_detail_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="net.mf99.d3profileviewer.HeroDetailActivity"
+    tools:context="net.mf99.d3viewer.ui.HeroDetailActivity"
     tools:ignore="MergeRootFrame" />

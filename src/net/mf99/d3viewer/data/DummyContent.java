@@ -1,4 +1,4 @@
-package net.mf99.d3profileviewer.dummy;
+package net.mf99.d3viewer.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package net.mf99.d3profileviewer;
+package net.mf99.d3viewer.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,8 +6,7 @@ import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import net.mf99.d3profileviewer.dummy.DummyContent;
+import net.mf99.d3viewer.data.DummyContent;
 
 /**
  * A list fragment representing a list of Heros. This fragment
