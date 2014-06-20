@@ -2,7 +2,9 @@ package net.mf99.d3viewer.data;
 
 import java.util.ArrayList;
 
+import net.mf99.d3viewer.Const.HERO_CLASS;
 import net.mf99.d3viewer.R;
+import net.mf99.d3viewer.data.unit.Hero;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +15,9 @@ import android.widget.ImageView;
 
 public class HeroListAdapter extends BaseAdapter {
 	Context mContext;
-	ArrayList<HeroListItem> mList;
+	ArrayList<Hero> mList;
 	View mHeaderView;
+	Hero mEmptyHero;
 	LayoutInflater mInflater;
 	int mPatagonLv, mKill, mEliteKill;
 	
@@ -24,7 +27,9 @@ public class HeroListAdapter extends BaseAdapter {
 		mKill = kill;
 		mEliteKill = eliteKill;
 		mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-	}
+		
+		mList = initFakeList();
+	}	
 
 	@Override
 	public int getCount() {
@@ -32,12 +37,11 @@ public class HeroListAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public HeroListItem getItem(int index) {
+	public Hero getItem(int index) {
 		if(index == 0)
 			return null;
-		else{
+		else
 			return mList.get(index-1);
-		}
 	}
 
 	@Override
@@ -50,12 +54,13 @@ public class HeroListAdapter extends BaseAdapter {
 	public View getView(int index, View view, ViewGroup group) {
 		// Customized Header
 		if(index == 0){
-			if(mHeaderView == null) 
+			if(mHeaderView == null) {
 				mHeaderView = mInflater.inflate(R.layout.hero_list_header, null);			
 			
-			((TextView)mHeaderView.findViewById(R.id.paragon_level)).setText(String.valueOf(mPatagonLv));
-			((TextView)mHeaderView.findViewById(R.id.number_kill)).setText(String.valueOf(mKill));
-			((TextView)mHeaderView.findViewById(R.id.number_kill_elite)).setText(String.valueOf(mEliteKill));
+				((TextView)mHeaderView.findViewById(R.id.paragon_level)).setText(String.valueOf(mPatagonLv));
+				((TextView)mHeaderView.findViewById(R.id.number_kill)).setText(String.valueOf(mKill));
+				((TextView)mHeaderView.findViewById(R.id.number_kill_elite)).setText(String.valueOf(mEliteKill));
+			}
 			
 			return mHeaderView;			
 		}
@@ -63,18 +68,37 @@ public class HeroListAdapter extends BaseAdapter {
 			if(view == null)
 				view = mInflater.inflate(R.layout.hero_list_item, null);
 			
-			HeroListItem hero = mList.get(index-1);
+			Hero hero = mList.get(index-1);
 			
 			
 			((ImageView)view.findViewById(R.id.hero_head)).setImageResource(hero.getHeaderSource());
 			
 			((TextView)view.findViewById(R.id.hero_name)).setText(hero.mName);
-			String heroInfo = "Lv " + hero.mLv + " " + mContext.getString(hero.getHeroTypeSource());
+			String heroInfo = "Lv " + hero.mLevel + " " + mContext.getString(hero.getHeroTypeSource());
 			((TextView)view.findViewById(R.id.hero_info)).setText(heroInfo);
+			//mList.get(index-1).mView = view;
 			
 			return view;
 			
 		}
+	}
+	
+	private ArrayList<Hero> initFakeList() {
+		ArrayList<Hero> list = new ArrayList<Hero>();
+		
+		Hero hero = new Hero("Legolas", 123, 70, HERO_CLASS.HUNTER, false, 5, null, null, null);
+		list.add(hero);
+		
+		hero = new Hero("JamesHarden", 2564, 65, HERO_CLASS.MONK, true, 4, null, null, null);
+		list.add(hero);
+		
+		hero = new Hero("Sir", 25560, 70, HERO_CLASS.CRUSADER, true, 4, null, null, null);
+		list.add(hero);
+		
+		hero = new Hero("Star", 7789456, 30, HERO_CLASS.WIZARD, false, 2, null, null, null);
+		list.add(hero);
+		
+		return list;
 	}
 
 }

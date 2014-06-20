@@ -1,17 +1,37 @@
-package net.mf99.d3viewer.data;
+package net.mf99.d3viewer.data.unit;
 
-import net.mf99.d3viewer.Const;
+import java.util.ArrayList;
+
 import net.mf99.d3viewer.R;
-import android.view.View;
 import net.mf99.d3viewer.Const.HERO_CLASS;
 
-public class HeroListItem {
-	public HERO_CLASS mClass;
+public class Hero {
 	public String mName;
-	public int mLv;
+	public long mId;
+	public int mLevel;
+	public HERO_CLASS mClass;
 	public boolean isMale;
+	public int mProgression;
+	public EquipList mEquips;
+	public ArrayList<Skill> mActiveSkills;
+	public ArrayList<Skill> mPassiveSkills;
 	
-	public View mView;
+	public Hero(String mName, long mId, int mLevel, HERO_CLASS mClass,
+			boolean isMale, int mProgression, EquipList mEquips,
+			ArrayList<Skill> mActiveSkills, ArrayList<Skill> mPassiveSkills) {
+		super();
+		this.mName = mName;
+		this.mId = mId;
+		this.mLevel = mLevel;
+		this.mClass = mClass;
+		this.isMale = isMale;
+		this.mProgression = mProgression;
+		this.mEquips = mEquips;
+		this.mActiveSkills = mActiveSkills;
+		this.mPassiveSkills = mPassiveSkills;
+	}
+
+	
 	
 	public int getHeaderSource(){
 		switch(mClass){
@@ -49,5 +69,4 @@ public class HeroListItem {
 		}
 		return 0;
 	}
-
 }

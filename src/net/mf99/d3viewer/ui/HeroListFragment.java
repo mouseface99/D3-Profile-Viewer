@@ -4,9 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import net.mf99.d3viewer.data.DummyContent;
+import net.mf99.d3viewer.data.HeroListAdapter;
 
 /**
  * A list fragment representing a list of Heros. This fragment
@@ -18,6 +17,7 @@ import net.mf99.d3viewer.data.DummyContent;
  * interface.
  */
 public class HeroListFragment extends ListFragment {
+	HeroListAdapter mAdapter;
 
     /**
      * The serialization (saved instance state) Bundle key representing the
@@ -69,12 +69,8 @@ public class HeroListFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // TODO: replace with a real list adapter.
-        setListAdapter(new ArrayAdapter<DummyContent.DummyItem>(
-                getActivity(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
-                DummyContent.ITEMS));
+        mAdapter = new HeroListAdapter(getActivity(), 100, 5000, 500);
+        setListAdapter(mAdapter);
     }
 
     @Override
@@ -114,7 +110,8 @@ public class HeroListFragment extends ListFragment {
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
-        mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
+        if(position != 0)
+        	mCallbacks.onItemSelected(mAdapter.getItem(position).mName);
     }
 
     @Override
