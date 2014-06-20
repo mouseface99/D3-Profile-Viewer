@@ -3,5 +3,13 @@
 
     <string name="app_name">D3 Viewer</string>
     <string name="title_hero_detail">Hero Detail</string>
+    
+    <string name="hero_type_hunter">Demon Hunter</string>
+    <string name="hero_type_monk">Monk</string>
+    <string name="hero_type_doctor">Witch Doctor</string>
+    <string name="hero_type_barbarian">Barbarian</string>
+    <string name="hero_type_wizard">Wizard</string>
+    <string name="hero_type_crusader">Crusader</string>
+    
 
 </resources>

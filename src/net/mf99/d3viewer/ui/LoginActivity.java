@@ -99,6 +99,13 @@ public class LoginActivity extends Activity {
 			mBattleTagView.setError(getString(R.string.error_invalid_battletag));
 			focusView = mBattleTagView;
 			cancel = true;
+		} else {
+			String num = mBattleTag.substring(mBattleTag.indexOf('#')+1, mBattleTag.length());
+			if(num.length() != 4 || !TextUtils.isDigitsOnly(num)){
+				mBattleTagView.setError(getString(R.string.error_invalid_battletag));
+				focusView = mBattleTagView;
+				cancel = true;
+			}
 		}
 
 		if (cancel) {
@@ -108,7 +115,7 @@ public class LoginActivity extends Activity {
 		} else {
 			// Show a progress spinner, and kick off a background task to
 			// perform the user login attempt.
-			mLoginStatusMessageView.setText(R.string.login_progress_signing_in);
+			mLoginStatusMessageView.setText(R.string.login_progress_loading);
 			showProgress(true);
 			mAuthTask = new UserLoginTask();
 			mAuthTask.execute((Void) null);
