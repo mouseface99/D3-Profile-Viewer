@@ -1,9 +1,268 @@
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/hero_detail"
-    style="?android:attr/textAppearanceLarge"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    android:textIsSelectable="true"
-    tools:context="net.mf99.d3viewer.ui.HeroDetailFragment" />
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+<LinearLayout
+      android:layout_width="fill_parent"
+  	  android:layout_height="wrap_content"
+  	  android:orientation="vertical">
+	<!-- Title info area -->
+  	<RelativeLayout
+   		android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:background="#336699" >
+    	<TextView
+    	    android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentTop="true"
+	        android:text="@string/hero_type_hunter"
+	        android:textAlignment="center"
+    	    />
+    </RelativeLayout>
+    
+  	<!-- Equip info area -->
+	<RelativeLayout
+   		android:layout_width="fill_parent"
+    	android:layout_height="wrap_content"
+    	android:background="#000000" >
+    	
+	    <ImageView
+	        android:id="@+id/view_head"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentTop="true"
+	        android:layout_centerHorizontal="true"
+	        android:src="@drawable/sample_head"
+	        android:contentDescription="@string/icon_desc" />
+	
+	    <ImageView
+	        android:id="@+id/view_torso"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/view_head"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="-32dp"
+	        android:src="@drawable/sample_torso"
+	        android:contentDescription="@string/icon_desc" />
+	    
+	    <ImageView
+	        android:id="@+id/view_waist"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/view_torso"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="-32dp"
+	        android:src="@drawable/sample_waist"
+	        android:contentDescription="@string/icon_desc" />
+	
+	    <ImageView
+	        android:id="@+id/view_legs"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/view_waist"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="-32dp"
+	        android:src="@drawable/sample_legs"
+	        android:contentDescription="@string/icon_desc" />
+
+	
+	    <ImageView
+	        android:id="@+id/view_feet"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/view_legs"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="-32dp"
+	        android:src="@drawable/sample_boots"
+	        android:contentDescription="@string/icon_desc" />
+
+	    <ImageView
+	        android:id="@+id/view_shoulder"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignTop="@+id/view_head"
+	        android:layout_toLeftOf="@+id/view_head"
+	        android:layout_marginRight="20dp"
+	        android:src="@drawable/sample_shoulder"
+	        android:contentDescription="@string/icon_desc" />
+
+	    <ImageView
+	        android:id="@+id/view_hand"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/view_shoulder"
+	        android:layout_below="@+id/view_shoulder"
+	        android:src="@drawable/sample_hand"
+	        android:contentDescription="@string/icon_desc" />
+
+	    <ImageView
+	        android:id="@+id/view_right_ring"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/view_hand"
+	        android:layout_below="@+id/view_hand"
+	        android:src="@drawable/sample_ring"
+	        android:contentDescription="@string/icon_desc" />
+
+	    <ImageView
+	        android:id="@+id/view_mainhand"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/view_right_ring"
+	        android:layout_below="@+id/view_right_ring"
+	        android:src="@drawable/sample_mainhand"
+	        android:contentDescription="@string/icon_desc" />
+
+	    <ImageView
+	        android:id="@+id/view_neck"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/view_head"
+	        android:layout_toRightOf="@+id/view_head"
+	        android:layout_marginLeft="20dp"
+	        android:src="@drawable/sample_neck"
+	        android:contentDescription="@string/icon_desc" />
+
+	    <ImageView
+	        android:id="@+id/view_bracers"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/view_neck"
+	        android:layout_below="@+id/view_neck"
+	        android:src="@drawable/sample_bracers"
+	        android:contentDescription="@string/icon_desc" />
+
+	    <ImageView
+	        android:id="@+id/view_left_ring"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/view_bracers"
+	        android:layout_below="@+id/view_bracers"
+	        android:src="@drawable/sample_ring"
+	        android:contentDescription="@string/icon_desc" />
+
+	    <ImageView
+	        android:id="@+id/view_offhand"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/view_left_ring"
+	        android:layout_below="@+id/view_left_ring"
+	        android:src="@drawable/sample_offhand"
+	        android:contentDescription="@string/icon_desc" />
+
+	</RelativeLayout>
+	
+	<!-- Skill info area -->
+  	<RelativeLayout
+  	    android:layout_width="fill_parent"
+  	    android:layout_height="wrap_content"
+  	    android:background="#000000" >
+	    
+  	    <View
+  	        android:id="@+id/space_view"
+  	        android:layout_width="64dp"
+  	        android:layout_height="64dp"
+  	        android:layout_alignParentTop="true"
+  	        android:layout_centerHorizontal="true"
+  	        />
+
+  	    <ImageView
+  	        android:id="@+id/view_active_skill_1"
+  	        android:layout_width="wrap_content"
+  	        android:layout_height="wrap_content"
+  	        android:layout_alignParentTop="true"
+  	        android:layout_toLeftOf="@+id/space_view"
+  	        android:contentDescription="@string/icon_desc"
+  	        android:src="@drawable/sample_active_skill" />
+  	        
+  	    <ImageView
+  	        android:id="@+id/view_active_skill_2"
+  	        android:layout_width="wrap_content"
+  	        android:layout_height="wrap_content"
+  	        android:layout_alignParentTop="true"
+  	        android:layout_toRightOf="@+id/space_view"
+  	        android:contentDescription="@string/icon_desc"
+  	        android:src="@drawable/sample_active_skill" />
+  	    
+  	    <LinearLayout
+  	        android:id="@+id/active_skill"
+  	        android:layout_width="wrap_content"
+  	        android:layout_height="wrap_content"
+  	        android:layout_below="@+id/space_view"
+  	        android:layout_marginTop="5dp"
+  	        android:layout_centerHorizontal="true">
+  	    
+	  	    <ImageView
+	  	        android:id="@+id/view_active_skill_3"
+	  	        android:layout_width="wrap_content"
+	  	        android:layout_height="wrap_content"
+	  	        android:src="@drawable/sample_active_skill"
+	  	        android:contentDescription="@string/icon_desc" />
+	
+	  	    <ImageView
+	  	        android:id="@+id/view_active_skill_4"
+	  	        android:layout_width="wrap_content"
+	  	        android:layout_height="wrap_content"
+	  	        android:src="@drawable/sample_active_skill"
+	  	        android:layout_marginLeft="10dp"
+	  	        android:contentDescription="@string/icon_desc" />
+	  	    
+	  	    <ImageView
+	  	        android:id="@+id/view_active_skill_5"
+	  	        android:layout_width="wrap_content"
+	  	        android:layout_height="wrap_content"
+	  	        android:src="@drawable/sample_active_skill"
+	  	        android:layout_marginLeft="10dp"
+	  	        android:contentDescription="@string/icon_desc" />
+	  	    
+	  	    <ImageView
+	  	        android:id="@+id/view_active_skill_6"
+	  	        android:layout_width="wrap_content"
+	  	        android:layout_height="wrap_content"
+	  	        android:src="@drawable/sample_active_skill"
+	  	        android:layout_marginLeft="10dp"
+	  	        android:contentDescription="@string/icon_desc" />
+  	    </LinearLayout>
+  	    
+  	    <LinearLayout
+  	        android:layout_width="wrap_content"
+  	        android:layout_height="wrap_content"
+  	        android:layout_below="@+id/active_skill"
+  	        android:layout_marginTop="5dp"
+  	        android:layout_centerHorizontal="true">
+  	    
+	  	    <ImageView
+	  	        android:id="@+id/view_passive_skill_1"
+	  	        android:layout_width="wrap_content"
+	  	        android:layout_height="wrap_content"
+	  	        android:src="@drawable/sample_passive_skill"
+	  	        android:contentDescription="@string/icon_desc" />
+	
+	  	    <ImageView
+	  	        android:id="@+id/view_passive_skill_2"
+	  	        android:layout_width="wrap_content"
+	  	        android:layout_height="wrap_content"
+	  	        android:src="@drawable/sample_passive_skill"
+	  	        android:layout_marginLeft="10dp"
+	  	        android:contentDescription="@string/icon_desc" />
+	  	    
+	  	    <ImageView
+	  	        android:id="@+id/view_passive_skill_3"
+	  	        android:layout_width="wrap_content"
+	  	        android:layout_height="wrap_content"
+	  	        android:src="@drawable/sample_passive_skill"
+	  	        android:layout_marginLeft="10dp"
+	  	        android:contentDescription="@string/icon_desc" />
+	  	    
+	  	    <ImageView
+	  	        android:id="@+id/view_passive_skill_4"
+	  	        android:layout_width="wrap_content"
+	  	        android:layout_height="wrap_content"
+	  	        android:src="@drawable/sample_passive_skill"
+	  	        android:layout_marginLeft="10dp"
+	  	        android:contentDescription="@string/icon_desc" />
+  	    </LinearLayout>
+  	</RelativeLayout>
+
+</LinearLayout>
+</ScrollView>

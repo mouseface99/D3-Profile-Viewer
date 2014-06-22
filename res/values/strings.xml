@@ -11,5 +11,7 @@
     <string name="hero_type_wizard">Wizard</string>
     <string name="hero_type_crusader">Crusader</string>
     
+    <string name="icon_desc">icon</string>
+    
 
 </resources>
