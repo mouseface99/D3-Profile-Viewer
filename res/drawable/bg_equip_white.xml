@@ -6,4 +6,6 @@
         android:endColor="#4E3A2C"
         android:angle="45"
         />
+    <stroke android:width="2dp" android:color="#644F3F" />
+	<corners android:radius="8.0dp" />
 </shape>
