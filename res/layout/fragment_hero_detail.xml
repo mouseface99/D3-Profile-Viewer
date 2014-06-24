@@ -21,136 +21,272 @@
     </RelativeLayout>
     
   	<!-- Equip info area -->
-	<RelativeLayout
+  	<FrameLayout
    		android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
     	android:background="#000000" >
-    	
-	    <ImageView
-	        android:id="@+id/view_head"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignParentTop="true"
-	        android:layout_centerHorizontal="true"
-	        android:src="@drawable/sample_head"
-	        android:contentDescription="@string/icon_desc" />
+    	<!-- Equip background color -->
+    	<RelativeLayout
+	   		android:layout_width="fill_parent"
+	    	android:layout_height="wrap_content"
+	    	android:background="#000000" >
+	    	
+    	    <View		
+    	        android:id="@+id/bg_head"        
+		        android:layout_width="70dp"
+		        android:layout_height="70dp"
+		        android:layout_alignParentTop="true"
+		        android:layout_centerHorizontal="true"
+		        android:layout_marginTop="35dp"
+		        android:background="@drawable/bg_equip_gray"/>
+    	    
+    	    <View
+		        android:id="@+id/bg_torso"
+		        android:layout_width="70dp"
+		        android:layout_height="128dp"
+		        android:layout_below="@+id/bg_head"
+		        android:layout_marginTop="7dp"
+		        android:layout_centerHorizontal="true"		        
+		        android:background="@drawable/bg_equip_yellow" />
+    	    
+    	    <View
+		        android:id="@+id/bg_waist"
+		        android:layout_width="70dp"
+		        android:layout_height="32dp"
+		        android:layout_below="@+id/bg_torso"
+		        android:layout_marginTop="5dp"
+		        android:layout_centerHorizontal="true"
+		        android:background="@drawable/bg_equip_blue" />
+		
+		    <View
+		        android:id="@+id/bg_legs"
+		        android:layout_width="70dp"
+		        android:layout_height="100dp"
+		        android:layout_below="@+id/bg_waist"
+		        android:layout_centerHorizontal="true"
+		        android:layout_marginTop="10dp"
+		        android:background="@drawable/bg_equip_green" />
 	
-	    <ImageView
-	        android:id="@+id/view_torso"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_below="@+id/view_head"
-	        android:layout_centerHorizontal="true"
-	        android:layout_marginTop="-32dp"
-	        android:src="@drawable/sample_torso"
-	        android:contentDescription="@string/icon_desc" />
+		
+		    <View
+		        android:id="@+id/bg_feet"
+		        android:layout_width="70dp"
+		        android:layout_height="100dp"
+		        android:layout_below="@+id/bg_legs"
+		        android:layout_centerHorizontal="true"
+		        android:layout_marginTop="5dp"
+		        android:background="@drawable/bg_equip_gray" />
+	
+		    <View
+		        android:id="@+id/bg_shoulder"
+		        android:layout_width="70dp"
+		        android:layout_height="100dp"
+		        android:layout_alignTop="@+id/bg_head"
+		        android:layout_toLeftOf="@+id/bg_head"
+		        android:layout_marginRight="15dp" 
+		        android:layout_marginTop="-20dp"
+		        android:background="@drawable/bg_equip_orange"/>
+	
+		    <View
+		        android:id="@+id/bg_hand"
+		        android:layout_width="70dp"
+		        android:layout_height="128dp"
+		        android:layout_alignLeft="@+id/bg_shoulder"
+		        android:layout_below="@+id/bg_shoulder" 
+		        android:layout_marginTop="10dp"
+		        android:background="@drawable/bg_equip_yellow" />
+	
+		    <View
+		        android:id="@+id/bg_right_ring"
+		        android:layout_width="50dp"
+		        android:layout_height="50dp"
+		        android:layout_alignLeft="@+id/bg_hand"		        
+		        android:layout_below="@+id/bg_hand"
+		        android:layout_marginTop="10dp"
+		        android:layout_marginLeft="10dp"
+		        android:background="@drawable/bg_equip_blue" />
+	
+		    <View
+		        android:id="@+id/bg_mainhand"
+		        android:layout_width="70dp"
+		        android:layout_height="140dp"
+		        android:layout_alignLeft="@+id/bg_shoulder"
+		        android:layout_below="@+id/bg_right_ring"
+		        android:layout_marginTop="8dp"
+		        android:background="@drawable/bg_equip_white" />
+	
+		    <View
+		        android:id="@+id/bg_neck"
+		        android:layout_width="64dp"
+		        android:layout_height="64dp"
+		        android:layout_alignTop="@+id/bg_head"
+		        android:layout_toRightOf="@+id/bg_head"
+		        android:layout_marginLeft="15dp"
+		        android:layout_marginTop="32dp"
+		        android:background="@drawable/bg_equip_yellow" />
+	
+		    <View
+		        android:id="@+id/bg_bracers"
+		        android:layout_width="70dp"
+		        android:layout_height="110dp"
+		        android:layout_alignLeft="@+id/bg_neck"
+		        android:layout_below="@+id/bg_neck"
+		        android:layout_marginTop="10dp"
+		        android:background="@drawable/bg_equip_green" />
+	
+		    <View
+		        android:id="@+id/bg_left_ring"
+		        android:layout_width="50dp"
+		        android:layout_height="50dp"
+		        android:layout_alignLeft="@+id/bg_bracers"
+		        android:layout_below="@+id/bg_bracers"
+		        android:layout_marginTop="10dp"
+		        android:layout_marginLeft="10dp"
+		        android:background="@drawable/bg_equip_orange" />
+	
+		    <View
+		        android:id="@+id/bg_offhand"
+		        android:layout_width="70dp"
+		        android:layout_height="128dp"
+		        android:layout_alignLeft="@+id/bg_bracers"
+		        android:layout_below="@+id/bg_left_ring"
+		        android:layout_marginTop="10dp"
+		        android:background="@drawable/bg_equip_green" />
+    	    
+	    </RelativeLayout>
 	    
-	    <ImageView
-	        android:id="@+id/view_waist"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_below="@+id/view_torso"
-	        android:layout_centerHorizontal="true"
-	        android:layout_marginTop="-32dp"
-	        android:src="@drawable/sample_waist"
-	        android:contentDescription="@string/icon_desc" />
+    	<!-- Equip image -->
+		<RelativeLayout
+	   		android:layout_width="fill_parent"
+	    	android:layout_height="wrap_content">
+	    	
+		    <ImageView
+		        android:id="@+id/view_head"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentTop="true"
+		        android:layout_centerHorizontal="true"
+		        android:src="@drawable/sample_head"
+		        android:contentDescription="@string/icon_desc" />
+		
+		    <ImageView
+		        android:id="@+id/view_torso"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@+id/view_head"
+		        android:layout_centerHorizontal="true"
+		        android:layout_marginTop="-32dp"
+		        android:src="@drawable/sample_torso"
+		        android:contentDescription="@string/icon_desc" />
+		    
+		    <ImageView
+		        android:id="@+id/view_waist"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@+id/view_torso"
+		        android:layout_centerHorizontal="true"
+		        android:layout_marginTop="-32dp"
+		        android:src="@drawable/sample_waist"
+		        android:contentDescription="@string/icon_desc" />
+		
+		    <ImageView
+		        android:id="@+id/view_legs"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@+id/view_waist"
+		        android:layout_centerHorizontal="true"
+		        android:layout_marginTop="-24dp"
+		        android:src="@drawable/sample_legs"
+		        android:contentDescription="@string/icon_desc" />
 	
-	    <ImageView
-	        android:id="@+id/view_legs"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_below="@+id/view_waist"
-	        android:layout_centerHorizontal="true"
-	        android:layout_marginTop="-32dp"
-	        android:src="@drawable/sample_legs"
-	        android:contentDescription="@string/icon_desc" />
-
+		
+		    <ImageView
+		        android:id="@+id/view_feet"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@+id/view_legs"
+		        android:layout_centerHorizontal="true"
+		        android:layout_marginTop="-24dp"
+		        android:src="@drawable/sample_boots"
+		        android:contentDescription="@string/icon_desc" />
 	
-	    <ImageView
-	        android:id="@+id/view_feet"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_below="@+id/view_legs"
-	        android:layout_centerHorizontal="true"
-	        android:layout_marginTop="-32dp"
-	        android:src="@drawable/sample_boots"
-	        android:contentDescription="@string/icon_desc" />
-
-	    <ImageView
-	        android:id="@+id/view_shoulder"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignTop="@+id/view_head"
-	        android:layout_toLeftOf="@+id/view_head"
-	        android:layout_marginRight="20dp"
-	        android:src="@drawable/sample_shoulder"
-	        android:contentDescription="@string/icon_desc" />
-
-	    <ImageView
-	        android:id="@+id/view_hand"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignLeft="@+id/view_shoulder"
-	        android:layout_below="@+id/view_shoulder"
-	        android:src="@drawable/sample_hand"
-	        android:contentDescription="@string/icon_desc" />
-
-	    <ImageView
-	        android:id="@+id/view_right_ring"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignLeft="@+id/view_hand"
-	        android:layout_below="@+id/view_hand"
-	        android:src="@drawable/sample_ring"
-	        android:contentDescription="@string/icon_desc" />
-
-	    <ImageView
-	        android:id="@+id/view_mainhand"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignLeft="@+id/view_right_ring"
-	        android:layout_below="@+id/view_right_ring"
-	        android:src="@drawable/sample_mainhand"
-	        android:contentDescription="@string/icon_desc" />
-
-	    <ImageView
-	        android:id="@+id/view_neck"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignBottom="@+id/view_head"
-	        android:layout_toRightOf="@+id/view_head"
-	        android:layout_marginLeft="20dp"
-	        android:src="@drawable/sample_neck"
-	        android:contentDescription="@string/icon_desc" />
-
-	    <ImageView
-	        android:id="@+id/view_bracers"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignLeft="@+id/view_neck"
-	        android:layout_below="@+id/view_neck"
-	        android:src="@drawable/sample_bracers"
-	        android:contentDescription="@string/icon_desc" />
-
-	    <ImageView
-	        android:id="@+id/view_left_ring"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignLeft="@+id/view_bracers"
-	        android:layout_below="@+id/view_bracers"
-	        android:src="@drawable/sample_ring"
-	        android:contentDescription="@string/icon_desc" />
-
-	    <ImageView
-	        android:id="@+id/view_offhand"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignLeft="@+id/view_left_ring"
-	        android:layout_below="@+id/view_left_ring"
-	        android:src="@drawable/sample_offhand"
-	        android:contentDescription="@string/icon_desc" />
-
-	</RelativeLayout>
+		    <ImageView
+		        android:id="@+id/view_shoulder"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignTop="@+id/view_head"
+		        android:layout_toLeftOf="@+id/view_head"
+		        android:layout_marginRight="20dp"
+		        android:src="@drawable/sample_shoulder"
+		        android:contentDescription="@string/icon_desc" />
+	
+		    <ImageView
+		        android:id="@+id/view_hand"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignLeft="@+id/view_shoulder"
+		        android:layout_below="@+id/view_shoulder"
+		        android:src="@drawable/sample_hand"
+		        android:contentDescription="@string/icon_desc" />
+	
+		    <ImageView
+		        android:id="@+id/view_right_ring"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignLeft="@+id/view_hand"
+		        android:layout_below="@+id/view_hand"
+		        android:src="@drawable/sample_ring"
+		        android:contentDescription="@string/icon_desc" />
+	
+		    <ImageView
+		        android:id="@+id/view_mainhand"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignLeft="@+id/view_right_ring"
+		        android:layout_below="@+id/view_right_ring"
+		        android:src="@drawable/sample_mainhand"
+		        android:contentDescription="@string/icon_desc" />
+	
+		    <ImageView
+		        android:id="@+id/view_neck"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignBottom="@+id/view_head"
+		        android:layout_toRightOf="@+id/view_head"
+		        android:layout_marginLeft="20dp"
+		        android:src="@drawable/sample_neck"
+		        android:contentDescription="@string/icon_desc" />
+	
+		    <ImageView
+		        android:id="@+id/view_bracers"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignLeft="@+id/view_neck"
+		        android:layout_below="@+id/view_neck"
+		        android:src="@drawable/sample_bracers"
+		        android:contentDescription="@string/icon_desc" />
+	
+		    <ImageView
+		        android:id="@+id/view_left_ring"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignLeft="@+id/view_bracers"
+		        android:layout_below="@+id/view_bracers"
+		        android:src="@drawable/sample_ring"
+		        android:contentDescription="@string/icon_desc" />
+	
+		    <ImageView
+		        android:id="@+id/view_offhand"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignLeft="@+id/view_left_ring"
+		        android:layout_below="@+id/view_left_ring"
+		        android:src="@drawable/sample_offhand"
+		        android:contentDescription="@string/icon_desc" />
+	
+		</RelativeLayout>
+		
+	</FrameLayout>
 	
 	<!-- Skill info area -->
   	<RelativeLayout
