@@ -111,7 +111,7 @@ public class HeroListFragment extends ListFragment {
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
         if(position != 0)
-        	mCallbacks.onItemSelected(mAdapter.getItem(position).mName);
+        	mCallbacks.onItemSelected(String.valueOf(mAdapter.getItem(position).mId));
     }
 
     @Override

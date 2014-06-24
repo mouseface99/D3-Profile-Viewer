@@ -2,6 +2,8 @@ package net.mf99.d3viewer;
 
 public class Const {
 	
+	public static final String KEY_HERO_ID = "key_of_hero_id";
+	
 	public static enum SERVER_REGION{
 		TW,
 		US,
@@ -35,4 +37,6 @@ public class Const {
 		ORANGE,
 		GREEN
 	}
+
+	
 }
