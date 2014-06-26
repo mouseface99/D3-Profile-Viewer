@@ -82,7 +82,7 @@
 		        android:layout_below="@+id/bg_head"
 		        android:layout_marginTop="7dp"
 		        android:layout_centerHorizontal="true"		        
-		        android:background="@drawable/bg_equip_yellow" />
+		        android:background="@drawable/bg_equip_gray" />
     	    
     	    <View
 		        android:id="@+id/bg_waist"
@@ -91,7 +91,7 @@
 		        android:layout_below="@+id/bg_torso"
 		        android:layout_marginTop="5dp"
 		        android:layout_centerHorizontal="true"
-		        android:background="@drawable/bg_equip_blue" />
+		        android:background="@drawable/bg_equip_gray" />
 		
 		    <View
 		        android:id="@+id/bg_legs"
@@ -100,7 +100,7 @@
 		        android:layout_below="@+id/bg_waist"
 		        android:layout_centerHorizontal="true"
 		        android:layout_marginTop="10dp"
-		        android:background="@drawable/bg_equip_green" />
+		        android:background="@drawable/bg_equip_gray" />
 	
 		
 		    <View
@@ -118,9 +118,9 @@
 		        android:layout_height="100dp"
 		        android:layout_alignTop="@+id/bg_head"
 		        android:layout_toLeftOf="@+id/bg_head"
-		        android:layout_marginRight="15dp" 
+		        android:layout_marginRight="30dp" 
 		        android:layout_marginTop="-20dp"
-		        android:background="@drawable/bg_equip_orange"/>
+		        android:background="@drawable/bg_equip_gray"/>
 	
 		    <View
 		        android:id="@+id/bg_hand"
@@ -129,7 +129,7 @@
 		        android:layout_alignLeft="@+id/bg_shoulder"
 		        android:layout_below="@+id/bg_shoulder" 
 		        android:layout_marginTop="10dp"
-		        android:background="@drawable/bg_equip_yellow" />
+		        android:background="@drawable/bg_equip_gray" />
 	
 		    <View
 		        android:id="@+id/bg_right_ring"
@@ -139,7 +139,7 @@
 		        android:layout_below="@+id/bg_hand"
 		        android:layout_marginTop="10dp"
 		        android:layout_marginLeft="10dp"
-		        android:background="@drawable/bg_equip_blue" />
+		        android:background="@drawable/bg_equip_gray" />
 	
 		    <View
 		        android:id="@+id/bg_mainhand"
@@ -148,7 +148,7 @@
 		        android:layout_alignLeft="@+id/bg_shoulder"
 		        android:layout_below="@+id/bg_right_ring"
 		        android:layout_marginTop="8dp"
-		        android:background="@drawable/bg_equip_white" />
+		        android:background="@drawable/bg_equip_gray" />
 	
 		    <View
 		        android:id="@+id/bg_neck"
@@ -156,9 +156,9 @@
 		        android:layout_height="64dp"
 		        android:layout_alignTop="@+id/bg_head"
 		        android:layout_toRightOf="@+id/bg_head"
-		        android:layout_marginLeft="15dp"
+		        android:layout_marginLeft="30dp"
 		        android:layout_marginTop="32dp"
-		        android:background="@drawable/bg_equip_yellow" />
+		        android:background="@drawable/bg_equip_gray" />
 	
 		    <View
 		        android:id="@+id/bg_bracers"
@@ -167,7 +167,7 @@
 		        android:layout_alignLeft="@+id/bg_neck"
 		        android:layout_below="@+id/bg_neck"
 		        android:layout_marginTop="10dp"
-		        android:background="@drawable/bg_equip_green" />
+		        android:background="@drawable/bg_equip_gray" />
 	
 		    <View
 		        android:id="@+id/bg_left_ring"
@@ -177,7 +177,7 @@
 		        android:layout_below="@+id/bg_bracers"
 		        android:layout_marginTop="10dp"
 		        android:layout_marginLeft="10dp"
-		        android:background="@drawable/bg_equip_orange" />
+		        android:background="@drawable/bg_equip_gray" />
 	
 		    <View
 		        android:id="@+id/bg_offhand"
@@ -186,7 +186,7 @@
 		        android:layout_alignLeft="@+id/bg_bracers"
 		        android:layout_below="@+id/bg_left_ring"
 		        android:layout_marginTop="10dp"
-		        android:background="@drawable/bg_equip_green" />
+		        android:background="@drawable/bg_equip_gray" />
     	    
 	    </RelativeLayout>
 	    
@@ -201,7 +201,7 @@
 		        android:layout_height="wrap_content"
 		        android:layout_alignParentTop="true"
 		        android:layout_centerHorizontal="true"
-		        android:src="@drawable/sample_head"
+		        android:src="@drawable/default_equip_64_128"
 		        android:contentDescription="@string/icon_desc" />
 		
 		    <ImageView
@@ -211,7 +211,7 @@
 		        android:layout_below="@+id/view_head"
 		        android:layout_centerHorizontal="true"
 		        android:layout_marginTop="-32dp"
-		        android:src="@drawable/sample_torso"
+		        android:src="@drawable/default_torso"
 		        android:contentDescription="@string/icon_desc" />
 		
 		    <ImageView
@@ -221,7 +221,7 @@
 		        android:layout_below="@+id/view_waist"
 		        android:layout_centerHorizontal="true"
 		        android:layout_marginTop="-24dp"
-		        android:src="@drawable/sample_legs"
+		        android:src="@drawable/default_equip_64_128"
 		        android:contentDescription="@string/icon_desc" />
 		    
 		    <ImageView
@@ -231,7 +231,7 @@
 		        android:layout_below="@+id/view_torso"
 		        android:layout_centerHorizontal="true"
 		        android:layout_marginTop="-32dp"
-		        android:src="@drawable/sample_waist"
+		        android:src="@drawable/default_equip_64_64"
 		        android:contentDescription="@string/icon_desc" />
 	
 		
@@ -242,7 +242,7 @@
 		        android:layout_below="@+id/view_legs"
 		        android:layout_centerHorizontal="true"
 		        android:layout_marginTop="-24dp"
-		        android:src="@drawable/sample_boots"
+		        android:src="@drawable/default_equip_64_128"
 		        android:contentDescription="@string/icon_desc" />
 	
 		    <ImageView
@@ -251,8 +251,8 @@
 		        android:layout_height="wrap_content"
 		        android:layout_alignTop="@+id/view_head"
 		        android:layout_toLeftOf="@+id/view_head"
-		        android:layout_marginRight="20dp"
-		        android:src="@drawable/sample_shoulder"
+		        android:layout_marginRight="35dp"
+		        android:src="@drawable/default_equip_64_128"
 		        android:contentDescription="@string/icon_desc" />
 	
 		    <ImageView
@@ -261,7 +261,7 @@
 		        android:layout_height="wrap_content"
 		        android:layout_alignLeft="@+id/view_shoulder"
 		        android:layout_below="@+id/view_shoulder"
-		        android:src="@drawable/sample_hand"
+		        android:src="@drawable/default_equip_64_128"
 		        android:contentDescription="@string/icon_desc" />
 	
 		    <ImageView
@@ -270,16 +270,17 @@
 		        android:layout_height="wrap_content"
 		        android:layout_alignLeft="@+id/view_hand"
 		        android:layout_below="@+id/view_hand"
-		        android:src="@drawable/sample_ring"
+		        android:src="@drawable/default_equip_64_64"
 		        android:contentDescription="@string/icon_desc" />
 	
 		    <ImageView
 		        android:id="@+id/view_mainhand"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
+		        android:layout_marginTop="8dp"
 		        android:layout_alignLeft="@+id/view_right_ring"
 		        android:layout_below="@+id/view_right_ring"
-		        android:src="@drawable/sample_mainhand"
+		        android:src="@drawable/default_equip_64_128"
 		        android:contentDescription="@string/icon_desc" />
 	
 		    <ImageView
@@ -288,8 +289,8 @@
 		        android:layout_height="wrap_content"
 		        android:layout_alignBottom="@+id/view_head"
 		        android:layout_toRightOf="@+id/view_head"
-		        android:layout_marginLeft="20dp"
-		        android:src="@drawable/sample_neck"
+		        android:layout_marginLeft="35dp"
+		        android:src="@drawable/default_equip_64_64"
 		        android:contentDescription="@string/icon_desc" />
 	
 		    <ImageView
@@ -298,7 +299,7 @@
 		        android:layout_height="wrap_content"
 		        android:layout_alignLeft="@+id/view_neck"
 		        android:layout_below="@+id/view_neck"
-		        android:src="@drawable/sample_bracers"
+		        android:src="@drawable/default_equip_64_128"
 		        android:contentDescription="@string/icon_desc" />
 	
 		    <ImageView
@@ -307,7 +308,7 @@
 		        android:layout_height="wrap_content"
 		        android:layout_alignLeft="@+id/view_bracers"
 		        android:layout_below="@+id/view_bracers"
-		        android:src="@drawable/sample_ring"
+		        android:src="@drawable/default_equip_64_64"
 		        android:contentDescription="@string/icon_desc" />
 	
 		    <ImageView
@@ -316,7 +317,7 @@
 		        android:layout_height="wrap_content"
 		        android:layout_alignLeft="@+id/view_left_ring"
 		        android:layout_below="@+id/view_left_ring"
-		        android:src="@drawable/sample_offhand"
+		        android:src="@drawable/default_equip_64_128"
 		        android:contentDescription="@string/icon_desc" />
 	
 		</RelativeLayout>
@@ -343,7 +344,7 @@
   	        android:layout_alignParentTop="true"
   	        android:layout_toLeftOf="@+id/space_view"
   	        android:contentDescription="@string/icon_desc"
-  	        android:src="@drawable/sample_active_skill" />
+  	        android:src="@drawable/default_active_skill" />
   	        
   	    <ImageView
   	        android:id="@+id/view_active_skill_2"
@@ -352,7 +353,7 @@
   	        android:layout_alignParentTop="true"
   	        android:layout_toRightOf="@+id/space_view"
   	        android:contentDescription="@string/icon_desc"
-  	        android:src="@drawable/sample_active_skill" />
+  	        android:src="@drawable/default_active_skill" />
   	    
   	    <LinearLayout
   	        android:id="@+id/active_skill"
@@ -367,7 +368,7 @@
 	  	        android:layout_width="0dp"
     	    	android:layout_weight="1"
 	  	        android:layout_height="wrap_content"
-	  	        android:src="@drawable/sample_active_skill"
+	  	        android:src="@drawable/default_active_skill"
 	  	        android:contentDescription="@string/icon_desc" />
 	
 	  	    <ImageView
@@ -375,7 +376,7 @@
 	  	        android:layout_width="0dp"
     	    	android:layout_weight="1"
 	  	        android:layout_height="wrap_content"
-	  	        android:src="@drawable/sample_active_skill"
+	  	        android:src="@drawable/default_active_skill"
 	  	        android:layout_marginLeft="10dp"
 	  	        android:contentDescription="@string/icon_desc" />
 	  	    
@@ -384,7 +385,7 @@
 	  	        android:layout_width="0dp"
     	    	android:layout_weight="1"
 	  	        android:layout_height="wrap_content"
-	  	        android:src="@drawable/sample_active_skill"
+	  	        android:src="@drawable/default_active_skill"
 	  	        android:layout_marginLeft="10dp"
 	  	        android:contentDescription="@string/icon_desc" />
 	  	    
@@ -393,7 +394,7 @@
 	  	        android:layout_width="0dp"
     	    	android:layout_weight="1"
 	  	        android:layout_height="wrap_content"
-	  	        android:src="@drawable/sample_active_skill"
+	  	        android:src="@drawable/default_active_skill"
 	  	        android:layout_marginLeft="10dp"
 	  	        android:contentDescription="@string/icon_desc" />
   	    </LinearLayout>
@@ -410,7 +411,7 @@
 	  	        android:layout_width="0dp"
     	    	android:layout_weight="1"
 	  	        android:layout_height="wrap_content"
-	  	        android:src="@drawable/sample_passive_skill"
+	  	        android:src="@drawable/default_passive_skill"
 	  	        android:contentDescription="@string/icon_desc" />
 	
 	  	    <ImageView
@@ -418,7 +419,7 @@
 	  	        android:layout_width="0dp"
     	    	android:layout_weight="1"
 	  	        android:layout_height="wrap_content"
-	  	        android:src="@drawable/sample_passive_skill"
+	  	        android:src="@drawable/default_passive_skill"
 	  	        android:layout_marginLeft="10dp"
 	  	        android:contentDescription="@string/icon_desc" />
 	  	    
@@ -427,7 +428,7 @@
 	  	        android:layout_width="0dp"
     	    	android:layout_weight="1"
 	  	        android:layout_height="wrap_content"
-	  	        android:src="@drawable/sample_passive_skill"
+	  	        android:src="@drawable/default_passive_skill"
 	  	        android:layout_marginLeft="10dp"
 	  	        android:contentDescription="@string/icon_desc" />
 	  	    
@@ -436,7 +437,7 @@
 	  	        android:layout_width="0dp"
     	    	android:layout_weight="1"
 	  	        android:layout_height="wrap_content"
-	  	        android:src="@drawable/sample_passive_skill"
+	  	        android:src="@drawable/default_passive_skill"
 	  	        android:layout_marginLeft="10dp"
 	  	        android:contentDescription="@string/icon_desc" />
   	    </LinearLayout>
