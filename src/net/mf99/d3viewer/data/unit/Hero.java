@@ -13,9 +13,7 @@ public class Hero {
 	public int mProgression;
 	public EquipList mEquips;
 	public ArrayList<Skill> mActiveSkills;
-	public ArrayList<Skill> mPassiveSkills;
-	
-	public boolean isTemp;
+	public ArrayList<Skill> mPassiveSkills;	
 	
 	public Hero(String mName, long mId, int mLevel, HERO_CLASS mClass,
 			boolean isMale, int mProgression, EquipList mEquips,
@@ -30,18 +28,5 @@ public class Hero {
 		this.mEquips = mEquips;
 		this.mActiveSkills = mActiveSkills;
 		this.mPassiveSkills = mPassiveSkills;
-		
-		isTemp = false;
-	}
-	
-	public Hero(String mName, long mId, int mLevel, HERO_CLASS mClass, boolean isMale) {
-		
-		this.mName = mName;
-		this.mId = mId;
-		this.mLevel = mLevel;
-		this.mClass = mClass;
-		this.isMale = isMale;
-		
-		isTemp = true;
 	}
 }

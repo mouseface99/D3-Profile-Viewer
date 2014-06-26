@@ -2,11 +2,7 @@ package net.mf99.d3viewer;
 
 public class Const {
 	
-	public static final String KEY_HERO_NAME = "key_of_hero_name";
 	public static final String KEY_HERO_ID = "key_of_hero_id";
-	public static final String KEY_HERO_LV = "key_of_hero_lv";
-	public static final String KEY_HERO_CLASS = "key_of_hero_class";
-	public static final String KEY_HERO_IS_MALE = "key_of_hero_is_male";
 	
 	public static enum SERVER_REGION{
 		TW,

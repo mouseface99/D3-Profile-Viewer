@@ -6,18 +6,33 @@ import net.mf99.d3viewer.data.unit.EquipShort;
 import net.mf99.d3viewer.data.unit.Hero;
 import android.os.AsyncTask;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ImageView;
 
 public class HeroDetailSubView {	
+	EquipShort mEquip;
 	View mColor;
 	ImageView mIcon;
-	public HeroDetailSubView(ImageView iconView, View colorView) {
+	private OnEquipClickListener mListener;
+	public HeroDetailSubView(ImageView iconView, View colorView, OnEquipClickListener listener) {
 		super();
 		this.mColor = colorView;
 		this.mIcon = iconView;
+		this.mListener = listener;
+		
+		mIcon.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				if(mListener != null){
+					mListener.onEquipClick(mEquip);
+				}
+			}
+			
+		});
 	}
 	
 	public void setData(EquipShort equip){
+		mEquip = equip;
 		mColor.setBackgroundResource(Utils.getBackgroundColorResource(equip.mColor));
 		setIcon(equip.mIcon);
 	}
@@ -45,5 +60,9 @@ public class HeroDetailSubView {
 		}
     	
     }
+	
+	public static interface OnEquipClickListener{
+		public void onEquipClick(EquipShort equip);
+	}
 
 }

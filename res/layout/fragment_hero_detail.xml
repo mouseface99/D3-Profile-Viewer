@@ -8,11 +8,12 @@
   	  android:layout_height="wrap_content"
   	  android:orientation="vertical">
 	<!-- Progression area -->
+
   	<LinearLayout
-   		android:layout_width="fill_parent"
-    	android:layout_height="wrap_content"
-    	android:gravity="center"
-    	android:background="#336699" >
+  	    android:layout_width="fill_parent"
+  	    android:layout_height="wrap_content"
+  	    android:background="#55960710"
+  	    android:gravity="center" >
     	
     	<ImageView
     	    android:id="@+id/view_progression_act1"
@@ -212,16 +213,6 @@
 		        android:layout_marginTop="-32dp"
 		        android:src="@drawable/sample_torso"
 		        android:contentDescription="@string/icon_desc" />
-		    
-		    <ImageView
-		        android:id="@+id/view_waist"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_below="@+id/view_torso"
-		        android:layout_centerHorizontal="true"
-		        android:layout_marginTop="-32dp"
-		        android:src="@drawable/sample_waist"
-		        android:contentDescription="@string/icon_desc" />
 		
 		    <ImageView
 		        android:id="@+id/view_legs"
@@ -231,6 +222,16 @@
 		        android:layout_centerHorizontal="true"
 		        android:layout_marginTop="-24dp"
 		        android:src="@drawable/sample_legs"
+		        android:contentDescription="@string/icon_desc" />
+		    
+		    <ImageView
+		        android:id="@+id/view_waist"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_below="@+id/view_torso"
+		        android:layout_centerHorizontal="true"
+		        android:layout_marginTop="-32dp"
+		        android:src="@drawable/sample_waist"
 		        android:contentDescription="@string/icon_desc" />
 	
 		
