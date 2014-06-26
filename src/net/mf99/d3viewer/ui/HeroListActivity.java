@@ -2,6 +2,8 @@ package net.mf99.d3viewer.ui;
 
 import net.mf99.d3viewer.Const;
 import net.mf99.d3viewer.R;
+import net.mf99.d3viewer.Utils;
+import net.mf99.d3viewer.data.unit.Hero;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -59,13 +61,17 @@ public class HeroListActivity extends FragmentActivity
      * indicating that the item with the given ID was selected.
      */
     @Override
-    public void onItemSelected(String id) {
+    public void onItemSelected(Hero hero) {
         if (mTwoPane) {
             // In two-pane mode, show the detail view in this activity by
             // adding or replacing the detail fragment using a
             // fragment transaction.
-            Bundle arguments = new Bundle();            
-            arguments.putString(Const.KEY_HERO_ID, id);
+            Bundle arguments = new Bundle();
+            arguments.putString(Const.KEY_HERO_NAME, hero.mName);
+            arguments.putLong(Const.KEY_HERO_ID, hero.mId);
+            arguments.putInt(Const.KEY_HERO_LV, hero.mLevel);
+            arguments.putInt(Const.KEY_HERO_CLASS, Utils.getHeroClassCode(hero.mClass));
+            arguments.putBoolean(Const.KEY_HERO_IS_MALE, hero.isMale);
             HeroDetailFragment fragment = new HeroDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
@@ -76,7 +82,11 @@ public class HeroListActivity extends FragmentActivity
             // In single-pane mode, simply start the detail activity
             // for the selected item ID.
             Intent detailIntent = new Intent(this, HeroDetailActivity.class);       
-            detailIntent.putExtra(Const.KEY_HERO_ID, id);
+            detailIntent.putExtra(Const.KEY_HERO_NAME, hero.mName);
+            detailIntent.putExtra(Const.KEY_HERO_ID, hero.mId);
+            detailIntent.putExtra(Const.KEY_HERO_LV, hero.mLevel);
+            detailIntent.putExtra(Const.KEY_HERO_CLASS, Utils.getHeroClassCode(hero.mClass));
+            detailIntent.putExtra(Const.KEY_HERO_IS_MALE, hero.isMale);
             startActivity(detailIntent);
         }
     }

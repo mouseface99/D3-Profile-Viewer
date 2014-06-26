@@ -5,9 +5,9 @@ import java.util.List;
 import net.mf99.d3viewer.Const.ITEM_COLOR;
 
 public class EquipShort {
-	String mIcon;
-	ITEM_COLOR mColor;
-	String mToolkitParam;
-	int mSocketCount;
-	List<Gem> mGems;
+	public String mIcon;
+	public ITEM_COLOR mColor;
+	public String mToolkitParam;
+	public int mSocketCount;
+	public List<Gem> mGems;
 }

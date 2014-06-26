@@ -1,7 +1,10 @@
 package net.mf99.d3viewer.ui;
 
 import net.mf99.d3viewer.Const.ITEM_COLOR;
-import net.mf99.d3viewer.R;
+import net.mf99.d3viewer.Utils;
+import net.mf99.d3viewer.data.unit.EquipShort;
+import net.mf99.d3viewer.data.unit.Hero;
+import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -14,31 +17,33 @@ public class HeroDetailSubView {
 		this.mIcon = iconView;
 	}
 	
-	public void setColor(ITEM_COLOR color){
-		switch(color){
-			case GRAY:
-				mColor.setBackgroundResource(R.drawable.bg_equip_gray);
-				break;
-			case WHITE:
-				mColor.setBackgroundResource(R.drawable.bg_equip_white);
-				break;
-			case BLUE:
-				mColor.setBackgroundResource(R.drawable.bg_equip_blue);
-				break;
-			case YELLOW:
-				mColor.setBackgroundResource(R.drawable.bg_equip_yellow);
-				break;
-			case ORANGE:
-				mColor.setBackgroundResource(R.drawable.bg_equip_orange);
-				break;
-			case GREEN:
-				mColor.setBackgroundResource(R.drawable.bg_equip_green);
-				break;
-		}
+	public void setData(EquipShort equip){
+		mColor.setBackgroundResource(Utils.getBackgroundColorResource(equip.mColor));
+		setIcon(equip.mIcon);
+	}
+	
+	public void setBlankData(){
+		mColor.setBackgroundResource(Utils.getBackgroundColorResource(ITEM_COLOR.GRAY));
 	}
 	
 	public void setIcon(String fileName){
 		
 	}
+	
+	class EquipIconDownloadTask extends AsyncTask<String, Void, Hero>{
+
+		@Override
+		protected void onPostExecute(Hero result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+		}
+
+		@Override
+		protected Hero doInBackground(String... params) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+    	
+    }
 
 }

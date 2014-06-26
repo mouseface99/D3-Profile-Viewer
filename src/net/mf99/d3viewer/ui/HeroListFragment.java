@@ -6,6 +6,7 @@ import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.ListView;
 import net.mf99.d3viewer.data.HeroListAdapter;
+import net.mf99.d3viewer.data.unit.Hero;
 
 /**
  * A list fragment representing a list of Heros. This fragment
@@ -45,7 +46,7 @@ public class HeroListFragment extends ListFragment {
         /**
          * Callback for when an item has been selected.
          */
-        public void onItemSelected(String id);
+        public void onItemSelected(Hero hero);
     }
 
     /**
@@ -54,7 +55,8 @@ public class HeroListFragment extends ListFragment {
      */
     private static Callbacks sDummyCallbacks = new Callbacks() {
         @Override
-        public void onItemSelected(String id) {
+        public void onItemSelected(Hero hero) {
+        	// do nothing
         }
     };
 
@@ -111,7 +113,7 @@ public class HeroListFragment extends ListFragment {
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
         if(position != 0)
-        	mCallbacks.onItemSelected(String.valueOf(mAdapter.getItem(position).mId));
+        	mCallbacks.onItemSelected(mAdapter.getItem(position));
     }
 
     @Override

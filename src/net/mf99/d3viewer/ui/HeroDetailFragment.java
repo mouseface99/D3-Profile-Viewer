@@ -1,6 +1,7 @@
 package net.mf99.d3viewer.ui;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,7 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import net.mf99.d3viewer.Const;
+import net.mf99.d3viewer.Const.HERO_CLASS;
 import net.mf99.d3viewer.R;
+import net.mf99.d3viewer.Utils;
+import net.mf99.d3viewer.data.unit.EquipList;
+import net.mf99.d3viewer.data.unit.EquipShort;
 import net.mf99.d3viewer.data.unit.Hero;
 
 /**
@@ -19,7 +24,6 @@ import net.mf99.d3viewer.data.unit.Hero;
  * on handsets.
  */
 public class HeroDetailFragment extends Fragment {
-	TextView mHeroInfo;
 	
     HeroDetailSubView mHead, mTorso, mWaist, mLeg, mFeets;
     HeroDetailSubView mShoulder, mHand, mRightRing, mMainhand;
@@ -27,26 +31,46 @@ public class HeroDetailFragment extends Fragment {
     
     ImageView[] mActiveSkills, mPassiveSkills;
 
-    private String HeroID;
+    private String hName;
+    private long hID;
+    private int hLv;
+    private boolean hIsMale;
+    private HERO_CLASS hClass;
+    
     private Hero mHero;    
-
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        HeroID = getArguments().getString(Const.KEY_HERO_ID);
+        Bundle args = this.getArguments();
+        
+        hName = args.getString(Const.KEY_HERO_NAME);
+        hID = args.getLong(Const.KEY_HERO_ID);
+        hLv = args.getInt(Const.KEY_HERO_LV);
+        hIsMale = args.getBoolean(Const.KEY_HERO_IS_MALE);
+        hClass = Utils.getHeroClass(args.getInt(Const.KEY_HERO_CLASS));
+        
         mActiveSkills = new ImageView[6];
         mPassiveSkills = new ImageView[4];
     }
+    
+
+    @Override
+	public void onStart() {
+		super.onStart();
+		
+		// set an empty Hero with only limited info
+		this.setHeroData(new Hero(hName, hID, hLv, hClass, hIsMale));
+		
+		HeroDataDownloadTask downloadTask = new HeroDataDownloadTask();
+		downloadTask.execute(hID);
+	}	
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_hero_detail, container, false);
-        
-        mHeroInfo = (TextView)rootView.findViewById(R.id.hero_info_title);
-        mHeroInfo.setText("Hero ID : " + HeroID);
-        
+        View rootView = inflater.inflate(R.layout.fragment_hero_detail, container, false);        
         mHead = new HeroDetailSubView((ImageView)rootView.findViewById(R.id.view_head), rootView.findViewById(R.id.bg_head));
         mTorso = new HeroDetailSubView((ImageView)rootView.findViewById(R.id.view_torso), rootView.findViewById(R.id.bg_torso));
         mWaist = new HeroDetailSubView((ImageView)rootView.findViewById(R.id.view_waist), rootView.findViewById(R.id.bg_waist));
@@ -76,5 +100,62 @@ public class HeroDetailFragment extends Fragment {
         mPassiveSkills[3] = (ImageView)rootView.findViewById(R.id.view_passive_skill_4);
         
         return rootView;
+    }
+    
+    public void setHeroData(Hero hero){
+    	mHero = hero;
+    	
+    	if(hero.isTemp){
+    		/*
+	    	mHead.setData(mList.mHead);
+	    	mTorso.setData(mList.mTorso);
+	    	mWaist.setData(mList.mWaist);
+	    	mLeg.setData(mList.mLegs);
+	    	mFeets.setData(mList.mFeet);
+	        mShoulder.setData(mList.mShoulders);
+	        mHand.setData(mList.mHands);
+	        mRightRing.setData(mList.mRightFinger);
+	        mMainhand.setData(mList.mMainHand);
+	        mNeck.setData(mList.mNeck);
+	        mBracers.setData(mList.mBracers);
+	        mLeftRing.setData(mList.mLeftFinger);
+	        mOffhand.setData(mList.mOffHand);
+	        */
+    	}
+    	else{
+    		EquipList mList = mHero.mEquips;
+	    	
+	    	mHead.setData(mList.mHead);
+	    	mTorso.setData(mList.mTorso);
+	    	mWaist.setData(mList.mWaist);
+	    	mLeg.setData(mList.mLegs);
+	    	mFeets.setData(mList.mFeet);
+	        mShoulder.setData(mList.mShoulders);
+	        mHand.setData(mList.mHands);
+	        mRightRing.setData(mList.mRightFinger);
+	        mMainhand.setData(mList.mMainHand);
+	        mNeck.setData(mList.mNeck);
+	        mBracers.setData(mList.mBracers);
+	        mLeftRing.setData(mList.mLeftFinger);
+	        mOffhand.setData(mList.mOffHand);
+    	}
+    	
+    }
+    
+    class HeroDataDownloadTask extends AsyncTask<Long, Void, Hero>{
+
+		@Override
+		protected void onPostExecute(Hero result) {
+			// TODO Auto-generated method stub
+			super.onPostExecute(result);
+			//setHeroData(result);
+		}
+
+		@Override
+		protected Hero doInBackground(Long... heroIDs) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+    	
     }
 }

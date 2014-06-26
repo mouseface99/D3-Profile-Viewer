@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import net.mf99.d3viewer.Const.HERO_CLASS;
 import net.mf99.d3viewer.R;
+import net.mf99.d3viewer.Utils;
 import net.mf99.d3viewer.data.unit.Hero;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -71,10 +72,10 @@ public class HeroListAdapter extends BaseAdapter {
 			Hero hero = mList.get(index-1);
 			
 			
-			((ImageView)view.findViewById(R.id.hero_head)).setImageResource(hero.getHeaderSource());
+			((ImageView)view.findViewById(R.id.hero_head)).setImageResource(Utils.getHeroHeaderSource(hero.mClass, hero.isMale));
 			
 			((TextView)view.findViewById(R.id.hero_name)).setText(hero.mName);
-			String heroInfo = "Lv " + hero.mLevel + " " + mContext.getString(hero.getHeroTypeSource());
+			String heroInfo = "Lv " + hero.mLevel + " " + mContext.getString(Utils.getHeroClassNameSource(hero.mClass));
 			((TextView)view.findViewById(R.id.hero_info)).setText(heroInfo);
 			//mList.get(index-1).mView = view;
 			
