@@ -7,20 +7,54 @@
       android:layout_width="fill_parent"
   	  android:layout_height="wrap_content"
   	  android:orientation="vertical">
-	<!-- Title info area -->
-  	<RelativeLayout
+	<!-- Progression area -->
+  	<LinearLayout
    		android:layout_width="fill_parent"
     	android:layout_height="wrap_content"
+    	android:gravity="center"
     	android:background="#336699" >
-    	<TextView
-    	    android:id="@+id/hero_info_title"
-    	    android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignParentTop="true"
-	        android:text="@string/hero_type_hunter"
-	        android:textAlignment="center"
-    	    />
-    </RelativeLayout>
+    	
+    	<ImageView
+    	    android:id="@+id/view_progression_act1"
+    	    android:layout_width="0dp"
+    	    android:layout_weight="1"
+    	    android:layout_height="wrap_content"
+    	    android:src="@drawable/progression_act1_lock"
+    	    android:contentDescription="@string/icon_desc" />
+    	
+    	<ImageView
+    	    android:id="@+id/view_progression_act2"
+    	    android:layout_width="0dp"
+    	    android:layout_weight="1"
+    	    android:layout_height="wrap_content"
+    	    android:src="@drawable/progression_act2_lock"
+    	    android:contentDescription="@string/icon_desc" />
+    	
+    	<ImageView
+    	    android:id="@+id/view_progression_act3"
+    	    android:layout_width="0dp"
+    	    android:layout_weight="1"
+    	    android:layout_height="wrap_content"
+    	    android:src="@drawable/progression_act3_lock"
+    	    android:contentDescription="@string/icon_desc" />
+    	
+    	<ImageView
+    	    android:id="@+id/view_progression_act4"
+    	    android:layout_width="0dp"
+    	    android:layout_weight="1"
+    	    android:layout_height="wrap_content"
+    	    android:src="@drawable/progression_act4_lock"
+    	    android:contentDescription="@string/icon_desc" />
+    	
+    	<ImageView
+    	    android:id="@+id/view_progression_act5"
+    	    android:layout_width="0dp"
+    	    android:layout_weight="1"
+    	    android:layout_height="wrap_content"
+    	    android:src="@drawable/progression_act5_lock"
+    	    android:contentDescription="@string/icon_desc" />
+
+    </LinearLayout>
     
   	<!-- Equip info area -->
   	<FrameLayout
@@ -321,7 +355,7 @@
   	    
   	    <LinearLayout
   	        android:id="@+id/active_skill"
-  	        android:layout_width="wrap_content"
+  	        android:layout_width="fill_parent"
   	        android:layout_height="wrap_content"
   	        android:layout_below="@+id/space_view"
   	        android:layout_marginTop="5dp"
@@ -329,14 +363,16 @@
   	    
 	  	    <ImageView
 	  	        android:id="@+id/view_active_skill_3"
-	  	        android:layout_width="wrap_content"
+	  	        android:layout_width="0dp"
+    	    	android:layout_weight="1"
 	  	        android:layout_height="wrap_content"
 	  	        android:src="@drawable/sample_active_skill"
 	  	        android:contentDescription="@string/icon_desc" />
 	
 	  	    <ImageView
 	  	        android:id="@+id/view_active_skill_4"
-	  	        android:layout_width="wrap_content"
+	  	        android:layout_width="0dp"
+    	    	android:layout_weight="1"
 	  	        android:layout_height="wrap_content"
 	  	        android:src="@drawable/sample_active_skill"
 	  	        android:layout_marginLeft="10dp"
@@ -344,7 +380,8 @@
 	  	    
 	  	    <ImageView
 	  	        android:id="@+id/view_active_skill_5"
-	  	        android:layout_width="wrap_content"
+	  	        android:layout_width="0dp"
+    	    	android:layout_weight="1"
 	  	        android:layout_height="wrap_content"
 	  	        android:src="@drawable/sample_active_skill"
 	  	        android:layout_marginLeft="10dp"
@@ -352,7 +389,8 @@
 	  	    
 	  	    <ImageView
 	  	        android:id="@+id/view_active_skill_6"
-	  	        android:layout_width="wrap_content"
+	  	        android:layout_width="0dp"
+    	    	android:layout_weight="1"
 	  	        android:layout_height="wrap_content"
 	  	        android:src="@drawable/sample_active_skill"
 	  	        android:layout_marginLeft="10dp"
@@ -360,22 +398,24 @@
   	    </LinearLayout>
   	    
   	    <LinearLayout
-  	        android:layout_width="wrap_content"
+  	        android:layout_width="fill_parent"
   	        android:layout_height="wrap_content"
-  	        android:layout_below="@+id/active_skill"
+  	        android:layout_below="@+id/active_skill"  	        
   	        android:layout_marginTop="5dp"
   	        android:layout_centerHorizontal="true">
   	    
 	  	    <ImageView
 	  	        android:id="@+id/view_passive_skill_1"
-	  	        android:layout_width="wrap_content"
+	  	        android:layout_width="0dp"
+    	    	android:layout_weight="1"
 	  	        android:layout_height="wrap_content"
 	  	        android:src="@drawable/sample_passive_skill"
 	  	        android:contentDescription="@string/icon_desc" />
 	
 	  	    <ImageView
 	  	        android:id="@+id/view_passive_skill_2"
-	  	        android:layout_width="wrap_content"
+	  	        android:layout_width="0dp"
+    	    	android:layout_weight="1"
 	  	        android:layout_height="wrap_content"
 	  	        android:src="@drawable/sample_passive_skill"
 	  	        android:layout_marginLeft="10dp"
@@ -383,7 +423,8 @@
 	  	    
 	  	    <ImageView
 	  	        android:id="@+id/view_passive_skill_3"
-	  	        android:layout_width="wrap_content"
+	  	        android:layout_width="0dp"
+    	    	android:layout_weight="1"
 	  	        android:layout_height="wrap_content"
 	  	        android:src="@drawable/sample_passive_skill"
 	  	        android:layout_marginLeft="10dp"
@@ -391,7 +432,8 @@
 	  	    
 	  	    <ImageView
 	  	        android:id="@+id/view_passive_skill_4"
-	  	        android:layout_width="wrap_content"
+	  	        android:layout_width="0dp"
+    	    	android:layout_weight="1"
 	  	        android:layout_height="wrap_content"
 	  	        android:src="@drawable/sample_passive_skill"
 	  	        android:layout_marginLeft="10dp"

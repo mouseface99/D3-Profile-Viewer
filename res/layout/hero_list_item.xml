@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/hero_head"
-        android:layout_alignRight="@+id/hero_name"
+        android:layout_alignLeft="@+id/hero_name"
         android:paddingLeft="10sp"
         android:text="Medium Text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
