@@ -1,5 +1,10 @@
 package net.mf99.d3viewer.ui;
 
+import java.io.IOException;
+
+import org.apache.http.client.ClientProtocolException;
+import org.json.JSONException;
+
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,7 +14,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 import net.mf99.d3viewer.Const;
+import net.mf99.d3viewer.Const.ServerPath;
 import net.mf99.d3viewer.R;
+import net.mf99.d3viewer.Utils;
 import net.mf99.d3viewer.data.unit.EquipList;
 import net.mf99.d3viewer.data.unit.EquipShort;
 import net.mf99.d3viewer.data.unit.Hero;
@@ -50,12 +57,8 @@ public class HeroDetailFragment extends Fragment implements HeroDetailSubView.On
     @Override
 	public void onStart() {
 		super.onStart();
-		/*
 		HeroDataDownloadTask downloadTask = new HeroDataDownloadTask();
 		downloadTask.execute(hID);
-		*/
-		
-		this.setProgression(3);
 	}	
 
     @Override
@@ -147,16 +150,31 @@ public class HeroDetailFragment extends Fragment implements HeroDetailSubView.On
     class HeroDataDownloadTask extends AsyncTask<Long, Void, Hero>{
 
 		@Override
-		protected void onPostExecute(Hero result) {
-			// TODO Auto-generated method stub
-			super.onPostExecute(result);
-			//setHeroData(result);
-		}
-
-		@Override
-		protected Hero doInBackground(Long... heroIDs) {
-			// TODO Auto-generated method stub
+		protected Hero doInBackground(Long... heroID) {
+			try {
+				return Utils.translateJsonToHero(Utils.downloadJSONData(ServerPath.getHeroPath(heroID[0])));
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(Hero result) {			
+			super.onPostExecute(result);
+			
+			if(result == null)
+				Toast.makeText(getActivity(), "Download Hero data fail", Toast.LENGTH_SHORT).show();
+			else
+				setHeroData(result);
 		}
     	
     }

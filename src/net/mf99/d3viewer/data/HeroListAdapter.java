@@ -6,6 +6,8 @@ import net.mf99.d3viewer.Const.HERO_CLASS;
 import net.mf99.d3viewer.R;
 import net.mf99.d3viewer.Utils;
 import net.mf99.d3viewer.data.unit.Hero;
+import net.mf99.d3viewer.data.unit.HeroShort;
+import net.mf99.d3viewer.data.unit.Profile;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,21 +18,34 @@ import android.widget.ImageView;
 
 public class HeroListAdapter extends BaseAdapter {
 	Context mContext;
-	ArrayList<Hero> mList;
+	ArrayList<HeroShort> mList;
 	View mHeaderView;
 	Hero mEmptyHero;
 	LayoutInflater mInflater;
-	int mPatagonLv, mKill, mEliteKill;
+	int mPatagonLv;
+	long mKill, mEliteKill;
 	
-	public HeroListAdapter(Context context, int patagonLv, int kill, int eliteKill) {
+	public boolean isTemp;
+	
+	public HeroListAdapter(Context context, int patagonLv, long kill, long eliteKill) {
 		mContext = context;
 		mPatagonLv = patagonLv;
 		mKill = kill;
 		mEliteKill = eliteKill;
 		mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		
-		mList = initFakeList();
-	}	
+		mList = new ArrayList<HeroShort>();
+		
+		isTemp = true;
+	}
+	
+	public HeroListAdapter(Context context, Profile profile) {
+		this(context, profile.mParagonLevel, profile.mKilled, profile.mEliteKilled);
+		
+		mList = profile.mHeros;
+		
+		isTemp = false;
+	}
 
 	@Override
 	public int getCount() {
@@ -38,7 +53,7 @@ public class HeroListAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public Hero getItem(int index) {
+	public HeroShort getItem(int index) {
 		if(index == 0)
 			return null;
 		else
@@ -69,7 +84,7 @@ public class HeroListAdapter extends BaseAdapter {
 			if(view == null)
 				view = mInflater.inflate(R.layout.hero_list_item, null);
 			
-			Hero hero = mList.get(index-1);
+			HeroShort hero = mList.get(index-1);
 			
 			
 			((ImageView)view.findViewById(R.id.hero_head)).setImageResource(Utils.getHeroHeaderSource(hero.mClass, hero.isMale));
@@ -77,29 +92,9 @@ public class HeroListAdapter extends BaseAdapter {
 			((TextView)view.findViewById(R.id.hero_name)).setText(hero.mName);
 			String heroInfo = "Lv " + hero.mLevel + " " + mContext.getString(Utils.getHeroClassNameSource(hero.mClass));
 			((TextView)view.findViewById(R.id.hero_info)).setText(heroInfo);
-			//mList.get(index-1).mView = view;
 			
 			return view;
 			
 		}
 	}
-	
-	private ArrayList<Hero> initFakeList() {
-		ArrayList<Hero> list = new ArrayList<Hero>();
-		
-		Hero hero = new Hero("Legolas", 123, 70, HERO_CLASS.HUNTER, false, 5, null, null, null);
-		list.add(hero);
-		
-		hero = new Hero("JamesHarden", 2564, 65, HERO_CLASS.MONK, true, 4, null, null, null);
-		list.add(hero);
-		
-		hero = new Hero("Sir", 25560, 70, HERO_CLASS.CRUSADER, true, 4, null, null, null);
-		list.add(hero);
-		
-		hero = new Hero("Star", 7789456, 30, HERO_CLASS.WIZARD, false, 2, null, null, null);
-		list.add(hero);
-		
-		return list;
-	}
-
 }

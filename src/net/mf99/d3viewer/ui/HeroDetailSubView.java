@@ -5,6 +5,7 @@ import net.mf99.d3viewer.Utils;
 import net.mf99.d3viewer.data.unit.EquipShort;
 import net.mf99.d3viewer.data.unit.Hero;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -32,9 +33,15 @@ public class HeroDetailSubView {
 	}
 	
 	public void setData(EquipShort equip){
-		mEquip = equip;
-		mColor.setBackgroundResource(Utils.getBackgroundColorResource(equip.mColor));
-		setIcon(equip.mIcon);
+		if(equip != null){
+			mEquip = equip;
+			mColor.setBackgroundResource(Utils.getBackgroundColorResource(equip.mColor));
+			setIcon(equip.mIcon);
+			
+			Log.d("MIKE", equip.mName + " : " + equip.mIcon);
+		}
+		else
+			Log.d("MIKE", "Equip is null");
 	}
 	
 	public void setBlankData(){

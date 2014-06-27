@@ -3,9 +3,11 @@ package net.mf99.d3viewer.ui;
 import net.mf99.d3viewer.Const;
 import net.mf99.d3viewer.R;
 import net.mf99.d3viewer.data.unit.Hero;
+import net.mf99.d3viewer.data.unit.HeroShort;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 
 
 /**
@@ -27,7 +29,9 @@ import android.support.v4.app.FragmentActivity;
 public class HeroListActivity extends FragmentActivity
         implements HeroListFragment.Callbacks {
 
-    /**
+   
+
+	/**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
      */
@@ -37,6 +41,7 @@ public class HeroListActivity extends FragmentActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hero_list);
+        
 
         if (findViewById(R.id.hero_detail_container) != null) {
             // The detail container view will be present only in the
@@ -47,12 +52,10 @@ public class HeroListActivity extends FragmentActivity
 
             // In two-pane mode, list items should be given the
             // 'activated' state when touched.
-            ((HeroListFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.hero_list))
-                    .setActivateOnItemClick(true);
+            ((HeroListFragment)getSupportFragmentManager().findFragmentById(R.id.hero_list)).setActivateOnItemClick(true);
         }
-
-        // TODO: If exposing deep links into your app, handle intents here.
+        
+        
     }
 
     /**
@@ -60,7 +63,7 @@ public class HeroListActivity extends FragmentActivity
      * indicating that the item with the given ID was selected.
      */
     @Override
-    public void onItemSelected(Hero hero) {
+    public void onItemSelected(HeroShort hero) {
         if (mTwoPane) {
             // In two-pane mode, show the detail view in this activity by
             // adding or replacing the detail fragment using a
@@ -81,4 +84,11 @@ public class HeroListActivity extends FragmentActivity
             startActivity(detailIntent);
         }
     }
+    
+    @Override
+   	protected void onDestroy() {
+   		// TODO Auto-generated method stub
+   		super.onDestroy();
+   		HeroListFragment.mAdapter = null;
+   	}
 }

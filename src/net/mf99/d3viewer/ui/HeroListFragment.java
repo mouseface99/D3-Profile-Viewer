@@ -1,12 +1,38 @@
 package net.mf99.d3viewer.ui;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
+
 import android.app.Activity;
+import android.content.Context;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
+import net.mf99.d3viewer.Const;
+import net.mf99.d3viewer.Const.SERVER_REGION;
+import net.mf99.d3viewer.Const.ServerPath;
+import net.mf99.d3viewer.R;
+import net.mf99.d3viewer.Utils;
 import net.mf99.d3viewer.data.HeroListAdapter;
 import net.mf99.d3viewer.data.unit.Hero;
+import net.mf99.d3viewer.data.unit.HeroShort;
+import net.mf99.d3viewer.data.unit.Profile;
 
 /**
  * A list fragment representing a list of Heros. This fragment
@@ -18,7 +44,8 @@ import net.mf99.d3viewer.data.unit.Hero;
  * interface.
  */
 public class HeroListFragment extends ListFragment {
-	HeroListAdapter mAdapter;
+	public static HeroListAdapter mAdapter = null;
+	Context mContext;
 
     /**
      * The serialization (saved instance state) Bundle key representing the
@@ -46,7 +73,7 @@ public class HeroListFragment extends ListFragment {
         /**
          * Callback for when an item has been selected.
          */
-        public void onItemSelected(Hero hero);
+        public void onItemSelected(HeroShort hero);
     }
 
     /**
@@ -55,7 +82,7 @@ public class HeroListFragment extends ListFragment {
      */
     private static Callbacks sDummyCallbacks = new Callbacks() {
         @Override
-        public void onItemSelected(Hero hero) {
+        public void onItemSelected(HeroShort hero) {
         	// do nothing
         }
     };
@@ -70,9 +97,16 @@ public class HeroListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mContext = getActivity();
 
-        mAdapter = new HeroListAdapter(getActivity(), 100, 5000, 500);
+        if(mAdapter == null)
+        	mAdapter = new HeroListAdapter(mContext, 0, 0, 0);
+        
         setListAdapter(mAdapter);
+        if(mAdapter.isTemp){
+        	CarrerDownloadTask downloadTask = new CarrerDownloadTask();
+            downloadTask.execute("BattleTag");
+        }
     }
 
     @Override
@@ -145,5 +179,42 @@ public class HeroListFragment extends ListFragment {
         }
 
         mActivatedPosition = position;
+    }
+    
+    class CarrerDownloadTask extends AsyncTask<String, Void, Profile>{
+
+    	@Override
+		protected Profile doInBackground(String... params) {
+    		try {
+				return Utils.translateJsonToProfile(
+									Utils.downloadJSONData(ServerPath.getProfilePath()), 
+									Utils.getRegion(Const.DATA_BATTLE_REGION));
+				
+			} catch (ClientProtocolException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		
+    		return null;
+		}
+    	
+		@Override
+		protected void onPostExecute(Profile result) {
+			super.onPostExecute(result);
+			
+			if(result == null)
+				Toast.makeText(getActivity(), "Download Profile fail", Toast.LENGTH_SHORT).show();			
+			else{
+				mAdapter = new HeroListAdapter(mContext, result);
+				setListAdapter(mAdapter);
+				
+			}
+		}
     }
 }

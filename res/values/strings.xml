@@ -13,5 +13,9 @@
     
     <string name="icon_desc">icon</string>
     
+    <string name="server_region">Region : </string>
+    <string name="career_paragon_lv">Paragon Lv</string>
+    <string name="num_monster_killed">Killed</string>
+    <string name="num_elite_killed">Elite Killed</string>
 
 </resources>
