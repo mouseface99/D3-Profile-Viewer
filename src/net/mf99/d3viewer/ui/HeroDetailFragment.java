@@ -1,10 +1,16 @@
 package net.mf99.d3viewer.ui;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
 
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,6 +26,7 @@ import net.mf99.d3viewer.Utils;
 import net.mf99.d3viewer.data.unit.EquipList;
 import net.mf99.d3viewer.data.unit.EquipShort;
 import net.mf99.d3viewer.data.unit.Hero;
+import net.mf99.d3viewer.data.unit.Skill;
 
 /**
  * A fragment representing a single Hero detail screen.
@@ -27,15 +34,17 @@ import net.mf99.d3viewer.data.unit.Hero;
  * in two-pane mode (on tablets) or a {@link HeroDetailActivity}
  * on handsets.
  */
-public class HeroDetailFragment extends Fragment implements HeroDetailSubView.OnEquipClickListener{
+public class HeroDetailFragment extends Fragment 
+								implements HeroDetailItemSubView.OnEquipClickListener, 
+										   HeroDetailSkillSubView.OnSkillClickListener{
 	
 	View mRootView;
 	
-    HeroDetailSubView mHead, mTorso, mWaist, mLeg, mFeets;
-    HeroDetailSubView mShoulder, mHand, mRightRing, mMainhand;
-    HeroDetailSubView mNeck, mBracers, mLeftRing, mOffhand;
+    HeroDetailItemSubView mHead, mTorso, mWaist, mLeg, mFeets;
+    HeroDetailItemSubView mShoulder, mHand, mRightRing, mMainhand;
+    HeroDetailItemSubView mNeck, mBracers, mLeftRing, mOffhand;
     
-    ImageView[] mActiveSkills, mPassiveSkills;
+    HeroDetailSkillSubView[] mActiveSkills, mPassiveSkills;
 
     private long hID;
     
@@ -44,13 +53,10 @@ public class HeroDetailFragment extends Fragment implements HeroDetailSubView.On
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        hID = getArguments().getLong(Const.KEY_HERO_ID);
         
-        Bundle args = this.getArguments();
-        
-        hID = args.getLong(Const.KEY_HERO_ID);
-        
-        mActiveSkills = new ImageView[6];
-        mPassiveSkills = new ImageView[4];
+        mActiveSkills = new HeroDetailSkillSubView[6];
+        mPassiveSkills = new HeroDetailSkillSubView[4];
     }
     
 
@@ -66,33 +72,33 @@ public class HeroDetailFragment extends Fragment implements HeroDetailSubView.On
             Bundle savedInstanceState) {
     	mRootView = inflater.inflate(R.layout.fragment_hero_detail, container, false);    
     	
-        mHead = new HeroDetailSubView((ImageView)mRootView.findViewById(R.id.view_head), mRootView.findViewById(R.id.bg_head), this);
-        mTorso = new HeroDetailSubView((ImageView)mRootView.findViewById(R.id.view_torso), mRootView.findViewById(R.id.bg_torso), this);
-        mWaist = new HeroDetailSubView((ImageView)mRootView.findViewById(R.id.view_waist), mRootView.findViewById(R.id.bg_waist), this);
-        mLeg = new HeroDetailSubView((ImageView)mRootView.findViewById(R.id.view_legs), mRootView.findViewById(R.id.bg_legs), this);
-        mFeets = new HeroDetailSubView((ImageView)mRootView.findViewById(R.id.view_feet), mRootView.findViewById(R.id.bg_feet), this);
+        mHead = new HeroDetailItemSubView((ImageView)mRootView.findViewById(R.id.view_head), mRootView.findViewById(R.id.bg_head), this);
+        mTorso = new HeroDetailItemSubView((ImageView)mRootView.findViewById(R.id.view_torso), mRootView.findViewById(R.id.bg_torso), this);
+        mWaist = new HeroDetailItemSubView((ImageView)mRootView.findViewById(R.id.view_waist), mRootView.findViewById(R.id.bg_waist), this);
+        mLeg = new HeroDetailItemSubView((ImageView)mRootView.findViewById(R.id.view_legs), mRootView.findViewById(R.id.bg_legs), this);
+        mFeets = new HeroDetailItemSubView((ImageView)mRootView.findViewById(R.id.view_feet), mRootView.findViewById(R.id.bg_feet), this);
         
-        mShoulder = new HeroDetailSubView((ImageView)mRootView.findViewById(R.id.view_shoulder), mRootView.findViewById(R.id.bg_shoulder), this);
-        mHand = new HeroDetailSubView((ImageView)mRootView.findViewById(R.id.view_hand), mRootView.findViewById(R.id.bg_hand), this);
-        mRightRing = new HeroDetailSubView((ImageView)mRootView.findViewById(R.id.view_right_ring), mRootView.findViewById(R.id.bg_right_ring), this);
-        mMainhand = new HeroDetailSubView((ImageView)mRootView.findViewById(R.id.view_mainhand), mRootView.findViewById(R.id.bg_mainhand), this);
+        mShoulder = new HeroDetailItemSubView((ImageView)mRootView.findViewById(R.id.view_shoulder), mRootView.findViewById(R.id.bg_shoulder), this);
+        mHand = new HeroDetailItemSubView((ImageView)mRootView.findViewById(R.id.view_hand), mRootView.findViewById(R.id.bg_hand), this);
+        mRightRing = new HeroDetailItemSubView((ImageView)mRootView.findViewById(R.id.view_right_ring), mRootView.findViewById(R.id.bg_right_ring), this);
+        mMainhand = new HeroDetailItemSubView((ImageView)mRootView.findViewById(R.id.view_mainhand), mRootView.findViewById(R.id.bg_mainhand), this);
         
-        mNeck = new HeroDetailSubView((ImageView)mRootView.findViewById(R.id.view_neck), mRootView.findViewById(R.id.bg_neck), this);
-        mBracers = new HeroDetailSubView((ImageView)mRootView.findViewById(R.id.view_bracers), mRootView.findViewById(R.id.bg_bracers), this);
-        mLeftRing = new HeroDetailSubView((ImageView)mRootView.findViewById(R.id.view_left_ring), mRootView.findViewById(R.id.bg_left_ring), this);
-        mOffhand = new HeroDetailSubView((ImageView)mRootView.findViewById(R.id.view_offhand), mRootView.findViewById(R.id.bg_offhand), this);
+        mNeck = new HeroDetailItemSubView((ImageView)mRootView.findViewById(R.id.view_neck), mRootView.findViewById(R.id.bg_neck), this);
+        mBracers = new HeroDetailItemSubView((ImageView)mRootView.findViewById(R.id.view_bracers), mRootView.findViewById(R.id.bg_bracers), this);
+        mLeftRing = new HeroDetailItemSubView((ImageView)mRootView.findViewById(R.id.view_left_ring), mRootView.findViewById(R.id.bg_left_ring), this);
+        mOffhand = new HeroDetailItemSubView((ImageView)mRootView.findViewById(R.id.view_offhand), mRootView.findViewById(R.id.bg_offhand), this);
 
-        mActiveSkills[0] = (ImageView)mRootView.findViewById(R.id.view_active_skill_1);
-        mActiveSkills[1] = (ImageView)mRootView.findViewById(R.id.view_active_skill_2);
-        mActiveSkills[2] = (ImageView)mRootView.findViewById(R.id.view_active_skill_3);
-        mActiveSkills[3] = (ImageView)mRootView.findViewById(R.id.view_active_skill_4);
-        mActiveSkills[4] = (ImageView)mRootView.findViewById(R.id.view_active_skill_5);
-        mActiveSkills[5] = (ImageView)mRootView.findViewById(R.id.view_active_skill_6);
+        mActiveSkills[0] = new HeroDetailSkillSubView((ImageView)mRootView.findViewById(R.id.view_active_skill_1), this);
+        mActiveSkills[1] = new HeroDetailSkillSubView((ImageView)mRootView.findViewById(R.id.view_active_skill_2), this);
+        mActiveSkills[2] = new HeroDetailSkillSubView((ImageView)mRootView.findViewById(R.id.view_active_skill_3), this);
+        mActiveSkills[3] = new HeroDetailSkillSubView((ImageView)mRootView.findViewById(R.id.view_active_skill_4), this);
+        mActiveSkills[4] = new HeroDetailSkillSubView((ImageView)mRootView.findViewById(R.id.view_active_skill_5), this);
+        mActiveSkills[5] = new HeroDetailSkillSubView((ImageView)mRootView.findViewById(R.id.view_active_skill_6), this);
         
-        mPassiveSkills[0] = (ImageView)mRootView.findViewById(R.id.view_passive_skill_1);
-        mPassiveSkills[1] = (ImageView)mRootView.findViewById(R.id.view_passive_skill_2);
-        mPassiveSkills[2] = (ImageView)mRootView.findViewById(R.id.view_passive_skill_3);
-        mPassiveSkills[3] = (ImageView)mRootView.findViewById(R.id.view_passive_skill_4);
+        mPassiveSkills[0] = new HeroDetailSkillSubView((ImageView)mRootView.findViewById(R.id.view_passive_skill_1), this);
+        mPassiveSkills[1] = new HeroDetailSkillSubView((ImageView)mRootView.findViewById(R.id.view_passive_skill_2), this);
+        mPassiveSkills[2] = new HeroDetailSkillSubView((ImageView)mRootView.findViewById(R.id.view_passive_skill_3), this);
+        mPassiveSkills[3] = new HeroDetailSkillSubView((ImageView)mRootView.findViewById(R.id.view_passive_skill_4), this);
         
         return mRootView;
     }
@@ -102,6 +108,7 @@ public class HeroDetailFragment extends Fragment implements HeroDetailSubView.On
     	
     	EquipList mList = mHero.mEquips;
     	
+    	// Set Item data
     	mHead.setData(mList.mHead);
     	mTorso.setData(mList.mTorso);
     	mWaist.setData(mList.mWaist);
@@ -115,10 +122,17 @@ public class HeroDetailFragment extends Fragment implements HeroDetailSubView.On
         mBracers.setData(mList.mBracers);
         mLeftRing.setData(mList.mLeftFinger);
         mOffhand.setData(mList.mOffHand);
-        
+
+        // Set Progression
         setProgression(mHero.mProgression);
-    	
-    }
+        
+        // Set Skills data
+        for(int i=0; i<mHero.mActiveSkills.size(); i++)
+        	mActiveSkills[i].setData(mHero.mActiveSkills.get(i));
+        
+        for(int i=0; i<mHero.mPassiveSkills.size(); i++)
+        	mPassiveSkills[i].setData(mHero.mPassiveSkills.get(i));    	
+    }    
     
     private void setProgression(int progression){
     	ImageView act = null;
@@ -144,7 +158,12 @@ public class HeroDetailFragment extends Fragment implements HeroDetailSubView.On
     
     @Override
 	public void onEquipClick(EquipShort equip) {
-		
+		Toast.makeText(getActivity(), "Item ["+equip.mName+"] Clicked", Toast.LENGTH_SHORT).show();
+	}
+    
+    @Override
+	public void onSkillClick(Skill skill) {
+		Toast.makeText(getActivity(), "Skill ["+skill.mName+"] Clicked", Toast.LENGTH_SHORT).show();
 	}
     
     class HeroDataDownloadTask extends AsyncTask<Long, Void, Hero>{

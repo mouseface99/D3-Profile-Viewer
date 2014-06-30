@@ -197,8 +197,8 @@
 	    	
 		    <ImageView
 		        android:id="@+id/view_head"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
+		        android:layout_width="64dp"
+		        android:layout_height="128dp"
 		        android:layout_alignParentTop="true"
 		        android:layout_centerHorizontal="true"
 		        android:src="@drawable/default_equip_64_128"
@@ -206,8 +206,8 @@
 		
 		    <ImageView
 		        android:id="@+id/view_torso"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
+		        android:layout_width="82dp"
+		        android:layout_height="164dp"
 		        android:layout_below="@+id/view_head"
 		        android:layout_centerHorizontal="true"
 		        android:layout_marginTop="-32dp"
@@ -216,8 +216,8 @@
 		
 		    <ImageView
 		        android:id="@+id/view_legs"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
+		        android:layout_width="64dp"
+		        android:layout_height="128dp"
 		        android:layout_below="@+id/view_waist"
 		        android:layout_centerHorizontal="true"
 		        android:layout_marginTop="-24dp"
@@ -226,8 +226,8 @@
 		    
 		    <ImageView
 		        android:id="@+id/view_waist"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
+		        android:layout_width="64dp"
+		        android:layout_height="64dp"
 		        android:layout_below="@+id/view_torso"
 		        android:layout_centerHorizontal="true"
 		        android:layout_marginTop="-32dp"
@@ -237,8 +237,8 @@
 		
 		    <ImageView
 		        android:id="@+id/view_feet"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
+		        android:layout_width="64dp"
+		        android:layout_height="128dp"
 		        android:layout_below="@+id/view_legs"
 		        android:layout_centerHorizontal="true"
 		        android:layout_marginTop="-24dp"
@@ -247,8 +247,8 @@
 	
 		    <ImageView
 		        android:id="@+id/view_shoulder"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
+		        android:layout_width="64dp"
+		        android:layout_height="128dp"
 		        android:layout_alignTop="@+id/view_head"
 		        android:layout_toLeftOf="@+id/view_head"
 		        android:layout_marginRight="35dp"
@@ -257,8 +257,8 @@
 	
 		    <ImageView
 		        android:id="@+id/view_hand"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
+		        android:layout_width="64dp"
+		        android:layout_height="128dp"
 		        android:layout_alignLeft="@+id/view_shoulder"
 		        android:layout_below="@+id/view_shoulder"
 		        android:src="@drawable/default_equip_64_128"
@@ -266,8 +266,8 @@
 	
 		    <ImageView
 		        android:id="@+id/view_right_ring"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
+		        android:layout_width="64dp"
+		        android:layout_height="64dp"
 		        android:layout_alignLeft="@+id/view_hand"
 		        android:layout_below="@+id/view_hand"
 		        android:src="@drawable/default_equip_64_64"
@@ -275,8 +275,8 @@
 	
 		    <ImageView
 		        android:id="@+id/view_mainhand"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
+		        android:layout_width="64dp"
+		        android:layout_height="128dp"
 		        android:layout_marginTop="8dp"
 		        android:layout_alignLeft="@+id/view_right_ring"
 		        android:layout_below="@+id/view_right_ring"
@@ -285,8 +285,8 @@
 	
 		    <ImageView
 		        android:id="@+id/view_neck"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
+		        android:layout_width="64dp"
+		        android:layout_height="64dp"
 		        android:layout_alignBottom="@+id/view_head"
 		        android:layout_toRightOf="@+id/view_head"
 		        android:layout_marginLeft="35dp"
@@ -295,8 +295,8 @@
 	
 		    <ImageView
 		        android:id="@+id/view_bracers"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
+		        android:layout_width="64dp"
+		        android:layout_height="128dp"
 		        android:layout_alignLeft="@+id/view_neck"
 		        android:layout_below="@+id/view_neck"
 		        android:src="@drawable/default_equip_64_128"
@@ -304,8 +304,8 @@
 	
 		    <ImageView
 		        android:id="@+id/view_left_ring"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
+		        android:layout_width="64dp"
+		        android:layout_height="64dp"
 		        android:layout_alignLeft="@+id/view_bracers"
 		        android:layout_below="@+id/view_bracers"
 		        android:src="@drawable/default_equip_64_64"
@@ -313,8 +313,8 @@
 	
 		    <ImageView
 		        android:id="@+id/view_offhand"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
+		        android:layout_width="64dp"
+		        android:layout_height="128dp"
 		        android:layout_alignLeft="@+id/view_left_ring"
 		        android:layout_below="@+id/view_left_ring"
 		        android:src="@drawable/default_equip_64_128"
@@ -339,8 +339,8 @@
 
   	    <ImageView
   	        android:id="@+id/view_active_skill_1"
-  	        android:layout_width="wrap_content"
-  	        android:layout_height="wrap_content"
+  	        android:layout_width="64dp"    	    	
+	  	    android:layout_height="64dp"
   	        android:layout_alignParentTop="true"
   	        android:layout_toLeftOf="@+id/space_view"
   	        android:contentDescription="@string/icon_desc"
@@ -348,8 +348,8 @@
   	        
   	    <ImageView
   	        android:id="@+id/view_active_skill_2"
-  	        android:layout_width="wrap_content"
-  	        android:layout_height="wrap_content"
+  	        android:layout_width="64dp"    	    	
+	  	    android:layout_height="64dp"
   	        android:layout_alignParentTop="true"
   	        android:layout_toRightOf="@+id/space_view"
   	        android:contentDescription="@string/icon_desc"
@@ -365,35 +365,35 @@
   	    
 	  	    <ImageView
 	  	        android:id="@+id/view_active_skill_3"
-	  	        android:layout_width="0dp"
+	  	        android:layout_width="64dp"
     	    	android:layout_weight="1"
-	  	        android:layout_height="wrap_content"
+	  	        android:layout_height="64dp"
 	  	        android:src="@drawable/default_active_skill"
 	  	        android:contentDescription="@string/icon_desc" />
 	
 	  	    <ImageView
 	  	        android:id="@+id/view_active_skill_4"
-	  	        android:layout_width="0dp"
+	  	        android:layout_width="64dp"
     	    	android:layout_weight="1"
-	  	        android:layout_height="wrap_content"
+	  	        android:layout_height="64dp"
 	  	        android:src="@drawable/default_active_skill"
 	  	        android:layout_marginLeft="10dp"
 	  	        android:contentDescription="@string/icon_desc" />
 	  	    
 	  	    <ImageView
 	  	        android:id="@+id/view_active_skill_5"
-	  	        android:layout_width="0dp"
+	  	        android:layout_width="64dp"
     	    	android:layout_weight="1"
-	  	        android:layout_height="wrap_content"
+	  	        android:layout_height="64dp"
 	  	        android:src="@drawable/default_active_skill"
 	  	        android:layout_marginLeft="10dp"
 	  	        android:contentDescription="@string/icon_desc" />
 	  	    
 	  	    <ImageView
 	  	        android:id="@+id/view_active_skill_6"
-	  	        android:layout_width="0dp"
+	  	        android:layout_width="64dp"
     	    	android:layout_weight="1"
-	  	        android:layout_height="wrap_content"
+	  	        android:layout_height="64dp"
 	  	        android:src="@drawable/default_active_skill"
 	  	        android:layout_marginLeft="10dp"
 	  	        android:contentDescription="@string/icon_desc" />
@@ -408,35 +408,35 @@
   	    
 	  	    <ImageView
 	  	        android:id="@+id/view_passive_skill_1"
-	  	        android:layout_width="0dp"
+	  	        android:layout_width="64dp"
     	    	android:layout_weight="1"
-	  	        android:layout_height="wrap_content"
+	  	        android:layout_height="64dp"
 	  	        android:src="@drawable/default_passive_skill"
 	  	        android:contentDescription="@string/icon_desc" />
 	
 	  	    <ImageView
 	  	        android:id="@+id/view_passive_skill_2"
-	  	        android:layout_width="0dp"
+	  	        android:layout_width="64dp"
     	    	android:layout_weight="1"
-	  	        android:layout_height="wrap_content"
+	  	        android:layout_height="64dp"
 	  	        android:src="@drawable/default_passive_skill"
 	  	        android:layout_marginLeft="10dp"
 	  	        android:contentDescription="@string/icon_desc" />
 	  	    
 	  	    <ImageView
 	  	        android:id="@+id/view_passive_skill_3"
-	  	        android:layout_width="0dp"
+	  	        android:layout_width="64dp"
     	    	android:layout_weight="1"
-	  	        android:layout_height="wrap_content"
+	  	        android:layout_height="64dp"
 	  	        android:src="@drawable/default_passive_skill"
 	  	        android:layout_marginLeft="10dp"
 	  	        android:contentDescription="@string/icon_desc" />
 	  	    
 	  	    <ImageView
 	  	        android:id="@+id/view_passive_skill_4"
-	  	        android:layout_width="0dp"
+	  	        android:layout_width="64dp"
     	    	android:layout_weight="1"
-	  	        android:layout_height="wrap_content"
+	  	        android:layout_height="64dp"
 	  	        android:src="@drawable/default_passive_skill"
 	  	        android:layout_marginLeft="10dp"
 	  	        android:contentDescription="@string/icon_desc" />

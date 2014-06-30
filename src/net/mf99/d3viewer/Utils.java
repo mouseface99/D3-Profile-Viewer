@@ -2,7 +2,10 @@ package net.mf99.d3viewer;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -17,6 +20,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import net.mf99.d3viewer.Const.HERO_CLASS;
 import net.mf99.d3viewer.Const.HeroKeys;
@@ -345,6 +350,24 @@ public class Utils {
         }
 		
 		return null;
+	}
+	
+	public static Bitmap downloadBitmapFromURL(String link) throws IOException {
+		URL url = new URL(link);
+        HttpURLConnection connection = (HttpURLConnection) url
+                .openConnection();
+        connection.setDoInput(true);
+        connection.connect();
+        InputStream input = connection.getInputStream();
+        Bitmap myBitmap = BitmapFactory.decodeStream(input);
+
+        return myBitmap;
+	}
+	
+	public static Bitmap getBitmapFromFile(String path){
+		Bitmap myBitmap = BitmapFactory.decodeFile(path);
+		
+		return myBitmap;
 	}
 
 }
