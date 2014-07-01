@@ -1,5 +1,10 @@
-<ScrollView
-  xmlns:android="http://schemas.android.com/apk/res/android"
+<uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ptr_layout"
+    android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+
+<ScrollView  
   android:layout_width="fill_parent"
   android:layout_height="fill_parent"
   android:background="@drawable/bg_main">
@@ -327,7 +332,8 @@
 	<!-- Skill info area -->
   	<RelativeLayout
   	    android:layout_width="fill_parent"
-  	    android:layout_height="wrap_content" >
+  	    android:layout_height="wrap_content"
+  	    android:layout_marginTop="10dp" >
 	    
   	    <View
   	        android:id="@+id/space_view"
@@ -360,7 +366,7 @@
   	        android:layout_width="fill_parent"
   	        android:layout_height="wrap_content"
   	        android:layout_below="@+id/space_view"
-  	        android:layout_marginTop="5dp"
+  	        android:layout_marginTop="10dp"
   	        android:layout_centerHorizontal="true">
   	    
 	  	    <ImageView
@@ -403,7 +409,7 @@
   	        android:layout_width="fill_parent"
   	        android:layout_height="wrap_content"
   	        android:layout_below="@+id/active_skill"  	        
-  	        android:layout_marginTop="5dp"
+  	        android:layout_marginTop="10dp"
   	        android:layout_centerHorizontal="true">
   	    
 	  	    <ImageView
@@ -445,3 +451,4 @@
 
 </LinearLayout>
 </ScrollView>
+</uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout>

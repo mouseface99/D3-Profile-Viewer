@@ -1,44 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content" >    
+    android:layout_height="wrap_content"
+    android:paddingLeft="16dp"
+    android:background="#FFD700" >    
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"        
         android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"        
         android:text="@string/career_paragon_lv"/>
     
     <TextView
         android:id="@+id/paragon_level"
+        android:layout_weight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="5sp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#FF0000"/>
     
     <TextView
+        android:layout_weight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="5sp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/num_monster_killed" />
     
     <TextView
+        android:layout_weight="1"
         android:id="@+id/number_kill"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="5sp"
+		android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#FF0000"/>
     
     <TextView
+        android:layout_weight="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="5sp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/num_elite_killed"/>
     
     <TextView
+        android:layout_weight="1"
         android:id="@+id/number_kill_elite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="5sp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:textColor="#FF0000"/>
 
 </LinearLayout>

@@ -42,7 +42,7 @@ public class HeroListActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hero_list);
         
-
+/*
         if (findViewById(R.id.hero_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-large and
@@ -54,7 +54,7 @@ public class HeroListActivity extends FragmentActivity
             // 'activated' state when touched.
             ((HeroListFragment)getSupportFragmentManager().findFragmentById(R.id.hero_list)).setActivateOnItemClick(true);
         }
-        
+*/        
         
     }
 

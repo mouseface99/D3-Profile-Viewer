@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp" >
 
     <ImageView
         android:id="@+id/hero_head"
@@ -19,6 +20,7 @@
         android:layout_toRightOf="@+id/hero_head"
         android:paddingLeft="10sp"
         android:text="Large Text"
+        android:textColor="#FFFFFF"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -29,6 +31,7 @@
         android:layout_alignLeft="@+id/hero_name"
         android:paddingLeft="10sp"
         android:text="Medium Text"
+        android:textColor="#EEE8AA"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

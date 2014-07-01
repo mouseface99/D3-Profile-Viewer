@@ -50,12 +50,10 @@ public class Const {
 		private static final String MEDIA_ITEM = "media.blizzard.com/d3/icons/items/large/";
 		private static final String MEDIA_SKILL = "media.blizzard.com/d3/icons/skills/64/";
 		
-		public static String getProfilePath(){
-			return PREFIX + DATA_BATTLE_REGION + HOST + "profile/" + DATA_BATTLE_ACCOUNT + "-" + DATA_BATTLE_CODE + "/";
-		}
+		public static final String PROFILE_PATH = PREFIX + DATA_BATTLE_REGION + HOST + "profile/" + DATA_BATTLE_ACCOUNT + "-" + DATA_BATTLE_CODE + "/";
 		
 		public static String getHeroPath(long ID){			
-			return getProfilePath() + "hero/" + String.valueOf(ID);
+			return PROFILE_PATH + "hero/" + String.valueOf(ID);
 		}
 		
 		public static String getItemMediaPath(String fileName){

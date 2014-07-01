@@ -15,6 +15,9 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 
+import uk.co.senab.actionbarpulltorefresh.library.ActionBarPullToRefresh;
+import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
+import uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener;
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -22,6 +25,7 @@ import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 import net.mf99.d3viewer.Const;
@@ -43,8 +47,9 @@ import net.mf99.d3viewer.data.unit.Profile;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class HeroListFragment extends ListFragment {
+public class HeroListFragment extends ListFragment implements OnRefreshListener {
 	public static HeroListAdapter mAdapter = null;
+	private PullToRefreshLayout mPullToRefreshLayout;
 	Context mContext;
 
     /**
@@ -107,6 +112,8 @@ public class HeroListFragment extends ListFragment {
         	CarrerDownloadTask downloadTask = new CarrerDownloadTask();
             downloadTask.execute("BattleTag");
         }
+        
+        getActivity().setTitle(Const.DATA_BATTLE_ACCOUNT + "#" + Const.DATA_BATTLE_CODE);
     }
 
     @Override
@@ -118,6 +125,27 @@ public class HeroListFragment extends ListFragment {
                 && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
             setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
         }
+        
+        // This is the View which is created by ListFragment
+        ViewGroup viewGroup = (ViewGroup) view;        
+
+        // We need to create a PullToRefreshLayout manually
+        mPullToRefreshLayout = new PullToRefreshLayout(viewGroup.getContext());
+        mPullToRefreshLayout.setBackgroundResource(R.drawable.bg_main);
+
+        // We can now setup the PullToRefreshLayout
+        ActionBarPullToRefresh.from(getActivity())
+
+                // We need to insert the PullToRefreshLayout into the Fragment's ViewGroup
+                .insertLayoutInto(viewGroup)
+
+                // We need to mark the ListView and it's Empty View as pullable
+                // This is because they are not dirent children of the ViewGroup
+                .theseChildrenArePullable(getListView(), getListView().getEmptyView())
+
+                // We can now complete the setup as desired
+                .listener(this)                
+                .setup(mPullToRefreshLayout);
     }
 
     @Override
@@ -187,7 +215,7 @@ public class HeroListFragment extends ListFragment {
 		protected Profile doInBackground(String... params) {
     		try {
 				return Utils.translateJsonToProfile(
-									Utils.downloadJSONData(ServerPath.getProfilePath()), 
+									Utils.downloadJSONData(ServerPath.PROFILE_PATH), 
 									Utils.getRegion(Const.DATA_BATTLE_REGION));
 				
 			} catch (ClientProtocolException e) {
@@ -209,12 +237,20 @@ public class HeroListFragment extends ListFragment {
 			super.onPostExecute(result);
 			
 			if(result == null)
-				Toast.makeText(getActivity(), "Download Profile fail", Toast.LENGTH_SHORT).show();			
+				Toast.makeText(getActivity(), "Download Profile fail, pull down to refresh !", Toast.LENGTH_SHORT).show();			
 			else{
 				mAdapter = new HeroListAdapter(mContext, result);
 				setListAdapter(mAdapter);
-				
 			}
+			
+			if(mPullToRefreshLayout != null)
+				mPullToRefreshLayout.setRefreshComplete();
 		}
     }
+
+	@Override
+	public void onRefreshStarted(View view) {
+		CarrerDownloadTask downloadTask = new CarrerDownloadTask();
+        downloadTask.execute("BattleTag");				
+	}
 }
