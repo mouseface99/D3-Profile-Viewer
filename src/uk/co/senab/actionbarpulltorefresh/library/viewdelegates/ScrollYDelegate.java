@@ -24,6 +24,7 @@ import android.widget.ScrollView;
  */
 public class ScrollYDelegate implements ViewDelegate {
 
+	@SuppressWarnings("rawtypes")
     public static final Class[] SUPPORTED_VIEW_CLASSES =  { ScrollView.class };
 
     @Override

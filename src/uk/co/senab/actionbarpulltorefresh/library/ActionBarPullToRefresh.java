@@ -28,6 +28,7 @@ import java.util.Set;
 import uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener;
 import uk.co.senab.actionbarpulltorefresh.library.viewdelegates.ViewDelegate;
 
+@SuppressWarnings("rawtypes")
 public class ActionBarPullToRefresh {
 
     public static SetupWizard from(Activity activity) {
@@ -70,7 +71,8 @@ public class ActionBarPullToRefresh {
             return this;
         }
 
-        public SetupWizard useViewDelegate(Class<?> viewClass, ViewDelegate delegate) {
+        
+		public SetupWizard useViewDelegate(Class<?> viewClass, ViewDelegate delegate) {
             if (mViewDelegates == null) {
                 mViewDelegates = new HashMap<Class, ViewDelegate>();
             }

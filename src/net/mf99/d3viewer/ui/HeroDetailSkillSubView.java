@@ -5,23 +5,15 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import net.mf99.d3viewer.Const;
-import net.mf99.d3viewer.Const.ITEM_COLOR;
 import net.mf99.d3viewer.Const.ServerPath;
-import net.mf99.d3viewer.R;
 import net.mf99.d3viewer.Utils;
-import net.mf99.d3viewer.data.unit.EquipShort;
-import net.mf99.d3viewer.data.unit.Hero;
 import net.mf99.d3viewer.data.unit.Skill;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.os.AsyncTask;
-import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 public class HeroDetailSkillSubView {	
 	Skill mSkill;	

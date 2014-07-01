@@ -2,7 +2,6 @@ package net.mf99.d3viewer.ui;
 
 import net.mf99.d3viewer.Const;
 import net.mf99.d3viewer.R;
-import net.mf99.d3viewer.Utils;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

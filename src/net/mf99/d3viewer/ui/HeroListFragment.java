@@ -1,18 +1,7 @@
 package net.mf99.d3viewer.ui;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
 
 import uk.co.senab.actionbarpulltorefresh.library.ActionBarPullToRefresh;
@@ -23,18 +12,15 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 import net.mf99.d3viewer.Const;
-import net.mf99.d3viewer.Const.SERVER_REGION;
 import net.mf99.d3viewer.Const.ServerPath;
 import net.mf99.d3viewer.R;
 import net.mf99.d3viewer.Utils;
 import net.mf99.d3viewer.data.HeroListAdapter;
-import net.mf99.d3viewer.data.unit.Hero;
 import net.mf99.d3viewer.data.unit.HeroShort;
 import net.mf99.d3viewer.data.unit.Profile;
 

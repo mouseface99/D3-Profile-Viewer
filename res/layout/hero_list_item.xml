@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/hero_hunter_female" />
+        android:src="@drawable/hero_hunter_female"
+        android:contentDescription="@string/icon_desc" />
 
     <TextView
         android:id="@+id/hero_name"
@@ -19,7 +20,6 @@
         android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/hero_head"
         android:paddingLeft="10sp"
-        android:text="Large Text"
         android:textColor="#FFFFFF"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -30,7 +30,6 @@
         android:layout_alignBottom="@+id/hero_head"
         android:layout_alignLeft="@+id/hero_name"
         android:paddingLeft="10sp"
-        android:text="Medium Text"
         android:textColor="#EEE8AA"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 

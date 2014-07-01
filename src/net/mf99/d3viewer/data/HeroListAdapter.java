@@ -2,7 +2,6 @@ package net.mf99.d3viewer.data;
 
 import java.util.ArrayList;
 
-import net.mf99.d3viewer.Const.HERO_CLASS;
 import net.mf99.d3viewer.R;
 import net.mf99.d3viewer.Utils;
 import net.mf99.d3viewer.data.unit.Hero;

@@ -24,9 +24,10 @@ import android.widget.AbsListView;
 /**
  * FIXME
  */
-public class AbsListViewDelegate implements ViewDelegate {
-
-    public static final Class[] SUPPORTED_VIEW_CLASSES =  { AbsListView.class };
+@SuppressWarnings("rawtypes")
+public class AbsListViewDelegate implements ViewDelegate {    
+	
+	public static final Class[] SUPPORTED_VIEW_CLASSES =  { AbsListView.class };
 
     @Override
     public boolean isReadyForPull(View view, final float x, final float y) {

@@ -30,6 +30,7 @@ import uk.co.senab.actionbarpulltorefresh.library.viewdelegates.ScrollYDelegate;
 import uk.co.senab.actionbarpulltorefresh.library.viewdelegates.ViewDelegate;
 import uk.co.senab.actionbarpulltorefresh.library.viewdelegates.WebViewDelegate;
 
+@SuppressWarnings("rawtypes")
 class InstanceCreationUtils {
 
     private static final String LOG_TAG = "InstanceCreationUtils";
@@ -82,10 +83,11 @@ class InstanceCreationUtils {
         return null;
     }
 
+    @SuppressWarnings("unchecked")
     private static <T> T newInstance(Context context, Class clazz, Class[] constructorSig,
             Object... arguments) {
-        try {
-            Constructor<?> constructor = clazz.getConstructor(constructorSig);
+        try {           
+			Constructor<?> constructor = clazz.getConstructor(constructorSig);
             return (T) constructor.newInstance(arguments);
         } catch (Exception e) {
             Log.w(LOG_TAG, "Cannot instantiate class: " + clazz.getName(), e);

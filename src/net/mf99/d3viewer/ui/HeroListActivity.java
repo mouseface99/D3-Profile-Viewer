@@ -2,12 +2,10 @@ package net.mf99.d3viewer.ui;
 
 import net.mf99.d3viewer.Const;
 import net.mf99.d3viewer.R;
-import net.mf99.d3viewer.data.unit.Hero;
 import net.mf99.d3viewer.data.unit.HeroShort;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 
 
 /**

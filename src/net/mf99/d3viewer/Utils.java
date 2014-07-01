@@ -7,8 +7,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -22,16 +20,13 @@ import org.json.JSONObject;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 import net.mf99.d3viewer.Const.HERO_CLASS;
 import net.mf99.d3viewer.Const.HeroKeys;
 import net.mf99.d3viewer.Const.ITEM_COLOR;
 import net.mf99.d3viewer.Const.ProfileKeys;
 import net.mf99.d3viewer.Const.SERVER_REGION;
-import net.mf99.d3viewer.Const.ServerPath;
 import net.mf99.d3viewer.data.unit.EquipList;
 import net.mf99.d3viewer.data.unit.EquipShort;
-import net.mf99.d3viewer.data.unit.Gem;
 import net.mf99.d3viewer.data.unit.Hero;
 import net.mf99.d3viewer.data.unit.HeroShort;
 import net.mf99.d3viewer.data.unit.Profile;

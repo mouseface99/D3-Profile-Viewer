@@ -26,17 +26,11 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.PixelFormat;
-import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RectShape;
 import android.os.Build;
 import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AccelerateInterpolator;
-import android.view.animation.Interpolator;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -64,7 +58,7 @@ public class DefaultHeaderTransformer extends HeaderTransformer {
     private int mProgressBarStyle;
     private int mProgressBarHeight = RelativeLayout.LayoutParams.WRAP_CONTENT;
 
-    private final Interpolator mInterpolator = new AccelerateInterpolator();
+    //private final Interpolator mInterpolator = new AccelerateInterpolator();
 
     protected DefaultHeaderTransformer() {
         final int min = getMinimumApiLevel();
@@ -286,7 +280,8 @@ public class DefaultHeaderTransformer extends HeaderTransformer {
         mReleaseLabel = releaseText;
     }
 
-    private void setupViewsFromStyles(Activity activity, View headerView) {
+    @SuppressWarnings("deprecation")
+	private void setupViewsFromStyles(Activity activity, View headerView) {
         final TypedArray styleAttrs = obtainStyledAttrsFromThemeAttr(activity,
                 R.attr.ptrHeaderStyle, R.styleable.PullToRefreshHeader);
 
@@ -347,12 +342,12 @@ public class DefaultHeaderTransformer extends HeaderTransformer {
         }
 
         //SmoothProgressBar Style
-        if (styleAttrs.hasValue(R.styleable.PullToRefreshHeader_ptrSmoothProgressBarStyle)) {
-            int spbStyleRes = styleAttrs.getResourceId(R.styleable.PullToRefreshHeader_ptrSmoothProgressBarStyle, 0);
+//        if (styleAttrs.hasValue(R.styleable.PullToRefreshHeader_ptrSmoothProgressBarStyle)) {
+//            int spbStyleRes = styleAttrs.getResourceId(R.styleable.PullToRefreshHeader_ptrSmoothProgressBarStyle, 0);
 //            if (spbStyleRes != 0)
 //                mHeaderProgressBar.applyStyle(spbStyleRes);
 
-        }
+//        }
 
         styleAttrs.recycle();
     }
