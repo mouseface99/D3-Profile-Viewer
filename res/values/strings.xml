@@ -3,6 +3,8 @@
 
     <string name="app_name">D3 Viewer</string>
     <string name="title_hero_detail">Hero Detail</string>
+    <string name="loading">Loading ...</string>
+    <string name="loading_fail">Load Fail</string>
     
     <string name="hero_type_hunter">Demon Hunter</string>
     <string name="hero_type_monk">Monk</string>
@@ -17,5 +19,12 @@
     <string name="career_paragon_lv">Paragon Lv</string>
     <string name="num_monster_killed">Killed</string>
     <string name="num_elite_killed">Elite Killed</string>
+    
+    <string name="main_value_type_dps">Damage per Second</string>
+    <string name="main_value_type_armor">Armor</string>
+    <string name="damage"> damage</string>
+    <string name="item_level">Item Level : </string>
+    <string name="empty_socket">Empty</string>
+    <string name="hit_per_sec"> hits per sec</string>
 
 </resources>

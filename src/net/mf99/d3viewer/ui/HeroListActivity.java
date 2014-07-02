@@ -39,6 +39,7 @@ public class HeroListActivity extends FragmentActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hero_list);
+        this.setTitle(R.string.loading);
         
 /*
         if (findViewById(R.id.hero_detail_container) != null) {

@@ -25,6 +25,8 @@ public class HeroDetailActivity extends FragmentActivity {
 
         // Show the Up button in the action bar.
         getActionBar().setDisplayHomeAsUpEnabled(true);
+        
+        this.setTitle(R.string.loading);
 
         // savedInstanceState is non-null when there is fragment state
         // saved from previous configurations of this activity

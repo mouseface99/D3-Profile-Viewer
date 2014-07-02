@@ -8,6 +8,8 @@ import org.json.JSONException;
 import uk.co.senab.actionbarpulltorefresh.library.ActionBarPullToRefresh;
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
 import uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnDismissListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -34,7 +36,8 @@ import net.mf99.d3viewer.data.unit.Skill;
 public class HeroDetailFragment extends Fragment 
 								implements HeroDetailItemSubView.OnEquipClickListener, 
 										   HeroDetailSkillSubView.OnSkillClickListener, 
-										   OnRefreshListener{
+										   OnRefreshListener, 
+										   OnDismissListener{
 	
 	View mRootView;
 	
@@ -44,11 +47,11 @@ public class HeroDetailFragment extends Fragment
     
     HeroDetailSkillSubView[] mActiveSkills, mPassiveSkills;
 
-    private long hID;
-    
-    private Hero mHero;
-    
-    private PullToRefreshLayout mPullToRefreshLayout;
+    private long hID;    
+    private Hero mHero;    
+    private PullToRefreshLayout mPullToRefreshLayout;    
+    private LayoutInflater mInflater;
+    private boolean isDialogDisplaying = false;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,6 +73,8 @@ public class HeroDetailFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+    	
+    	mInflater = inflater;
     	mRootView = inflater.inflate(R.layout.fragment_hero_detail, container, false);    
     	
     	// Now find the PullToRefreshLayout to setup
@@ -118,7 +123,7 @@ public class HeroDetailFragment extends Fragment
     public void setHeroData(Hero hero){
     	mHero = hero;
     	
-    	getActivity().setTitle(mHero.mName);
+    	getActivity().setTitle(mHero.mName + ", Lv " + mHero.mLevel + " " + getString(Utils.getHeroClassNameSource(mHero.mClass)));
     	
     	EquipList mList = mHero.mEquips;
     	
@@ -172,8 +177,13 @@ public class HeroDetailFragment extends Fragment
     
     @Override
 	public void onEquipClick(EquipShort equip) {
-    	if(equip != null)
-    		Toast.makeText(getActivity(), "Item ["+equip.mName+"] Clicked", Toast.LENGTH_SHORT).show();
+    	if(equip != null){
+    		if(!isDialogDisplaying){
+    			EquipDetailDialog dialog = new EquipDetailDialog(getActivity(), mInflater, equip.mToolkitParam, this);
+    			dialog.show();
+    			isDialogDisplaying = true;
+    		}
+    	}
 	}
     
     @Override
@@ -203,22 +213,33 @@ public class HeroDetailFragment extends Fragment
 		}
 		
 		@Override
-		protected void onPostExecute(Hero result) {			
-			super.onPostExecute(result);
-			
-			if(result == null)
-				Toast.makeText(getActivity(), "Download Hero data fail, pull down to refresh !", Toast.LENGTH_SHORT).show();
-			else
-				setHeroData(result);
-			
-			if(mPullToRefreshLayout != null)
-				mPullToRefreshLayout.setRefreshComplete();
+		protected void onPostExecute(Hero result) {	
+			try{
+				super.onPostExecute(result);
+				
+				if(result == null){
+					Toast.makeText(getActivity(), "Download Hero data fail, pull down to refresh !", Toast.LENGTH_SHORT).show();
+					getActivity().setTitle(R.string.loading_fail);
+				}
+				else
+					setHeroData(result);
+				
+				if(mPullToRefreshLayout != null)
+					mPullToRefreshLayout.setRefreshComplete();
+			}catch(Exception ex){}
 		}
     }
 
 	@Override
 	public void onRefreshStarted(View view) {
+		getActivity().setTitle(R.string.loading);
 		HeroDataDownloadTask downloadTask = new HeroDataDownloadTask();
 		downloadTask.execute(hID);		
+	}
+
+
+	@Override
+	public void onDismiss(DialogInterface dialog) {
+		isDialogDisplaying = false;		
 	}	
 }

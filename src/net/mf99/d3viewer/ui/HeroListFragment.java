@@ -97,9 +97,7 @@ public class HeroListFragment extends ListFragment implements OnRefreshListener 
         if(mAdapter.isTemp){
         	CarrerDownloadTask downloadTask = new CarrerDownloadTask();
             downloadTask.execute("BattleTag");
-        }
-        
-        getActivity().setTitle(Const.DATA_BATTLE_ACCOUNT + "#" + Const.DATA_BATTLE_CODE);
+        }       
     }
 
     @Override
@@ -220,22 +218,28 @@ public class HeroListFragment extends ListFragment implements OnRefreshListener 
     	
 		@Override
 		protected void onPostExecute(Profile result) {
-			super.onPostExecute(result);
-			
-			if(result == null)
-				Toast.makeText(getActivity(), "Download Profile fail, pull down to refresh !", Toast.LENGTH_SHORT).show();			
-			else{
-				mAdapter = new HeroListAdapter(mContext, result);
-				setListAdapter(mAdapter);
-			}
-			
-			if(mPullToRefreshLayout != null)
-				mPullToRefreshLayout.setRefreshComplete();
+			try{
+				super.onPostExecute(result);
+				
+				if(result == null){
+					Toast.makeText(getActivity(), "Download Profile fail, pull down to refresh !", Toast.LENGTH_SHORT).show();
+					getActivity().setTitle(R.string.loading_fail);
+				}
+				else{
+					mAdapter = new HeroListAdapter(mContext, result);
+					setListAdapter(mAdapter);
+					getActivity().setTitle(Const.DATA_BATTLE_ACCOUNT + "#" + Const.DATA_BATTLE_CODE); 
+				}
+				
+				if(mPullToRefreshLayout != null)
+					mPullToRefreshLayout.setRefreshComplete();
+			}catch(Exception ex){}
 		}
     }
 
 	@Override
 	public void onRefreshStarted(View view) {
+		getActivity().setTitle(R.string.loading);
 		CarrerDownloadTask downloadTask = new CarrerDownloadTask();
         downloadTask.execute("BattleTag");				
 	}

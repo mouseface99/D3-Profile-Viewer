@@ -1,6 +1,7 @@
 package net.mf99.d3viewer;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -20,13 +21,16 @@ import org.json.JSONObject;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import net.mf99.d3viewer.Const.GEM_CLASS;
 import net.mf99.d3viewer.Const.HERO_CLASS;
 import net.mf99.d3viewer.Const.HeroKeys;
 import net.mf99.d3viewer.Const.ITEM_COLOR;
 import net.mf99.d3viewer.Const.ProfileKeys;
 import net.mf99.d3viewer.Const.SERVER_REGION;
+import net.mf99.d3viewer.data.unit.Equip;
 import net.mf99.d3viewer.data.unit.EquipList;
 import net.mf99.d3viewer.data.unit.EquipShort;
+import net.mf99.d3viewer.data.unit.Gem;
 import net.mf99.d3viewer.data.unit.Hero;
 import net.mf99.d3viewer.data.unit.HeroShort;
 import net.mf99.d3viewer.data.unit.Profile;
@@ -183,6 +187,56 @@ public class Utils {
 		return SERVER_REGION.TW;
 	}
 	
+	public static int getGemIconResource(Gem gem){
+		int base;
+		switch(gem.mClass){
+			case AMETHYST:
+				base = R.drawable.gem_amethyst_01;
+				break;
+			case DIAMOND:
+				base = R.drawable.gem_diamond_01;
+				break;
+			case EMERALD:
+				base = R.drawable.gem_emerald_01;
+				break;
+			case RUBY:
+				base = R.drawable.gem_ruby_01;
+				break;
+			case TOPAZ:
+				base = R.drawable.gem_topaz_01;
+				break;
+			default :
+				base = R.drawable.gem_diamond_01;
+		}
+		
+		return (base+(gem.mLevel-1));
+	}
+	
+	private static int getGemLevel(String id){
+		if(id != null && id.contains("_")){
+			return Integer.parseInt(id.substring(id.indexOf("_")+1, id.length()));
+		}
+		
+		return -1;		
+	}
+	
+	private static GEM_CLASS getGemClass(String id){
+		String type = id.substring(0, id.indexOf("_"));
+		
+		if("Amethyst".equals(type))
+			return GEM_CLASS.AMETHYST;
+		else if("Diamond".equals(type))
+			return GEM_CLASS.DIAMOND;
+		else if("Emerald".equals(type))
+			return GEM_CLASS.EMERALD;
+		else if("Ruby".equals(type))
+			return GEM_CLASS.RUBY;
+		else if("Topaz".equals(type))
+			return GEM_CLASS.TOPAZ;
+		
+		return null;
+	}
+	
 	public static Profile translateJsonToProfile(String jsonData, SERVER_REGION region) throws JSONException{
 		JSONObject data = new JSONObject(jsonData);
 		JSONArray jsonHeros = data.getJSONArray(ProfileKeys.KEY_HEROS);
@@ -251,22 +305,116 @@ public class Utils {
 		EquipList mEquips = new EquipList();
 		JSONObject items = data.getJSONObject("items");
 		
-		mEquips.mHead = toEquip(items, "head");
-		mEquips.mTorso = toEquip(items, "torso");
-		mEquips.mWaist = toEquip(items, "waist");
-		mEquips.mLegs = toEquip(items, "legs");
-		mEquips.mFeet = toEquip(items, "feet");
-		mEquips.mShoulders = toEquip(items, "shoulders");
-		mEquips.mHands = toEquip(items, "hands");
-		mEquips.mNeck = toEquip(items, "neck");
-		mEquips.mBracers = toEquip(items, "bracers");
-		mEquips.mMainHand = toEquip(items, "mainHand");
-		mEquips.mOffHand = toEquip(items, "offHand");
-		mEquips.mRightFinger = toEquip(items, "rightFinger");
-		mEquips.mLeftFinger = toEquip(items, "leftFinger");
+		mEquips.mHead = toEquipShort(items, "head");
+		mEquips.mTorso = toEquipShort(items, "torso");
+		mEquips.mWaist = toEquipShort(items, "waist");
+		mEquips.mLegs = toEquipShort(items, "legs");
+		mEquips.mFeet = toEquipShort(items, "feet");
+		mEquips.mShoulders = toEquipShort(items, "shoulders");
+		mEquips.mHands = toEquipShort(items, "hands");
+		mEquips.mNeck = toEquipShort(items, "neck");
+		mEquips.mBracers = toEquipShort(items, "bracers");
+		mEquips.mMainHand = toEquipShort(items, "mainHand");
+		mEquips.mOffHand = toEquipShort(items, "offHand");
+		mEquips.mRightFinger = toEquipShort(items, "rightFinger");
+		mEquips.mLeftFinger = toEquipShort(items, "leftFinger");
 		
 		return new Hero(mName, mId, mLevel, mClass, isMale, mProgression, mEquips, mActiveSkills, mPassiveSkills);
 	}
+	
+	public static Equip translateJsonToEquip(String jsonData) throws JSONException{
+		JSONObject data = new JSONObject(jsonData);
+		
+		String mName = data.getString("name");
+		String mIcon = data.getString("icon");
+		ITEM_COLOR mColor = Utils.getItemColor(data.getString("displayColor"));
+		int mItemLevel = data.getInt("itemLevel");
+		int mSocketNum = 0;
+		
+		try{
+			mSocketNum = data.getJSONObject("attributesRaw").getJSONObject("Sockets").getInt("max");
+		}catch(JSONException ex){}
+		
+		boolean isWepond = false;
+		try{
+			data.getJSONObject("dps");
+			isWepond = true;
+		}catch(JSONException ex){}
+		
+		double mDps = 0, mAttackPerSec = 0, mMaxDamage = 0, mMinDamage = 0;
+		double mArmor = 0;
+		if(isWepond){
+			mDps = data.getJSONObject("dps").getDouble("max");
+			mAttackPerSec = data.getJSONObject("attacksPerSecond").getDouble("max");
+			mMaxDamage = data.getJSONObject("maxDamage").getDouble("max");
+			mMinDamage = data.getJSONObject("minDamage").getDouble("max");
+		}
+		else{
+			try{
+				mArmor = data.getJSONObject("armor").getDouble("max");
+			}catch(JSONException ex){ mArmor = -1; }
+		}
+		
+		ArrayList<String> mPrimaryAttr = new ArrayList<String>();
+		ArrayList<String> mSecandaryAttr = new ArrayList<String>();
+		ArrayList<String> mPassiveAttr = new ArrayList<String>();
+		ArrayList<Gem> mGems = new ArrayList<Gem>();
+		
+		try{
+			JSONObject attrs = data.getJSONObject("attributes");
+			
+			JSONArray primary = attrs.getJSONArray("primary");
+			
+			for(int i=0; i<primary.length(); i++)
+				mPrimaryAttr.add(primary.getJSONObject(i).getString("text"));
+			
+			JSONArray secondary = attrs.getJSONArray("secondary");
+			
+			for(int i=0; i<secondary.length(); i++)
+				mSecandaryAttr.add(secondary.getJSONObject(i).getString("text"));
+			
+			JSONArray passive = attrs.getJSONArray("passive");
+			
+			for(int i=0; i<passive.length(); i++)
+				mPassiveAttr.add(passive.getJSONObject(i).getString("text"));
+			
+			JSONArray gems = data.getJSONArray("gems");			
+			
+			for(int i=0; i<gems.length(); i++){
+				JSONObject gem = gems.getJSONObject(i);
+				String name = gem.getJSONObject("item").getString("name");
+				String id = gem.getJSONObject("item").getString("id");
+				GEM_CLASS mClass = getGemClass(id);
+				int level = getGemLevel(id);
+				String attr = gem.getJSONObject("attributes").getJSONArray("primary").getJSONObject(0).getString("text");				
+				mGems.add(new Gem(name, mClass, level, attr));
+			}			
+		}catch(JSONException ex){}
+		
+		// Adjust Max-Min damage with attribute
+		if(isWepond){
+			if(mPrimaryAttr.size() > 0 &&
+			   mPrimaryAttr.get(0).contains("+") && 
+			   mPrimaryAttr.get(0).contains("¡V")){				
+				String dd = mPrimaryAttr.get(0).substring(1, mPrimaryAttr.get(0).indexOf(" "));
+				
+				mMinDamage += Integer.parseInt(dd.substring(0, dd.indexOf("¡V")));
+				mMaxDamage += Integer.parseInt(dd.substring(dd.indexOf("¡V")+1, dd.length()));				
+			}
+		}
+		
+		
+		if(isWepond)
+			return new Equip(mName, mIcon, mColor, 
+							 mItemLevel, mSocketNum, 
+							 mDps, mAttackPerSec, mMaxDamage, mMinDamage, 
+							 mPrimaryAttr, mSecandaryAttr, mPassiveAttr, mGems);
+		else
+			return new Equip(mName, mIcon, mColor, 
+					 		 mItemLevel, mSocketNum, 
+					 		 mArmor, 
+					 		 mPrimaryAttr, mSecandaryAttr, mPassiveAttr, mGems);
+	}	
 	
 	private static int getProgression(JSONObject progData) throws JSONException{
 		int prog = 5;
@@ -309,7 +457,7 @@ public class Utils {
 						 mRuneName, mRuneDescription, mRuneType, mRuneLevel);		
 	}
 	
-	private static EquipShort toEquip(JSONObject itemsData, String pos){		
+	private static EquipShort toEquipShort(JSONObject itemsData, String pos){		
 		if(itemsData == null) return null;
 		try{
 			JSONObject equipData = itemsData.getJSONObject(pos);
@@ -361,6 +509,12 @@ public class Utils {
 	
 	public static Bitmap getBitmapFromFile(String path){
 		Bitmap myBitmap = BitmapFactory.decodeFile(path);
+		
+		return myBitmap;
+	}
+	
+	public static Bitmap getBitmapFromFile(File file){
+		Bitmap myBitmap = BitmapFactory.decodeFile(file.getPath());
 		
 		return myBitmap;
 	}
