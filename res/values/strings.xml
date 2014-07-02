@@ -26,5 +26,7 @@
     <string name="item_level">Item Level : </string>
     <string name="empty_socket">Empty</string>
     <string name="hit_per_sec"> hits per sec</string>
+    
+    <string name="unlock_at_level">Unlock at Lv :</string>
 
 </resources>

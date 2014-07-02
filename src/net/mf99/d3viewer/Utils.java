@@ -120,6 +120,19 @@ public class Utils {
 		return 0;
 	}
 	
+	public static int getRuneResource(int level){
+		switch(level){
+			case 0: return R.drawable.skill_rune_none;
+			case 1: return R.drawable.skill_rune1;
+			case 2: return R.drawable.skill_rune2;
+			case 3: return R.drawable.skill_rune3;
+			case 4: return R.drawable.skill_rune4;
+			case 5: return R.drawable.skill_rune5;
+		}
+		
+		return R.drawable.skill_rune_none;
+	}
+	
 	public static int getHeroHeaderSource(HERO_CLASS mClass, boolean isMale){
 		switch(mClass){
 			case HUNTER:

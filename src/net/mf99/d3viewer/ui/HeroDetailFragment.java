@@ -188,8 +188,13 @@ public class HeroDetailFragment extends Fragment
     
     @Override
 	public void onSkillClick(Skill skill) {
-    	if(skill != null)
-    		Toast.makeText(getActivity(), "Skill ["+skill.mName+"] Clicked", Toast.LENGTH_SHORT).show();
+    	if(skill != null){
+    		if(!isDialogDisplaying){
+    			SkillDetailDialog dialog = new SkillDetailDialog(getActivity(), mInflater, skill, this);
+    			dialog.show();
+    			isDialogDisplaying = true;
+    		}
+    	}
 	}
     
     class HeroDataDownloadTask extends AsyncTask<Long, Void, Hero>{

@@ -334,38 +334,37 @@
   	    android:layout_width="fill_parent"
   	    android:layout_height="wrap_content"
   	    android:layout_marginTop="10dp" >
-	    
-  	    <View
-  	        android:id="@+id/space_view"
-  	        android:layout_width="64dp"
-  	        android:layout_height="64dp"
+		
+  	    <LinearLayout
+  	        android:id="@+id/primary_skill"
+  	        android:layout_width="fill_parent"
+  	        android:layout_height="wrap_content"
   	        android:layout_alignParentTop="true"
-  	        android:layout_centerHorizontal="true"
-  	        />
-
-  	    <ImageView
-  	        android:id="@+id/view_active_skill_1"
-  	        android:layout_width="64dp"    	    	
-	  	    android:layout_height="64dp"
-  	        android:layout_alignParentTop="true"
-  	        android:layout_toLeftOf="@+id/space_view"
-  	        android:contentDescription="@string/icon_desc"
-  	        android:src="@drawable/default_active_skill" />
-  	        
-  	    <ImageView
-  	        android:id="@+id/view_active_skill_2"
-  	        android:layout_width="64dp"    	    	
-	  	    android:layout_height="64dp"
-  	        android:layout_alignParentTop="true"
-  	        android:layout_toRightOf="@+id/space_view"
-  	        android:contentDescription="@string/icon_desc"
-  	        android:src="@drawable/default_active_skill" />
+  	        android:layout_centerHorizontal="true">
+		    
+	  	    <ImageView
+	  	        android:id="@+id/view_active_skill_1"
+	  	        android:layout_width="64dp"    	    	
+		  	    android:layout_height="64dp"
+		  	    android:layout_weight="1"
+	  	        android:contentDescription="@string/icon_desc"
+	  	        android:src="@drawable/default_active_skill" />
+	  	        
+	  	    <ImageView
+	  	        android:id="@+id/view_active_skill_2"
+	  	        android:layout_width="64dp"    	    	
+		  	    android:layout_height="64dp"
+		  	    android:layout_weight="1"
+	  	        android:contentDescription="@string/icon_desc"
+	  	        android:src="@drawable/default_active_skill" />
+  	    
+  	    </LinearLayout>
   	    
   	    <LinearLayout
   	        android:id="@+id/active_skill"
   	        android:layout_width="fill_parent"
   	        android:layout_height="wrap_content"
-  	        android:layout_below="@+id/space_view"
+  	        android:layout_below="@+id/primary_skill"
   	        android:layout_marginTop="10dp"
   	        android:layout_centerHorizontal="true">
   	    
