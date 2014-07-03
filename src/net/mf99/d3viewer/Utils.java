@@ -23,9 +23,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import net.mf99.d3viewer.Const.GEM_CLASS;
 import net.mf99.d3viewer.Const.HERO_CLASS;
-import net.mf99.d3viewer.Const.HeroKeys;
 import net.mf99.d3viewer.Const.ITEM_COLOR;
-import net.mf99.d3viewer.Const.ProfileKeys;
 import net.mf99.d3viewer.Const.SERVER_REGION;
 import net.mf99.d3viewer.data.unit.Equip;
 import net.mf99.d3viewer.data.unit.EquipList;
@@ -252,18 +250,19 @@ public class Utils {
 	
 	public static Profile translateJsonToProfile(String jsonData, SERVER_REGION region) throws JSONException{
 		JSONObject data = new JSONObject(jsonData);
-		JSONArray jsonHeros = data.getJSONArray(ProfileKeys.KEY_HEROS);
-		JSONObject kills = data.getJSONObject(ProfileKeys.KEY_KILLS);
+		JSONArray jsonHeros = data.getJSONArray("heroes");
+		JSONObject kills = data.getJSONObject("kills");
 		
 		String battleTag;
 		ArrayList<HeroShort> heros = new ArrayList<HeroShort>(jsonHeros.length());
 		int paragonLv;
 		long killed, elite_killed;
 		
-		battleTag = data.getString(ProfileKeys.KEY_TAG);
-		paragonLv = data.getInt(ProfileKeys.KEY_PLV);
-		killed = kills.getLong(ProfileKeys.KEY_KILLS_MONSTER);
-		elite_killed = kills.getLong(ProfileKeys.KEY_KILLS_ELITE);
+		battleTag = data.getString("battleTag");
+		paragonLv = data.getInt("paragonLevel");
+		Const.PARAGON_LEVEL = paragonLv;
+		killed = kills.getLong("monsters");
+		elite_killed = kills.getLong("elites");
 		
 		String name;
 		long id;
@@ -274,11 +273,11 @@ public class Utils {
 		for(int i=0; i<jsonHeros.length(); i++){
 			JSONObject hero = jsonHeros.getJSONObject(i);
 			
-			name = hero.getString(ProfileKeys.KEY_NAME);
-			id = hero.getLong(ProfileKeys.KEY_ID);
-			level = hero.getInt(ProfileKeys.KEY_LV);
-			hClass = Utils.getHeroClass(hero.getString(ProfileKeys.KEY_CLASS));
-			isMale = (hero.getInt(ProfileKeys.KEY_GENDER) == 0 );
+			name = hero.getString("name");
+			id = hero.getLong("id");
+			level = hero.getInt("level");
+			hClass = Utils.getHeroClass(hero.getString("class"));
+			isMale = (hero.getInt("gender") == 0 );
 			
 			
 			heros.add(new HeroShort(name, id, level, hClass, isMale));
@@ -290,12 +289,11 @@ public class Utils {
 	public static Hero translateJsonToHero(String jsonData) throws JSONException{
 		JSONObject data = new JSONObject(jsonData);
 		
-		String mName = data.getString(HeroKeys.KEY_NAME);
-		long mId = data.getLong(HeroKeys.KEY_ID);
-		int mLevel = data.getInt(HeroKeys.KEY_LV);
-		HERO_CLASS mClass = Utils.getHeroClass(data.getString(HeroKeys.KEY_CLASS));
-		boolean isMale = (data.getInt(HeroKeys.KEY_GENDER) == 0 );
-		int mProgression = getProgression(data.getJSONObject(HeroKeys.KEY_PROG));
+		String mName = data.getString("name");
+		long mId = data.getLong("id");
+		int mLevel = data.getInt("level");
+		HERO_CLASS mClass = Utils.getHeroClass(data.getString("class"));
+		boolean isMale = (data.getInt("gender") == 0 );
 		
 		ArrayList<Skill> mActiveSkills = new ArrayList<Skill>(6);
 		ArrayList<Skill> mPassiveSkills = new ArrayList<Skill>(4);
@@ -332,7 +330,8 @@ public class Utils {
 		mEquips.mRightFinger = toEquipShort(items, "rightFinger");
 		mEquips.mLeftFinger = toEquipShort(items, "leftFinger");
 		
-		return new Hero(mName, mId, mLevel, mClass, isMale, mProgression, mEquips, mActiveSkills, mPassiveSkills);
+		return new Hero(mName, mId, mLevel, mClass, isMale, mEquips, mActiveSkills, mPassiveSkills,
+						new Hero.Stats(data.getJSONObject("stats"), mLevel, getProgression(data.getJSONObject("progression"))));
 	}
 	
 	public static Equip translateJsonToEquip(String jsonData) throws JSONException{

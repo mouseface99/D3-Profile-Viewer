@@ -3,7 +3,7 @@
 
     <string name="app_name">D3 Viewer</string>
     <string name="title_hero_detail">Hero Detail</string>
-    <string name="loading">Loading ...</string>
+    <string name="loading">Loading . . .</string>
     <string name="loading_fail">Load Fail</string>
     
     <string name="hero_type_hunter">Demon Hunter</string>
@@ -28,5 +28,52 @@
     <string name="hit_per_sec"> hits per sec</string>
     
     <string name="unlock_at_level">Unlock at Lv :</string>
+
+    
+    
+    <string name="stats_title_info">Info</string>
+    	<string name="stats_hero_level">Level</string>
+    	<string name="stats_paragon_level">Paragon Level</string>
+    	<string name="stats_source_primary">Primary Source</string>
+    	<string name="stats_source_secandary">Secandary Source</string>
+    	<string name="stats_source">Source</string>
+    	
+    <string name="stats_title_basic">Basic stats</string>
+    	<string name="stats_hero_str">Strength</string>
+    	<string name="stats_hero_dex">Dexterity</string>
+    	<string name="stats_hero_int">Intelligence</string>
+    	<string name="stats_hero_vit">Vitality</string>
+    	
+    <string name="stats_title_resist">Resist Info</string>
+    	<string name="stats_resist_phy">Physical Resistance</string>
+    	<string name="stats_resist_fire">Fire Resistance</string>
+    	<string name="stats_resist_cold">Cold Resistance</string>
+    	<string name="stats_resist_light">Lightning Resistance</string>
+    	<string name="stats_resist_poison">Poison Resistance</string>
+    	<string name="stats_resist_arcane">Arcane Resistance</string>    
+     	
+    <string name="stats_title_attack">Attack attributes</string>
+    	<string name="stats_damage">Damage</string>
+    	<string name="stats_attack_speed">Attack Speed</string>
+    	<string name="stats_crit_chance">Critical Hit Chance</string>
+    	<string name="stats_crit_damage">Critical Hit Damage</string>
+    	<string name="stats_damage_increase">Damage Increase</string>
+    	
+    <string name="stats_title_defence">Defence attributes</string>
+    	<string name="stats_armor">Armor</string>
+    	<string name="stats_block_chance">Block Chance</string>
+    	<string name="stats_block_amount">Block Amount</string>
+    	<string name="stats_thorns">Thorns</string>
+    	<string name="stats_damage_reduction">Damage Reduction</string>
+    	
+    <string name="stats_title_other">Others</string>
+    	<string name="stats_life">Life</string>
+    	<string name="stats_life_steal">Life Steal</string>
+    	<string name="stats_life_per_kill">Life per Kill</string>
+    	<string name="stats_life_on_hit">Life on Hit</string>
+    	<string name="stats_mf">Magic Find Chance</string>
+    	<string name="stats_gf">Gold Find Chance</string>
+    	
+    <string name="stats_title_progression">Progression</string>    
 
 </resources>

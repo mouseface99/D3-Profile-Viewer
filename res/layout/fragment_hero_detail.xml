@@ -11,61 +11,23 @@
 <LinearLayout
       android:layout_width="fill_parent"
   	  android:layout_height="wrap_content"
-  	  android:orientation="vertical">
-	<!-- Progression area -->
-
-  	<LinearLayout
-  	    android:layout_width="fill_parent"
-  	    android:layout_height="wrap_content"
-  	    android:background="#55960710"
-  	    android:gravity="center" >
-    	
-    	<ImageView
-    	    android:id="@+id/view_progression_act1"
-    	    android:layout_width="0dp"
-    	    android:layout_weight="1"
-    	    android:layout_height="wrap_content"
-    	    android:src="@drawable/progression_act1_lock"
-    	    android:contentDescription="@string/icon_desc" />
-    	
-    	<ImageView
-    	    android:id="@+id/view_progression_act2"
-    	    android:layout_width="0dp"
-    	    android:layout_weight="1"
-    	    android:layout_height="wrap_content"
-    	    android:src="@drawable/progression_act2_lock"
-    	    android:contentDescription="@string/icon_desc" />
-    	
-    	<ImageView
-    	    android:id="@+id/view_progression_act3"
-    	    android:layout_width="0dp"
-    	    android:layout_weight="1"
-    	    android:layout_height="wrap_content"
-    	    android:src="@drawable/progression_act3_lock"
-    	    android:contentDescription="@string/icon_desc" />
-    	
-    	<ImageView
-    	    android:id="@+id/view_progression_act4"
-    	    android:layout_width="0dp"
-    	    android:layout_weight="1"
-    	    android:layout_height="wrap_content"
-    	    android:src="@drawable/progression_act4_lock"
-    	    android:contentDescription="@string/icon_desc" />
-    	
-    	<ImageView
-    	    android:id="@+id/view_progression_act5"
-    	    android:layout_width="0dp"
-    	    android:layout_weight="1"
-    	    android:layout_height="wrap_content"
-    	    android:src="@drawable/progression_act5_lock"
-    	    android:contentDescription="@string/icon_desc" />
-
-    </LinearLayout>
+  	  android:orientation="vertical">	
     
   	<!-- Equip info area -->
   	<FrameLayout
    		android:layout_width="fill_parent"
     	android:layout_height="wrap_content" >
+    	
+  	    <ImageView
+		        android:id="@+id/info_view"
+		        android:layout_width="50dp"
+		        android:layout_height="50dp"
+		        android:layout_marginTop="20dp"
+		        android:layout_marginRight="20dp"
+		        android:layout_gravity="right"
+		        android:src="@drawable/info"
+		        android:contentDescription="@string/icon_desc" />
+  	    
     	<!-- Equip background color -->
     	<RelativeLayout
 	   		android:layout_width="fill_parent"
@@ -323,7 +285,7 @@
 		        android:layout_alignLeft="@+id/view_left_ring"
 		        android:layout_below="@+id/view_left_ring"
 		        android:src="@drawable/default_equip_64_128"
-		        android:contentDescription="@string/icon_desc" />
+		        android:contentDescription="@string/icon_desc" />		    
 	
 		</RelativeLayout>
 		

@@ -1,0 +1,763 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView  
+    xmlns:android="http://schemas.android.com/apk/res/android"
+  	android:layout_width="fill_parent"
+  	android:layout_height="fill_parent"
+  	android:background="@drawable/bg_main">
+  	
+  	<LinearLayout 
+  	    android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+		
+  	    
+		<!-- Info area -->
+		<TextView
+		    	    android:layout_width="fill_parent"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_title_info"
+		    	    android:textColor="#FFFFFF"
+		    	    android:gravity="center"
+		    	    android:background="#336699"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+		
+			<RelativeLayout 
+			    	android:layout_width="fill_parent"
+		    	    android:layout_height="wrap_content">
+		    	    
+			    <TextView
+			        android:id="@+id/level_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_hero_level"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_marginLeft="10dp"
+		    	    android:layout_alignParentLeft="true"
+		    	    android:layout_alignParentTop="true"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/plevel_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_paragon_level"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/level_title"
+		    	    android:layout_alignLeft="@+id/level_title"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/psource_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_source_primary"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/plevel_title"
+		    	    android:layout_alignLeft="@+id/level_title"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/ssource_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_source_secandary"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/psource_title"
+		    	    android:layout_alignLeft="@+id/level_title"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <!-- ============================= Value ============================= -->
+			    
+			    <TextView
+			        android:id="@+id/level_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_marginRight="10dp"
+		    	    android:layout_alignParentRight="true"
+		    	    android:layout_alignParentTop="true"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/plevel_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/level_value"
+		    	    android:layout_alignRight="@+id/level_value"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/psource_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/plevel_value"
+		    	    android:layout_alignRight="@+id/level_value"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/ssource_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/psource_value"
+		    	    android:layout_alignRight="@+id/level_value"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			</RelativeLayout>
+			
+		<!-- Basic stats area -->
+		<TextView
+		    	    android:layout_width="fill_parent"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_title_basic"
+		    	    android:textColor="#FFFFFF"
+		    	    android:gravity="center"
+		    	    android:background="#336699"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+		
+			<RelativeLayout 
+			    	android:layout_width="fill_parent"
+		    	    android:layout_height="wrap_content">
+		    	    
+			    <TextView
+			        android:id="@+id/str_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_hero_str"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_marginLeft="10dp"
+		    	    android:layout_alignParentLeft="true"
+		    	    android:layout_alignParentTop="true"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/dex_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_hero_dex"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/str_title"
+		    	    android:layout_alignLeft="@+id/str_title"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/int_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_hero_int"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/dex_title"
+		    	    android:layout_alignLeft="@+id/str_title"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/vit_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_hero_vit"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/int_title"
+		    	    android:layout_alignLeft="@+id/str_title"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <!-- ============================= Value ============================= -->
+			    
+			    <TextView
+			        android:id="@+id/str_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_marginRight="10dp"
+		    	    android:layout_alignParentRight="true"
+		    	    android:layout_alignParentTop="true"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/dex_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/str_value"
+		    	    android:layout_alignRight="@+id/str_value"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/int_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/dex_value"
+		    	    android:layout_alignRight="@+id/str_value"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/vit_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/int_value"
+		    	    android:layout_alignRight="@+id/str_value"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			</RelativeLayout>
+		
+		<!-- Resist info area -->
+		<TextView
+		    	    android:layout_width="fill_parent"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_title_resist"
+		    	    android:textColor="#FFFFFF"
+		    	    android:gravity="center"
+		    	    android:background="#336699"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+		    	    
+			<RelativeLayout 
+			    	android:layout_width="fill_parent"
+		    	    android:layout_height="wrap_content">
+		    	    
+			    <TextView
+			        android:id="@+id/phy_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_resist_phy"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_marginLeft="10dp"
+		    	    android:layout_alignParentLeft="true"
+		    	    android:layout_alignParentTop="true"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/fire_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_resist_fire"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/phy_title"
+		    	    android:layout_alignLeft="@+id/phy_title"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/cold_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_resist_cold"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/fire_title"
+		    	    android:layout_alignLeft="@+id/phy_title"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/light_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_resist_light"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/cold_title"
+		    	    android:layout_alignLeft="@+id/phy_title"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+		    	    
+		    	<TextView
+			        android:id="@+id/poison_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_resist_poison"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/light_title"
+		    	    android:layout_alignLeft="@+id/phy_title"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+		    	    
+		    	<TextView
+			        android:id="@+id/arcane_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_resist_arcane"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/poison_title"
+		    	    android:layout_alignLeft="@+id/phy_title"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <!-- ============================= Value ============================= -->
+			    
+			    <TextView
+			        android:id="@+id/phy_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_marginRight="10dp"
+		    	    android:layout_alignParentRight="true"
+		    	    android:layout_alignParentTop="true"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/fire_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/phy_value"
+		    	    android:layout_alignRight="@+id/phy_value"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/cold_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/fire_value"
+		    	    android:layout_alignRight="@+id/phy_value"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/light_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/cold_value"
+		    	    android:layout_alignRight="@+id/phy_value"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+		    	
+		    	<TextView
+			        android:id="@+id/poison_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/light_value"
+		    	    android:layout_alignRight="@+id/phy_value"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+		    	    
+		    	<TextView
+			        android:id="@+id/arcane_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/poison_value"
+		    	    android:layout_alignRight="@+id/phy_value"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			</RelativeLayout>
+		
+		<!-- Attack area -->
+		<TextView
+		    	    android:layout_width="fill_parent"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_title_attack"
+		    	    android:textColor="#FFFFFF"
+		    	    android:gravity="center"
+		    	    android:background="#336699"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+		    	    
+			<RelativeLayout 
+			    	android:layout_width="fill_parent"
+		    	    android:layout_height="wrap_content">
+		    	    
+			    <TextView
+			        android:id="@+id/damage_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_damage"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_marginLeft="10dp"
+		    	    android:layout_alignParentLeft="true"
+		    	    android:layout_alignParentTop="true"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/attack_speed_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_attack_speed"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/damage_title"
+		    	    android:layout_alignLeft="@+id/damage_title"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/crit_chance_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_crit_chance"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/attack_speed_title"
+		    	    android:layout_alignLeft="@+id/damage_title"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/crit_damage_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_crit_damage"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/crit_chance_title"
+		    	    android:layout_alignLeft="@+id/damage_title"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+		    	    
+		    	<TextView
+			        android:id="@+id/damage_increase_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_damage_increase"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/crit_damage_title"
+		    	    android:layout_alignLeft="@+id/damage_title"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <!-- ============================= Value ============================= -->
+			    
+			    <TextView
+			        android:id="@+id/damage_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_marginRight="10dp"
+		    	    android:layout_alignParentRight="true"
+		    	    android:layout_alignParentTop="true"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/attack_speed_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/damage_value"
+		    	    android:layout_alignRight="@+id/damage_value"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/crit_chance_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/attack_speed_value"
+		    	    android:layout_alignRight="@+id/damage_value"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/crit_damage_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/crit_chance_value"
+		    	    android:layout_alignRight="@+id/damage_value"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+		    	
+		    	<TextView
+			        android:id="@+id/damage_increase_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/crit_damage_value"
+		    	    android:layout_alignRight="@+id/damage_value"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			</RelativeLayout>
+		    	    
+		<!-- Defence area -->
+		<TextView
+		    	    android:layout_width="fill_parent"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_title_defence"
+		    	    android:textColor="#FFFFFF"
+		    	    android:gravity="center"
+		    	    android:background="#336699"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+		    	    
+			<RelativeLayout 
+			    	android:layout_width="fill_parent"
+		    	    android:layout_height="wrap_content">
+		    	    
+			    <TextView
+			        android:id="@+id/armor_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_armor"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_marginLeft="10dp"
+		    	    android:layout_alignParentLeft="true"
+		    	    android:layout_alignParentTop="true"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/block_chance_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_block_chance"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/armor_title"
+		    	    android:layout_alignLeft="@+id/armor_title"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/block_amount_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_block_amount"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/block_chance_title"
+		    	    android:layout_alignLeft="@+id/armor_title"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/thorns_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_thorns"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/block_amount_title"
+		    	    android:layout_alignLeft="@+id/armor_title"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+		    	    
+		    	<TextView
+			        android:id="@+id/damage_reduction_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_damage_reduction"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/thorns_title"
+		    	    android:layout_alignLeft="@+id/armor_title"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <!-- ============================= Value ============================= -->
+			    
+			    <TextView
+			        android:id="@+id/armor_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_marginRight="10dp"
+		    	    android:layout_alignParentRight="true"
+		    	    android:layout_alignParentTop="true"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/block_chance_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/armor_value"
+		    	    android:layout_alignRight="@+id/armor_value"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/block_amount_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/block_chance_value"
+		    	    android:layout_alignRight="@+id/armor_value"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/thorns_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/block_amount_value"
+		    	    android:layout_alignRight="@+id/armor_value"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+		    	
+		    	<TextView
+			        android:id="@+id/damage_reduction_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/thorns_value"
+		    	    android:layout_alignRight="@+id/armor_value"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			</RelativeLayout>
+		
+		<!-- Other area -->
+		<TextView
+		    	    android:layout_width="fill_parent"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_title_other"
+		    	    android:textColor="#FFFFFF"
+		    	    android:gravity="center"
+		    	    android:background="#336699"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+		    	    
+			<RelativeLayout 
+			    	android:layout_width="fill_parent"
+		    	    android:layout_height="wrap_content">
+		    	    
+			    <TextView
+			        android:id="@+id/life_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_life"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_marginLeft="10dp"
+		    	    android:layout_alignParentLeft="true"
+		    	    android:layout_alignParentTop="true"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/life_steal_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_life_steal"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/life_title"
+		    	    android:layout_alignLeft="@+id/life_title"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/life_per_kill_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_life_per_kill"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/life_steal_title"
+		    	    android:layout_alignLeft="@+id/life_title"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/life_on_hit_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_life_on_hit"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/life_per_kill_title"
+		    	    android:layout_alignLeft="@+id/life_title"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+		    	    
+		    	<TextView
+			        android:id="@+id/mf_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_mf"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/life_on_hit_title"
+		    	    android:layout_alignLeft="@+id/life_title"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+		    	    
+		    	<TextView
+			        android:id="@+id/gf_title"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_gf"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/mf_title"
+		    	    android:layout_alignLeft="@+id/life_title"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <!-- ============================= Value ============================= -->
+			    
+			    <TextView
+			        android:id="@+id/life_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_marginRight="10dp"
+		    	    android:layout_alignParentRight="true"
+		    	    android:layout_alignParentTop="true"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/life_steal_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/life_value"
+		    	    android:layout_alignRight="@+id/life_value"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/life_per_kill_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/life_steal_value"
+		    	    android:layout_alignRight="@+id/life_value"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			    <TextView
+			        android:id="@+id/life_on_hit_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/life_per_kill_value"
+		    	    android:layout_alignRight="@+id/life_value"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+		    	
+		    	<TextView
+			        android:id="@+id/mf_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/life_on_hit_value"
+		    	    android:layout_alignRight="@+id/life_value"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+		    	    
+		    	<TextView
+			        android:id="@+id/gf_value"
+		    	    android:layout_width="wrap_content"
+		    	    android:layout_height="wrap_content"
+		    	    android:textColor="#FFFFFF"
+		    	    android:layout_below="@+id/mf_value"
+		    	    android:layout_alignRight="@+id/life_value"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+			    
+			</RelativeLayout>
+		
+		<!-- Progression area -->
+		<TextView
+		    	    android:layout_width="fill_parent"
+		    	    android:layout_height="wrap_content"
+		    	    android:text="@string/stats_title_progression"
+		    	    android:textColor="#FFFFFF"
+		    	    android:gravity="center"
+		    	    android:background="#336699"
+		    	    android:textAppearance="?android:attr/textAppearanceMedium" />
+		
+		<LinearLayout
+		  	    android:layout_width="fill_parent"
+		  	    android:layout_height="wrap_content"		  	    
+		  	    android:gravity="center" >
+		    	
+		    	<ImageView
+		    	    android:id="@+id/view_progression_act1"
+		    	    android:layout_width="0dp"
+		    	    android:layout_weight="1"
+		    	    android:layout_height="wrap_content"
+		    	    android:src="@drawable/progression_act1_lock"
+		    	    android:contentDescription="@string/icon_desc" />		    	
+		    	
+		    	<ImageView
+		    	    android:id="@+id/view_progression_act2"
+		    	    android:layout_width="0dp"
+		    	    android:layout_weight="1"
+		    	    android:layout_height="wrap_content"
+		    	    android:src="@drawable/progression_act2_lock"
+		    	    android:contentDescription="@string/icon_desc" />
+		    	
+		    	<ImageView
+		    	    android:id="@+id/view_progression_act3"
+		    	    android:layout_width="0dp"
+		    	    android:layout_weight="1"
+		    	    android:layout_height="wrap_content"
+		    	    android:src="@drawable/progression_act3_lock"
+		    	    android:contentDescription="@string/icon_desc" />
+		    	
+		    	<ImageView
+		    	    android:id="@+id/view_progression_act4"
+		    	    android:layout_width="0dp"
+		    	    android:layout_weight="1"
+		    	    android:layout_height="wrap_content"
+		    	    android:src="@drawable/progression_act4_lock"
+		    	    android:contentDescription="@string/icon_desc" />
+		    	
+		    	<ImageView
+		    	    android:id="@+id/view_progression_act5"
+		    	    android:layout_width="0dp"
+		    	    android:layout_weight="1"
+		    	    android:layout_height="wrap_content"
+		    	    android:src="@drawable/progression_act5_lock"
+		    	    android:contentDescription="@string/icon_desc" />
+		
+		    </LinearLayout>	 
+		    
+	</LinearLayout>
+    
+</ScrollView>

@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -52,6 +53,7 @@ public class HeroDetailFragment extends Fragment
     private PullToRefreshLayout mPullToRefreshLayout;    
     private LayoutInflater mInflater;
     private boolean isDialogDisplaying = false;
+    private ImageView mInfo;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -117,6 +119,8 @@ public class HeroDetailFragment extends Fragment
         mPassiveSkills[2] = new HeroDetailSkillSubView((ImageView)mRootView.findViewById(R.id.view_passive_skill_3), this);
         mPassiveSkills[3] = new HeroDetailSkillSubView((ImageView)mRootView.findViewById(R.id.view_passive_skill_4), this);
         
+        mInfo = (ImageView)mRootView.findViewById(R.id.info_view);
+        
         return mRootView;
     }
     
@@ -141,38 +145,25 @@ public class HeroDetailFragment extends Fragment
         mBracers.setData(mList.mBracers);
         mLeftRing.setData(mList.mLeftFinger);
         mOffhand.setData(mList.mOffHand);
-
-        // Set Progression
-        setProgression(mHero.mProgression);
         
         // Set Skills data
         for(int i=0; i<mHero.mActiveSkills.size(); i++)
         	mActiveSkills[i].setData(mHero.mActiveSkills.get(i));
         
         for(int i=0; i<mHero.mPassiveSkills.size(); i++)
-        	mPassiveSkills[i].setData(mHero.mPassiveSkills.get(i));    	
-    }    
-    
-    private void setProgression(int progression){
-    	ImageView act = null;
-    	switch(progression){
-    		case 5:
-    			act = (ImageView)mRootView.findViewById(R.id.view_progression_act5);
-    			act.setImageResource(R.drawable.progression_act5_pass);
-    		case 4:
-    			act = (ImageView)mRootView.findViewById(R.id.view_progression_act4);
-    			act.setImageResource(R.drawable.progression_act4_pass);
-    		case 3:
-    			act = (ImageView)mRootView.findViewById(R.id.view_progression_act3);
-    			act.setImageResource(R.drawable.progression_act3_pass);
-    		case 2:
-    			act = (ImageView)mRootView.findViewById(R.id.view_progression_act2);
-    			act.setImageResource(R.drawable.progression_act2_pass);
-    		case 1:
-    			act = (ImageView)mRootView.findViewById(R.id.view_progression_act1);
-    			act.setImageResource(R.drawable.progression_act1_pass);
-    			
-    	}
+        	mPassiveSkills[i].setData(mHero.mPassiveSkills.get(i));    
+        
+        mInfo.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				HeroStatsDetailDialog dialog = new HeroStatsDetailDialog(getActivity(), 
+															mInflater, mHero.mStats, 
+															HeroDetailFragment.this);
+    			dialog.show();
+    			isDialogDisplaying = true;
+			}
+        	
+        });
     }
     
     @Override
@@ -225,6 +216,7 @@ public class HeroDetailFragment extends Fragment
 				if(result == null){
 					Toast.makeText(getActivity(), "Download Hero data fail, pull down to refresh !", Toast.LENGTH_SHORT).show();
 					getActivity().setTitle(R.string.loading_fail);
+					mInfo.setOnClickListener(null);
 				}
 				else
 					setHeroData(result);
