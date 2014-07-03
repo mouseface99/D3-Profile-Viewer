@@ -45,10 +45,6 @@ public class LoginActivity extends Activity {
 				});
 		
 		mRegionView = (Spinner) findViewById(R.id.server_region);
-//		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-//											android.R.layout.simple_spinner_item,
-//											new String[]{"TW", "US", "EU", "KR", "SEA"});
-//		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				R.layout.myspinner,
 				new String[]{"TW", "US", "EU", "KR", "SEA"});
@@ -68,10 +64,6 @@ public class LoginActivity extends Activity {
 
 		// Store values at the time of the login attempt.
 		mBattleTag = mBattleTagView.getText().toString();
-		//mBattleTag = "mouseface99#1233";
-		mBattleTag = "kevinchiu924#3491";
-		//mBattleTag = "roy#3537"; // US account
-		//mBattleTag = "poshinh#1845"; // US account
 
 		boolean cancel = false;
 		View focusView = null;		
