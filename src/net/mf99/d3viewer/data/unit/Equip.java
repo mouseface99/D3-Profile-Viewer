@@ -12,11 +12,12 @@ public class Equip {
 	public double mDps, mAttackPerSec; 
 	public int mMaxDamage, mMinDamage;
 	public double mArmor;
+	public double mBlockChance, mBlockMax, mBlockMin;
 	
 	public ArrayList<String> mPrimaryAttr, mSecandaryAttr, mPassiveAttr;
 	public ArrayList<Gem> mGems;
 	
-	public final boolean isWepond;
+	public final boolean isWepond, isShield;
 	
 	public Equip(String mName, String mIcon, ITEM_COLOR mColor, 
 				 int mItemLevel, int mSocketNum, 
@@ -39,7 +40,8 @@ public class Equip {
 		this.mPassiveAttr = mPassiveAttr;
 		this.mGems = mGems;
 		
-		this.isWepond = true;
+		isWepond = true;
+		isShield = false;
 	}
 
 	public Equip(String mName, String mIcon, ITEM_COLOR mColor, 
@@ -59,6 +61,33 @@ public class Equip {
 		this.mPassiveAttr = mPassiveAttr;
 		this.mGems = mGems;
 		
-		this.isWepond = false;
+		isWepond = false;
+		isShield = false;
 	}	
+	
+	public Equip(String mName, String mIcon, ITEM_COLOR mColor, 
+			int mItemLevel, int mSocketNum, 
+			double mArmor,
+			ArrayList<String> mPrimaryAttr, ArrayList<String> mSecandaryAttr, ArrayList<String> mPassiveAttr,
+			ArrayList<Gem> mGems,
+			double mBlockChance, double mBlockMin, double mBlockMax) {
+	
+		this.mName = mName;
+		this.mIcon = mIcon;
+		this.mColor = mColor;
+		this.mItemLevel = mItemLevel;
+		this.mSocketNum = mSocketNum;
+		this.mArmor = Math.floor(mArmor * 100) / 100;
+		this.mPrimaryAttr = mPrimaryAttr;
+		this.mSecandaryAttr = mSecandaryAttr;
+		this.mPassiveAttr = mPassiveAttr;
+		this.mGems = mGems;
+		
+		this.mBlockChance = mBlockChance;
+		this.mBlockMin = mBlockMin;
+		this.mBlockMax = mBlockMax;
+		
+		isWepond = false;
+		isShield = true;
+	}
 }

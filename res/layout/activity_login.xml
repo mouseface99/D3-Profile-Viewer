@@ -43,8 +43,9 @@
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/server_region"
         android:layout_below="@+id/battletag"
+        android:layout_marginTop="10sp"
         android:text="@string/server_region"
-        android:textColor="#FF0000"
+        android:textColor="#FFFFFF"
         android:textAppearance="?android:attr/textAppearanceLarge" />
    
 

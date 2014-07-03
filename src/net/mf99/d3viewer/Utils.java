@@ -353,8 +353,15 @@ public class Utils {
 			isWepond = true;
 		}catch(JSONException ex){}
 		
+		boolean isShield = false;
+		try{
+			data.getJSONObject("blockChance");
+			isShield = true;
+		}catch(JSONException ex){}
+		
 		double mDps = 0, mAttackPerSec = 0, mMaxDamage = 0, mMinDamage = 0;
 		double mArmor = 0;
+		double mBlockChance = 0, mBlockMin = 0, mBlockMax = 0;
 		if(isWepond){
 			mDps = data.getJSONObject("dps").getDouble("max");
 			mAttackPerSec = data.getJSONObject("attacksPerSecond").getDouble("max");
@@ -365,6 +372,13 @@ public class Utils {
 			try{
 				mArmor = data.getJSONObject("armor").getDouble("max");
 			}catch(JSONException ex){ mArmor = -1; }
+			if(isShield){
+				JSONObject rawData = data.getJSONObject("attributesRaw");
+				
+				mBlockChance = data.getJSONObject("blockChance").getDouble("max");
+				mBlockMin = rawData.getJSONObject("Block_Amount_Item_Min").getDouble("max");
+				mBlockMax = mBlockMin + rawData.getJSONObject("Block_Amount_Item_Delta").getDouble("max");
+			}
 		}
 		
 		ArrayList<String> mPrimaryAttr = new ArrayList<String>();
@@ -421,11 +435,17 @@ public class Utils {
 							 mItemLevel, mSocketNum, 
 							 mDps, mAttackPerSec, mMaxDamage, mMinDamage, 
 							 mPrimaryAttr, mSecandaryAttr, mPassiveAttr, mGems);
-		else
+		else if(isShield)
 			return new Equip(mName, mIcon, mColor, 
 					 		 mItemLevel, mSocketNum, 
 					 		 mArmor, 
-					 		 mPrimaryAttr, mSecandaryAttr, mPassiveAttr, mGems);
+					 		 mPrimaryAttr, mSecandaryAttr, mPassiveAttr, mGems,
+					 		 mBlockChance, mBlockMin, mBlockMax);
+		else
+			return new Equip(mName, mIcon, mColor, 
+			 		 mItemLevel, mSocketNum, 
+			 		 mArmor, 
+			 		 mPrimaryAttr, mSecandaryAttr, mPassiveAttr, mGems);
 	}	
 	
 	private static int getProgression(JSONObject progData) throws JSONException{

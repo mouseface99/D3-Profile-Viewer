@@ -19,8 +19,7 @@
             android:name="net.mf99.d3viewer.ui.HeroListActivity">            
         </activity>
         <activity
-            android:name="net.mf99.d3viewer.ui.HeroDetailActivity"
-            android:label="@string/title_hero_detail"
+            android:name="net.mf99.d3viewer.ui.HeroDetailActivity"            
             android:parentActivityName="net.mf99.d3viewer.ui.HeroListActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

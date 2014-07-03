@@ -34,11 +34,13 @@ public class EquipDetailDialog extends AlertDialog {
 	TextView mMainValue, mMainValueType, mMaxMinDamage, mAttackSpeed, mItemLevel;
 
 	LinearLayout mGemList, mAttrList;
+	OnDismissListener mListener;
 
 	public EquipDetailDialog(Context context, LayoutInflater inflater, String toolTip, OnDismissListener listener) {
 		super(context);
 		mContext = context;
 		
+		mListener = listener;
 		mBuilder = new Builder(mContext, AlertDialog.THEME_HOLO_DARK);
 		mBuilder.setOnDismissListener(listener);
 		mView = inflater.inflate(R.layout.equip_detail_view, null);
@@ -76,6 +78,11 @@ public class EquipDetailDialog extends AlertDialog {
 			if(data.mArmor != -1){
 				mMainValue.setText(String.valueOf(data.mArmor));
 				mMainValueType.setText(R.string.main_value_type_armor);
+				
+				if(data.isShield){
+					mMaxMinDamage.setText(data.mBlockMin + "-" + data.mBlockMax + " " + mContext.getString(R.string.block_value));
+					mAttackSpeed.setText(String.valueOf(data.mBlockChance*100) + " " + mContext.getString(R.string.block_chance));
+				}
 			}
 			else{
 				mMainValue.setVisibility(View.GONE);
@@ -160,8 +167,10 @@ public class EquipDetailDialog extends AlertDialog {
 			
 			if(result != null)
 				setData(result);
-			else
+			else{
 				Toast.makeText(mContext, "Download item data fail", Toast.LENGTH_SHORT).show();
+				mListener.onDismiss(null);
+			}
 		}
 		
 	}
