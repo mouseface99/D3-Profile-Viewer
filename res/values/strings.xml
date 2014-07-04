@@ -12,7 +12,8 @@
     <string name="hero_type_wizard">Wizard</string>
     <string name="hero_type_crusader">Crusader</string>
     
-    <string name="icon_desc">icon</string>
+    
+    <string name="icon_desc" translatable="false">icon</string>
     
     <string name="server_region">Region : </string>
     <string name="career_paragon_lv">Paragon Lv</string>
@@ -25,7 +26,7 @@
     <string name="item_level">Item Level : </string>
     <string name="empty_socket">Empty</string>
     <string name="hit_per_sec"> hits per sec</string>
-    <string name="block_chance"> % Block chance</string>
+    <string name="block_chance"> \% Block chance</string>
     <string name="block_value"> Block amount</string>
     
     <string name="unlock_at_level">Unlock at Lv :</string>
@@ -36,10 +37,8 @@
     <string name="pull_to_refresh_refreshing_label">Loading…</string>
     
     <!-- Strings related to login -->
-    <string name="title_activity_login">Login with BattleTag</string>
     <string name="battle_tag">BattleTag, ex: abc#1234</string>
     <string name="action_login"><b>Login</b></string>
-    <string name="login_progress_loading">Loading &#8230;</string>
     <string name="error_invalid_battletag">This BattleTag is invalid</string>
     <string name="error_field_required">This field is required</string>
 

@@ -23,7 +23,7 @@
     <string name="item_level">物品等級：</string>
     <string name="empty_socket">空</string>
     <string name="hit_per_sec">次/每秒</string>
-    <string name="block_chance"> % 格檔機率</string>
+    <string name="block_chance"> \% 格檔機率</string>
     <string name="block_value"> 格檔值</string>
     
     <string name="unlock_at_level">解鎖等級：</string>
@@ -34,10 +34,8 @@
     <string name="pull_to_refresh_refreshing_label">更新中…</string>
     
     <!-- Strings related to login -->
-    <string name="title_activity_login">使用 BattleTag 登入</string>
     <string name="battle_tag">BattleTag, ex: abc#1234</string>
     <string name="action_login"><b>登入</b></string>    
-    <string name="login_progress_loading">Loading &#8230;</string>
     <string name="error_invalid_battletag">此 BattleTag 有誤</string>
     <string name="error_field_required">請輸入 BattleTag</string>
 
