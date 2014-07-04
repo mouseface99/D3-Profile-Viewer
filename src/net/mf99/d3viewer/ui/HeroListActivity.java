@@ -87,7 +87,6 @@ public class HeroListActivity extends FragmentActivity
     @Override
    	protected void onDestroy() {
    		// TODO Auto-generated method stub
-   		super.onDestroy();
-   		HeroListFragment.mAdapter = null;
+   		super.onDestroy();   		
    	}
 }

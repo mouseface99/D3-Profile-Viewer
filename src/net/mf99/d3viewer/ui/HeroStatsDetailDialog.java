@@ -27,14 +27,14 @@ public class HeroStatsDetailDialog extends AlertDialog {
 	
 	Hero.Stats mStats;
 
-	public HeroStatsDetailDialog(Context context, LayoutInflater inflater, Hero.Stats stats, OnDismissListener listener) {
+	public HeroStatsDetailDialog(Context context, LayoutInflater inflater, Hero.Stats stats, OnCancelListener listener) {
 		super(context);
 		
 		mContext = context;
 		mStats = stats;
 		
 		mBuilder = new Builder(mContext, AlertDialog.THEME_HOLO_DARK);
-		mBuilder.setOnDismissListener(listener);		
+		mBuilder.setOnCancelListener(listener);		
 		
 		mView = inflater.inflate(R.layout.hero_stats_detail_view, null);
 		

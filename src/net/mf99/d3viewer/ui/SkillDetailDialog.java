@@ -27,13 +27,13 @@ public class SkillDetailDialog extends AlertDialog {
 
 	LinearLayout mGemList, mAttrList;
 
-	public SkillDetailDialog(Context context, LayoutInflater inflater, Skill skill, OnDismissListener listener) {
+	public SkillDetailDialog(Context context, LayoutInflater inflater, Skill skill, OnCancelListener listener) {
 		super(context);
 		
 		mContext = context;
 		
 		mBuilder = new Builder(mContext, AlertDialog.THEME_HOLO_DARK);
-		mBuilder.setOnDismissListener(listener);
+		mBuilder.setOnCancelListener(listener);
 		
 		mSkill = skill;
 		mView = inflater.inflate(R.layout.skill_detail_view, null);
@@ -64,7 +64,7 @@ public class SkillDetailDialog extends AlertDialog {
 			mRuneLv.setText(mContext.getString(R.string.unlock_at_level) + " " + mSkill.mRuneLevel);
 		}
 		else
-			mRuneView.setVisibility(View.GONE);
+			mRuneView.setVisibility(View.GONE);	
 		
 		mBuilder.setTitle(mSkill.mName);
 		mBuilder.setView(mView);		

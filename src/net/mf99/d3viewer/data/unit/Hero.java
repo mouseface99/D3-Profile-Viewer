@@ -93,10 +93,10 @@ public class Hero {
 				this.mThorns = data.getDouble("thorns");
 				this.mLifeSteal = data.getDouble("lifeSteal");
 				this.mLifePerKill = data.getDouble("lifePerKill");
-				this.mLifeOnHit = data.getDouble("lifeOnHit");
+				this.mLifeOnHit = data.getDouble("lifeOnHit");				
 				
-				this.mGoldFind = data.getDouble("goldFind");
-				this.mMagicFind = data.getDouble("magicFind");
+				this.mGoldFind = (Math.floor(data.getDouble("goldFind") * 100) / 100);
+				this.mMagicFind = (Math.floor(data.getDouble("magicFind") * 100) / 100);
 				
 				this.mSourcePrimary  = data.getInt("primaryResource");
 				this.mSourceSecandary  = data.getInt("secondaryResource");

@@ -34,15 +34,15 @@ public class EquipDetailDialog extends AlertDialog {
 	TextView mMainValue, mMainValueType, mMaxMinDamage, mAttackSpeed, mItemLevel;
 
 	LinearLayout mGemList, mAttrList;
-	OnDismissListener mListener;
+	OnCancelListener mListener;
 
-	public EquipDetailDialog(Context context, LayoutInflater inflater, String toolTip, OnDismissListener listener) {
+	public EquipDetailDialog(Context context, LayoutInflater inflater, String toolTip, OnCancelListener listener) {
 		super(context);
 		mContext = context;
 		
 		mListener = listener;
 		mBuilder = new Builder(mContext, AlertDialog.THEME_HOLO_DARK);
-		mBuilder.setOnDismissListener(listener);
+		mBuilder.setOnCancelListener(listener);
 		mView = inflater.inflate(R.layout.equip_detail_view, null);
 		mToolTip = toolTip;
 		
@@ -169,7 +169,7 @@ public class EquipDetailDialog extends AlertDialog {
 				setData(result);
 			else{
 				Toast.makeText(mContext, "Download item data fail", Toast.LENGTH_SHORT).show();
-				mListener.onDismiss(null);
+				mListener.onCancel(null);
 			}
 		}
 		

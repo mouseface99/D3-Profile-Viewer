@@ -9,7 +9,7 @@ import uk.co.senab.actionbarpulltorefresh.library.ActionBarPullToRefresh;
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
 import uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
+import android.content.DialogInterface.OnCancelListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -38,7 +38,7 @@ public class HeroDetailFragment extends Fragment
 								implements HeroDetailItemSubView.OnEquipClickListener, 
 										   HeroDetailSkillSubView.OnSkillClickListener, 
 										   OnRefreshListener, 
-										   OnDismissListener{
+										   OnCancelListener{
 	
 	View mRootView;
 	
@@ -234,9 +234,8 @@ public class HeroDetailFragment extends Fragment
 		downloadTask.execute(hID);		
 	}
 
-
 	@Override
-	public void onDismiss(DialogInterface dialog) {
-		isDialogDisplaying = false;		
+	public void onCancel(DialogInterface arg0) {
+		isDialogDisplaying = false;				
 	}	
 }
