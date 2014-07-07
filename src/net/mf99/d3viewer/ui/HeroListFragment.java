@@ -1,6 +1,7 @@
 package net.mf99.d3viewer.ui;
 
 import java.io.IOException;
+
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
 
@@ -8,6 +9,7 @@ import uk.co.senab.actionbarpulltorefresh.library.ActionBarPullToRefresh;
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
 import uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -36,6 +38,7 @@ import net.mf99.d3viewer.data.unit.Profile;
 public class HeroListFragment extends ListFragment implements OnRefreshListener {
 	public static HeroListAdapter mAdapter = null;
 	private PullToRefreshLayout mPullToRefreshLayout;
+	private ProgressDialog mLoadingDialog;
 	Context mContext;
 
     /**
@@ -89,15 +92,17 @@ public class HeroListFragment extends ListFragment implements OnRefreshListener 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getActivity();
+        
+        mLoadingDialog = new ProgressDialog(mContext, ProgressDialog.THEME_HOLO_DARK);
+		mLoadingDialog.setTitle(R.string.loading);
+		mLoadingDialog.setMessage(getString(R.string.loading_profile));
 
         if(mAdapter == null)
         	mAdapter = new HeroListAdapter(mContext, 0, 0, 0);
         
         setListAdapter(mAdapter);
-        if(mAdapter.isTemp){
-        	CarrerDownloadTask downloadTask = new CarrerDownloadTask();
-            downloadTask.execute("BattleTag");
-        }       
+        if(mAdapter.isTemp)
+        	downloadData();
     }
 
     @Override
@@ -193,7 +198,7 @@ public class HeroListFragment extends ListFragment implements OnRefreshListener 
         mActivatedPosition = position;
     }
     
-    class CarrerDownloadTask extends AsyncTask<String, Void, Profile>{
+    class ProfileDownloadTask extends AsyncTask<String, Void, Profile>{
 
     	@Override
 		protected Profile doInBackground(String... params) {
@@ -221,14 +226,18 @@ public class HeroListFragment extends ListFragment implements OnRefreshListener 
 			try{
 				super.onPostExecute(result);
 				
+				if(mLoadingDialog != null)
+					mLoadingDialog.dismiss();
+				
 				if(result == null){
-					Toast.makeText(getActivity(), "Download Profile fail, pull down to refresh !", Toast.LENGTH_SHORT).show();
+					Toast.makeText(mContext, "Download Profile fail, pull down to refresh !", Toast.LENGTH_SHORT).show();
 					getActivity().setTitle(R.string.loading_fail);
 				}
 				else{
 					mAdapter = new HeroListAdapter(mContext, result);
 					setListAdapter(mAdapter);
-					getActivity().setTitle(Const.DATA_BATTLE_ACCOUNT + "#" + Const.DATA_BATTLE_CODE); 
+					getActivity().setTitle(Const.DATA_BATTLE_ACCOUNT + "#" + Const.DATA_BATTLE_CODE + ", "
+							               + getString(R.string.pull_down_to_update)); 
 				}
 				
 				if(mPullToRefreshLayout != null)
@@ -240,7 +249,12 @@ public class HeroListFragment extends ListFragment implements OnRefreshListener 
 	@Override
 	public void onRefreshStarted(View view) {
 		getActivity().setTitle(R.string.loading);
-		CarrerDownloadTask downloadTask = new CarrerDownloadTask();
-        downloadTask.execute("BattleTag");				
+		downloadData();		
+	}
+	
+	private void downloadData(){
+		mLoadingDialog.show();
+		ProfileDownloadTask downloadTask = new ProfileDownloadTask();
+        downloadTask.execute("BattleTag");
 	}
 }

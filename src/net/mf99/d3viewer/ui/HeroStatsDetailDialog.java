@@ -5,15 +5,16 @@ import net.mf99.d3viewer.R;
 import net.mf99.d3viewer.data.unit.Hero;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface.OnCancelListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class HeroStatsDetailDialog extends AlertDialog {
+public class HeroStatsDetailDialog {
 	
 	Context mContext;
-	Builder mBuilder;	
+	AlertDialog.Builder mBuilder;	
 	View mView;
 	
 	TextView vLevel, vPLevel, vPSource, vSSource,
@@ -28,12 +29,10 @@ public class HeroStatsDetailDialog extends AlertDialog {
 	Hero.Stats mStats;
 
 	public HeroStatsDetailDialog(Context context, LayoutInflater inflater, Hero.Stats stats, OnCancelListener listener) {
-		super(context);
-		
 		mContext = context;
 		mStats = stats;
 		
-		mBuilder = new Builder(mContext, AlertDialog.THEME_HOLO_DARK);
+		mBuilder = new AlertDialog.Builder(mContext, AlertDialog.THEME_HOLO_DARK);
 		mBuilder.setOnCancelListener(listener);		
 		
 		mView = inflater.inflate(R.layout.hero_stats_detail_view, null);

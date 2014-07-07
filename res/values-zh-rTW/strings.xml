@@ -85,5 +85,9 @@
     	<string name="stats_gf">金幣掉落量</string>
     	
     <string name="stats_title_progression">劇情進程</string>    
+    
+    <string name="pull_down_to_update">(下拉以更新)</string>
+    <string name="loading_profile">讀取帳戶資料中</string>
+    <string name="loading_hero">讀取英雄資料中</string>
 
 </resources>

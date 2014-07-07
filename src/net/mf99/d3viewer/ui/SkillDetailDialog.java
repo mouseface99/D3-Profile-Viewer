@@ -6,16 +6,17 @@ import net.mf99.d3viewer.Utils;
 import net.mf99.d3viewer.data.unit.Skill;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface.OnCancelListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class SkillDetailDialog extends AlertDialog {
+public class SkillDetailDialog {
 	
 	Context mContext;
-	Builder mBuilder;	
+	AlertDialog.Builder mBuilder;	
 	View mView;
 	
 	View mItemColor;
@@ -28,11 +29,10 @@ public class SkillDetailDialog extends AlertDialog {
 	LinearLayout mGemList, mAttrList;
 
 	public SkillDetailDialog(Context context, LayoutInflater inflater, Skill skill, OnCancelListener listener) {
-		super(context);
 		
 		mContext = context;
 		
-		mBuilder = new Builder(mContext, AlertDialog.THEME_HOLO_DARK);
+		mBuilder = new AlertDialog.Builder(mContext, AlertDialog.THEME_HOLO_DARK);
 		mBuilder.setOnCancelListener(listener);
 		
 		mSkill = skill;

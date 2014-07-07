@@ -87,6 +87,11 @@
     	<string name="stats_mf">Magic Find Chance</string>
     	<string name="stats_gf">Gold Find Chance</string>
     	
-    <string name="stats_title_progression">Progression</string>    
+    <string name="stats_title_progression">Progression</string>   
+    
+    
+    <string name="pull_down_to_update">(Pull down to update)</string>
+    <string name="loading_profile">Loading User Profile data</string>
+    <string name="loading_hero">Loading Hero data</string>
 
 </resources>

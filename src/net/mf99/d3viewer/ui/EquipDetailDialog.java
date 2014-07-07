@@ -12,6 +12,7 @@ import net.mf99.d3viewer.data.unit.Equip;
 import net.mf99.d3viewer.data.unit.Gem;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface.OnCancelListener;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.view.Gravity;
@@ -19,13 +20,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class EquipDetailDialog extends AlertDialog {
+public class EquipDetailDialog {
 	
 	Context mContext;
-	Builder mBuilder;
+	AlertDialog mDialog;
+	AlertDialog.Builder mBuilder;
 	String mToolTip;
 	View mView;
 	
@@ -36,12 +39,11 @@ public class EquipDetailDialog extends AlertDialog {
 	LinearLayout mGemList, mAttrList;
 	OnCancelListener mListener;
 
-	public EquipDetailDialog(Context context, LayoutInflater inflater, String toolTip, OnCancelListener listener) {
-		super(context);
+	public EquipDetailDialog(Context context, LayoutInflater inflater, String toolTip, OnCancelListener listener){
 		mContext = context;
 		
 		mListener = listener;
-		mBuilder = new Builder(mContext, AlertDialog.THEME_HOLO_DARK);
+		mBuilder = new AlertDialog.Builder(mContext, AlertDialog.THEME_HOLO_DARK);
 		mBuilder.setOnCancelListener(listener);
 		mView = inflater.inflate(R.layout.equip_detail_view, null);
 		mToolTip = toolTip;
@@ -61,7 +63,10 @@ public class EquipDetailDialog extends AlertDialog {
 	
 	public void show(){
 		DownloadItemDetailTask task = new DownloadItemDetailTask();
-		task.execute(mToolTip);		
+		task.execute(mToolTip);
+		mBuilder.setTitle(R.string.loading);
+		mBuilder.setView(new ProgressBar(mContext));
+		mDialog = mBuilder.show();
 	}
 	
 	private void setData(Equip data){
@@ -137,8 +142,9 @@ public class EquipDetailDialog extends AlertDialog {
 		}		
 		
 		mBuilder.setTitle(data.mName);
-		mBuilder.setView(mView);		
-		mBuilder.show();
+		mBuilder.setView(mView);
+		mDialog.dismiss();
+		mDialog = mBuilder.show();
 	}
 	
 	private class DownloadItemDetailTask extends AsyncTask<String, Void, Equip>{
