@@ -47,6 +47,12 @@ public class Const {
 		GREEN
 	}
 	
+	public static enum ERROR_TYPE{
+		NONE,
+		NETWORK_ERROR,
+		INVALID_BATTLETAG,
+	}
+	
 	public static class ServerPath{
 		public static final String PREFIX = "http://";
 		public static final String HOST = ".battle.net/api/d3/";

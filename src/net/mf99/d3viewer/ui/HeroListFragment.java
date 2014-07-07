@@ -9,8 +9,12 @@ import uk.co.senab.actionbarpulltorefresh.library.ActionBarPullToRefresh;
 import uk.co.senab.actionbarpulltorefresh.library.PullToRefreshLayout;
 import uk.co.senab.actionbarpulltorefresh.library.listeners.OnRefreshListener;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -19,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 import net.mf99.d3viewer.Const;
+import net.mf99.d3viewer.Const.ERROR_TYPE;
 import net.mf99.d3viewer.Const.ServerPath;
 import net.mf99.d3viewer.R;
 import net.mf99.d3viewer.Utils;
@@ -200,6 +205,7 @@ public class HeroListFragment extends ListFragment implements OnRefreshListener 
     
     class ProfileDownloadTask extends AsyncTask<String, Void, Profile>{
 
+    	ERROR_TYPE mErrorType = ERROR_TYPE.NONE;
     	@Override
 		protected Profile doInBackground(String... params) {
     		try {
@@ -208,13 +214,13 @@ public class HeroListFragment extends ListFragment implements OnRefreshListener 
 									Utils.getRegion(Const.DATA_BATTLE_REGION));
 				
 			} catch (ClientProtocolException e) {
-				// TODO Auto-generated catch block
+				mErrorType = ERROR_TYPE.NETWORK_ERROR;
 				e.printStackTrace();
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
+				mErrorType = ERROR_TYPE.INVALID_BATTLETAG;
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				mErrorType = ERROR_TYPE.NETWORK_ERROR;
 				e.printStackTrace();
 			}
     		
@@ -230,8 +236,29 @@ public class HeroListFragment extends ListFragment implements OnRefreshListener 
 					mLoadingDialog.dismiss();
 				
 				if(result == null){
-					Toast.makeText(mContext, "Download Profile fail, pull down to refresh !", Toast.LENGTH_SHORT).show();
-					getActivity().setTitle(R.string.loading_fail);
+					if(mErrorType == ERROR_TYPE.NETWORK_ERROR){
+						Toast.makeText(mContext, R.string.download_profile_fail_network, Toast.LENGTH_SHORT).show();
+						getActivity().setTitle(R.string.loading_fail);
+					}
+					else if(mErrorType == ERROR_TYPE.INVALID_BATTLETAG){
+						final Activity mMe = getActivity();
+						AlertDialog.Builder builder = new AlertDialog.Builder(mMe, AlertDialog.THEME_HOLO_DARK);
+						builder.setMessage(R.string.download_profile_fail_battletag);
+						builder.setPositiveButton("OK", new OnClickListener(){
+							@Override
+							public void onClick(DialogInterface arg0, int arg1) {
+								Intent intent = new Intent(mMe, LoginActivity.class);
+								mMe.startActivity(intent);
+								mMe.finish();
+							}
+							
+						});
+						builder.show();
+						
+					}
+					else{
+						Toast.makeText(mContext, R.string.download_profile_fail_network, Toast.LENGTH_SHORT).show();
+					}
 				}
 				else{
 					mAdapter = new HeroListAdapter(mContext, result);

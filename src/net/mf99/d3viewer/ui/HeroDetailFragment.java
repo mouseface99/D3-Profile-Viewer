@@ -224,7 +224,7 @@ public class HeroDetailFragment extends Fragment
 					mLoadingDialog.dismiss();
 				
 				if(result == null){
-					Toast.makeText(getActivity(), "Download Hero data fail, pull down to refresh !", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getActivity(), R.string.download_hero_fail, Toast.LENGTH_SHORT).show();
 					getActivity().setTitle(R.string.loading_fail);
 					mInfo.setOnClickListener(null);
 				}
