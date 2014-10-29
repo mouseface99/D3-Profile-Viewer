@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 
@@ -505,26 +507,29 @@ public class Utils {
 		
 	}
 	
-	public static String downloadJSONData(String url) throws ClientProtocolException, IOException{		
-		StringBuffer string = new StringBuffer();
-		
-        HttpClient client = new DefaultHttpClient();
-        HttpGet get = new HttpGet(url);
+	public static String downloadJSONData(String url) throws ClientProtocolException, IOException{
+		URL u = new URL(url);
+        HttpURLConnection c = (HttpURLConnection) u.openConnection();
+        c.setRequestMethod("GET");
+        c.setUseCaches(false);
+        c.setAllowUserInteraction(false);
+        c.setConnectTimeout(Const.NETWORK_TIMEOUT);
+        c.setReadTimeout(Const.NETWORK_TIMEOUT);
+        c.connect();
+        int status = c.getResponseCode();
 
-        String linha = "";
-        HttpResponse response = client.execute(get);
-        StatusLine statusLine = response.getStatusLine();
-        int statusCode = statusLine.getStatusCode();
-
-        if (statusCode == 200) { // OK
-            BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-            while ((linha = rd.readLine()) != null) {
-            	string.append(linha);
-            }
-            return string.toString();
+        switch (status) {
+            case 200:            
+                BufferedReader br = new BufferedReader(new InputStreamReader(c.getInputStream()));
+                StringBuilder sb = new StringBuilder();
+                String line;
+                while ((line = br.readLine()) != null) {
+                    sb.append(line+"\n");
+                }
+                br.close();
+                return sb.toString();
         }
-		
-		return null;
+        return null;
 	}
 	
 	public static Bitmap downloadBitmapFromURL(String link) throws IOException {

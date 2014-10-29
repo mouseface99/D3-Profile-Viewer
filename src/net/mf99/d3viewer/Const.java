@@ -6,6 +6,8 @@ import android.content.Context;
 
 public class Const {
 	
+	public static final int NETWORK_TIMEOUT = 5000;
+	
 	public static String DATA_BATTLE_ACCOUNT = null;
 	public static String DATA_BATTLE_CODE = null;
 	public static String DATA_BATTLE_REGION = null;

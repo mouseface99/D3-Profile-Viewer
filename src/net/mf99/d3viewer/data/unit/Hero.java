@@ -81,7 +81,7 @@ public class Hero {
 				
 				
 				this.mCritDamage = (Math.floor(data.getDouble("critDamage") * 100) / 100) - 1;
-				this.mCritChance = data.getDouble("critChance");
+				this.mCritChance = Math.floor(data.getDouble("critChance")*10000) / 100;
 				
 				this.mBlockChance = data.getDouble("blockChance");
 				this.mBlockMin = data.getDouble("blockAmountMin");
