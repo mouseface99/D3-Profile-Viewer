@@ -518,16 +518,15 @@ public class Utils {
         c.connect();
         int status = c.getResponseCode();
 
-        switch (status) {
-            case 200:            
-                BufferedReader br = new BufferedReader(new InputStreamReader(c.getInputStream()));
-                StringBuilder sb = new StringBuilder();
-                String line;
-                while ((line = br.readLine()) != null) {
-                    sb.append(line+"\n");
-                }
-                br.close();
-                return sb.toString();
+        if(status == 200){// OK
+        	BufferedReader br = new BufferedReader(new InputStreamReader(c.getInputStream()));
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = br.readLine()) != null) {
+                sb.append(line+"\n");
+            }
+            br.close();
+            return sb.toString();
         }
         return null;
 	}
