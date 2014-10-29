@@ -3,12 +3,14 @@ package net.mf99.d3viewer.data.jsonformat;
 import org.json.JSONObject;
 
 import net.mf99.d3viewer.Const.HERO_CLASS;
+import net.mf99.d3viewer.Utils;
 
 public class HeroShort extends JsonObjectBase {
 	private String name;
 	private long id;
 	private int level;
-	private HERO_CLASS _class;
+	private String _class;
+	private HERO_CLASS mClass;
 	private int gender;
 	
 	public HeroShort(JSONObject jsonData) {
@@ -39,12 +41,19 @@ public class HeroShort extends JsonObjectBase {
 		this.level = level;
 	}	
 
-	public HERO_CLASS get_class() {
+	public String get_class() {
 		return _class;
 	}
 
-	public void set_class(HERO_CLASS _class) {
-		this._class = _class;
+	public void set_class(String _class) {
+		this._class = _class;		
+	}
+	
+	public HERO_CLASS getHeroClass(){
+		if(mClass == null)
+			mClass = Utils.getHeroClass(_class);
+		
+		return mClass;
 	}
 
 	public int getGender() {

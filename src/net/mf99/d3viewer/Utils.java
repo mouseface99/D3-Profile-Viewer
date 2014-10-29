@@ -6,17 +6,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,8 +25,6 @@ import net.mf99.d3viewer.data.unit.EquipList;
 import net.mf99.d3viewer.data.unit.EquipShort;
 import net.mf99.d3viewer.data.unit.Gem;
 import net.mf99.d3viewer.data.unit.Hero;
-import net.mf99.d3viewer.data.unit.HeroShort;
-import net.mf99.d3viewer.data.unit.Profile;
 import net.mf99.d3viewer.data.unit.Skill;
 
 public class Utils {
@@ -248,48 +239,9 @@ public class Utils {
 			return GEM_CLASS.TOPAZ;
 		
 		return null;
-	}
+	}	
 	
-	public static Profile translateJsonToProfile(String jsonData, SERVER_REGION region) throws JSONException{
-		JSONObject data = new JSONObject(jsonData);
-		JSONArray jsonHeros = data.getJSONArray("heroes");
-		JSONObject kills = data.getJSONObject("kills");
-		
-		String battleTag;
-		ArrayList<HeroShort> heros = new ArrayList<HeroShort>(jsonHeros.length());
-		int paragonLv;
-		long killed, elite_killed;
-		
-		battleTag = data.getString("battleTag");
-		paragonLv = data.getInt("paragonLevel");
-		Const.PARAGON_LEVEL = paragonLv;
-		killed = kills.getLong("monsters");
-		elite_killed = kills.getLong("elites");
-		
-		String name;
-		long id;
-		int level;
-		HERO_CLASS hClass;
-		boolean isMale;
-		
-		for(int i=0; i<jsonHeros.length(); i++){
-			JSONObject hero = jsonHeros.getJSONObject(i);
-			
-			name = hero.getString("name");
-			id = hero.getLong("id");
-			level = hero.getInt("level");
-			hClass = Utils.getHeroClass(hero.getString("class"));
-			isMale = (hero.getInt("gender") == 0 );
-			
-			
-			heros.add(new HeroShort(name, id, level, hClass, isMale));
-		}
-		
-		return new Profile(battleTag, region, heros, paragonLv, killed, elite_killed);
-	}
-	
-	public static Hero translateJsonToHero(String jsonData) throws JSONException{
-		JSONObject data = new JSONObject(jsonData);
+	public static Hero translateJsonToHero(JSONObject data) throws JSONException{		
 		
 		String mName = data.getString("name");
 		long mId = data.getLong("id");
@@ -336,8 +288,7 @@ public class Utils {
 						new Hero.Stats(data.getJSONObject("stats"), mLevel, getProgression(data.getJSONObject("progression"))));
 	}
 	
-	public static Equip translateJsonToEquip(String jsonData) throws JSONException{
-		JSONObject data = new JSONObject(jsonData);
+	public static Equip translateJsonToEquip(JSONObject data) throws JSONException{		
 		
 		String mName = data.getString("name");
 		String mIcon = data.getString("icon");
@@ -507,7 +458,7 @@ public class Utils {
 		
 	}
 	
-	public static String downloadJSONData(String url) throws ClientProtocolException, IOException{
+	public static JSONObject downloadJSONData(String url) throws ClientProtocolException, IOException, JSONException{
 		URL u = new URL(url);
         HttpURLConnection c = (HttpURLConnection) u.openConnection();
         c.setRequestMethod("GET");
@@ -526,7 +477,7 @@ public class Utils {
                 sb.append(line+"\n");
             }
             br.close();
-            return sb.toString();
+            return new JSONObject(sb.toString());
         }
         return null;
 	}

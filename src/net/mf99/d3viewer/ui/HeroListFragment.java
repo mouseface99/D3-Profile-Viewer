@@ -28,8 +28,8 @@ import net.mf99.d3viewer.Const.ServerPath;
 import net.mf99.d3viewer.R;
 import net.mf99.d3viewer.Utils;
 import net.mf99.d3viewer.data.HeroListAdapter;
-import net.mf99.d3viewer.data.unit.HeroShort;
-import net.mf99.d3viewer.data.unit.Profile;
+import net.mf99.d3viewer.data.jsonformat.HeroShort;
+import net.mf99.d3viewer.data.jsonformat.Profile;
 
 /**
  * A list fragment representing a list of Heros. This fragment
@@ -209,10 +209,8 @@ public class HeroListFragment extends ListFragment implements OnRefreshListener 
     	@Override
 		protected Profile doInBackground(String... params) {
     		try {
-				return Utils.translateJsonToProfile(
-									Utils.downloadJSONData(ServerPath.PROFILE_PATH), 
-									Utils.getRegion(Const.DATA_BATTLE_REGION));
-				
+    			return new Profile(Utils.downloadJSONData(ServerPath.PROFILE_PATH), 
+    							   Utils.getRegion(Const.DATA_BATTLE_REGION));
 			} catch (ClientProtocolException e) {
 				mErrorType = ERROR_TYPE.NETWORK_ERROR;
 				e.printStackTrace();

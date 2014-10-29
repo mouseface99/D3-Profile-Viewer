@@ -2,7 +2,7 @@ package net.mf99.d3viewer.ui;
 
 import net.mf99.d3viewer.Const;
 import net.mf99.d3viewer.R;
-import net.mf99.d3viewer.data.unit.HeroShort;
+import net.mf99.d3viewer.data.jsonformat.HeroShort;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -68,7 +68,7 @@ public class HeroListActivity extends FragmentActivity
             // adding or replacing the detail fragment using a
             // fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putLong(Const.KEY_HERO_ID, hero.mId);
+            arguments.putLong(Const.KEY_HERO_ID, hero.getId());
             HeroDetailFragment fragment = new HeroDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
@@ -79,7 +79,7 @@ public class HeroListActivity extends FragmentActivity
             // In single-pane mode, simply start the detail activity
             // for the selected item ID.
             Intent detailIntent = new Intent(this, HeroDetailActivity.class);  
-            detailIntent.putExtra(Const.KEY_HERO_ID, hero.mId);
+            detailIntent.putExtra(Const.KEY_HERO_ID, hero.getId());
             startActivity(detailIntent);
         }
     }

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import net.mf99.d3viewer.R;
 import net.mf99.d3viewer.Utils;
 import net.mf99.d3viewer.data.unit.Hero;
-import net.mf99.d3viewer.data.unit.HeroShort;
-import net.mf99.d3viewer.data.unit.Profile;
+import net.mf99.d3viewer.data.jsonformat.HeroShort;
+import net.mf99.d3viewer.data.jsonformat.Profile;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,9 +39,9 @@ public class HeroListAdapter extends BaseAdapter {
 	}
 	
 	public HeroListAdapter(Context context, Profile profile) {
-		this(context, profile.mParagonLevel, profile.mKilled, profile.mEliteKilled);
+		this(context, profile.getParagonLevel(), profile.getKills().getMonsters(), profile.getKills().getElites());
 		
-		mList = profile.mHeros;
+		mList = (ArrayList<HeroShort>) profile.getHeroes();
 		
 		isTemp = false;
 	}
@@ -86,10 +86,10 @@ public class HeroListAdapter extends BaseAdapter {
 			HeroShort hero = mList.get(index-1);
 			
 			
-			((ImageView)view.findViewById(R.id.hero_head)).setImageResource(Utils.getHeroHeaderSource(hero.mClass, hero.isMale));
+			((ImageView)view.findViewById(R.id.hero_head)).setImageResource(Utils.getHeroHeaderSource(hero.getHeroClass(), hero.isMale()));
 			
-			((TextView)view.findViewById(R.id.hero_name)).setText(hero.mName);
-			String heroInfo = "Lv " + hero.mLevel + " " + mContext.getString(Utils.getHeroClassNameSource(hero.mClass));
+			((TextView)view.findViewById(R.id.hero_name)).setText(hero.getName());
+			String heroInfo = "Lv " + hero.getLevel() + " " + mContext.getString(Utils.getHeroClassNameSource(hero.getHeroClass()));
 			((TextView)view.findViewById(R.id.hero_info)).setText(heroInfo);
 			
 			return view;
