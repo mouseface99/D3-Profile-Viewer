@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Locale;
 
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
@@ -168,7 +169,7 @@ public class Utils {
 	}
 	
 	public static SERVER_REGION getRegion(String region){
-		region = region.toLowerCase();
+		region = region.toLowerCase(Locale.getDefault());
 		
 		if("tw".equals(region))
 			return SERVER_REGION.TW;

@@ -1,5 +1,7 @@
 package net.mf99.d3viewer.ui;
 
+import java.util.Locale;
+
 import net.mf99.d3viewer.Const;
 import net.mf99.d3viewer.Const.ServerPath;
 import net.mf99.d3viewer.R;
@@ -95,7 +97,7 @@ public class LoginActivity extends Activity {
 		} else {			
 			Const.DATA_BATTLE_ACCOUNT = mBattleTag.substring(0, mBattleTag.indexOf('#'));
 			Const.DATA_BATTLE_CODE = mBattleTag.substring(mBattleTag.indexOf('#')+1, mBattleTag.length());
-			Const.DATA_BATTLE_REGION = ((String)mRegionView.getSelectedItem()).toLowerCase();	
+			Const.DATA_BATTLE_REGION = ((String)mRegionView.getSelectedItem()).toLowerCase(Locale.getDefault());	
 			
 			ServerPath.PROFILE_PATH =  ServerPath.PREFIX + Const.DATA_BATTLE_REGION + ServerPath.HOST + 
 									   "profile/" + Const.DATA_BATTLE_ACCOUNT + "-" + Const.DATA_BATTLE_CODE + "/";
