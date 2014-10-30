@@ -8,8 +8,10 @@ import org.json.JSONException;
 import net.mf99.d3viewer.Const;
 import net.mf99.d3viewer.R;
 import net.mf99.d3viewer.Utils;
-import net.mf99.d3viewer.data.unit.Equip;
-import net.mf99.d3viewer.data.unit.Gem;
+import net.mf99.d3viewer.data.jsonformat.Equip;
+import net.mf99.d3viewer.data.jsonformat.Equip.AttributeList;
+import net.mf99.d3viewer.data.jsonformat.Equip.AttributeList.Attribute;
+import net.mf99.d3viewer.data.jsonformat.Gem;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface.OnCancelListener;
@@ -70,64 +72,63 @@ public class EquipDetailDialog {
 	}
 	
 	private void setData(Equip data){
-		mItemColor.setBackgroundResource(Utils.getBackgroundColorResource(data.mColor));
-		mItemIcon.setImageBitmap(Utils.getBitmapFromFile(Const.getCacheFile(mContext, data.mIcon)));
+		mItemColor.setBackgroundResource(Utils.getBackgroundColorResource(data.getItemColor()));
+		mItemIcon.setImageBitmap(Utils.getBitmapFromFile(Const.getCacheFile(mContext, data.getIcon())));
 		
-		if(data.isWepond){
-			mMainValue.setText(String.valueOf(data.mDps));
+		if(data.isWepond()){
+			mMainValue.setText(String.valueOf(data.getDps().getValue()));
 			mMainValueType.setText(R.string.main_value_type_dps);
-			mMaxMinDamage.setText(data.mMinDamage + "-" + data.mMaxDamage + " " + mContext.getString(R.string.damage));
-			mAttackSpeed.setText(String.valueOf(data.mAttackPerSec) + " " + mContext.getString(R.string.hit_per_sec));
+			mMaxMinDamage.setText(data.getMinDamage().getValue() + "-" + data.getMaxDamage().getValue() + " " + mContext.getString(R.string.damage));
+			mAttackSpeed.setText(String.valueOf(data.getAttacksPerSecond().getValue()) + " " + mContext.getString(R.string.hit_per_sec));
 		}
-		else{
-			if(data.mArmor != -1){
-				mMainValue.setText(String.valueOf(data.mArmor));
+		else{			
+			if(data.getArmor() != null){
+				mMainValue.setText(String.valueOf(data.getArmor().getValue()));
 				mMainValueType.setText(R.string.main_value_type_armor);
-				
-				if(data.isShield){
-					mMaxMinDamage.setText(data.mBlockMin + "-" + data.mBlockMax + " " + mContext.getString(R.string.block_value));
-					mAttackSpeed.setText(String.valueOf(data.mBlockChance*100) + " " + mContext.getString(R.string.block_chance));
-				}
 			}
-			else{
+			if(data.isShield()){
+				mMaxMinDamage.setText(data.getBlockMin() + "-" + data.getBlockMax() + " " + mContext.getString(R.string.block_value));
+				mAttackSpeed.setText(String.valueOf(data.getBlockChance().getValue()) + "% " + mContext.getString(R.string.block_chance));
+			}			
+			
+			if(data.getArmor() == null && !data.isShield()){				
 				mMainValue.setVisibility(View.GONE);
 				mMainValueType.setVisibility(View.GONE);
-			}
+			}			
 		}
 		
-		mItemLevel.setText(mContext.getString(R.string.item_level) + " " + data.mItemLevel);
+		mItemLevel.setText(mContext.getString(R.string.item_level) + " " + data.getItemLevel());
 		
 		TextView tv;
-		
-		for(String attr : data.mPrimaryAttr){
+		AttributeList list = data.getAttributes();
+		for(Attribute attr : list.getPrimary()){
 			tv = new TextView(mContext);
-			tv.setText(attr);
+			tv.setText(attr.getVaule());
 			tv.setTextColor(Color.rgb(0x68, 0x67,0xFA));
 			tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.attr_dot, 0, 0, 0);
 			mAttrList.addView(tv);
 		}
 		
-		for(String attr : data.mSecandaryAttr){
+		for(Attribute attr : list.getSecondary()){
 			tv = new TextView(mContext);
-			tv.setText(attr);
+			tv.setText(attr.getVaule());
 			tv.setTextColor(Color.rgb(0xBF, 0xA6, 0xD6));
 			tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.attr_dot, 0, 0, 0);
 			mAttrList.addView(tv);
 		}
 		
-		for(String attr : data.mPassiveAttr){
+		for(Attribute attr : list.getPassive()){
 			tv = new TextView(mContext);
-			tv.setText(attr);
+			tv.setText(attr.getVaule());
 			tv.setTextColor(Color.rgb(0xC6, 0x56, 0x23));
 			tv.setCompoundDrawablesWithIntrinsicBounds(R.drawable.attr_dot, 0, 0, 0);
 			mAttrList.addView(tv);
 		}
 		
-		for(int i=0; i<data.mSocketNum; i++){
-			if(i<data.mGems.size()){
-				Gem gem = data.mGems.get(i);
+		for(Gem gem : data.getGems()){
+			if(gem != null){				
 				tv = new TextView(mContext);
-				tv.setText(gem.mAttribute);
+				tv.setText(gem.getAttribute());
 				tv.setCompoundDrawablesWithIntrinsicBounds(Utils.getGemIconResource(gem), 0, 0, 0);				
 			}
 			else{
@@ -141,7 +142,7 @@ public class EquipDetailDialog {
 			mGemList.addView(tv);
 		}		
 		
-		mBuilder.setTitle(data.mName);
+		mBuilder.setTitle(data.getName());
 		mBuilder.setView(mView);
 		mDialog.dismiss();
 		mDialog = mBuilder.show();
@@ -152,7 +153,8 @@ public class EquipDetailDialog {
 		@Override
 		protected Equip doInBackground(String... params) {			
 			try {
-				return Utils.translateJsonToEquip(Utils.downloadJSONData(Const.ServerPath.getItemDetailPath(params[0])));
+//				return Utils.translateJsonToEquip(Utils.downloadJSONData(Const.ServerPath.getItemDetailPath(params[0])));				
+				return new Equip(Utils.downloadJSONData(Const.ServerPath.getItemDetailPath(params[0])));
 			} catch (ClientProtocolException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

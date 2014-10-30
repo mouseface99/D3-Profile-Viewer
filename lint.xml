@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
+    <issue id="InflateParams" severity="ignore" />
     <issue id="TooManyViews">
         <ignore path="res/layout/hero_stats_detail_view.xml" />
     </issue>

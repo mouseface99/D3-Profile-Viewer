@@ -7,10 +7,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
 import org.apache.http.client.ClientProtocolException;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,8 +19,7 @@ import net.mf99.d3viewer.Const.GEM_CLASS;
 import net.mf99.d3viewer.Const.HERO_CLASS;
 import net.mf99.d3viewer.Const.ITEM_COLOR;
 import net.mf99.d3viewer.Const.SERVER_REGION;
-import net.mf99.d3viewer.data.unit.Equip;
-import net.mf99.d3viewer.data.unit.Gem;
+import net.mf99.d3viewer.data.jsonformat.Gem;
 
 public class Utils {
 	
@@ -190,7 +187,7 @@ public class Utils {
 	
 	public static int getGemIconResource(Gem gem){
 		int base;
-		switch(gem.mClass){
+		switch(gem.getGemClass()){
 			case AMETHYST:
 				base = R.drawable.gem_amethyst_01;
 				break;
@@ -210,10 +207,10 @@ public class Utils {
 				base = R.drawable.gem_diamond_01;
 		}
 		
-		return (base+(gem.mLevel-1));
+		return (base+(gem.getGemLevel()-1));
 	}
 	
-	private static int getGemLevel(String id){
+	public static int getGemLevel(String id){
 		if(id != null && id.contains("_")){
 			return Integer.parseInt(id.substring(id.indexOf("_")+1, id.length()));
 		}
@@ -221,7 +218,7 @@ public class Utils {
 		return -1;		
 	}
 	
-	private static GEM_CLASS getGemClass(String id){
+	public static GEM_CLASS getGemClass(String id){
 		String type = id.substring(0, id.indexOf("_"));
 		
 		if("Amethyst".equals(type))
@@ -236,122 +233,10 @@ public class Utils {
 			return GEM_CLASS.TOPAZ;
 		
 		return null;
-	}
+	}	
 	
-	public static Equip translateJsonToEquip(JSONObject data) throws JSONException{		
-		
-		String mName = data.getString("name");
-		String mIcon = data.getString("icon");
-		ITEM_COLOR mColor = Utils.getItemColor(data.getString("displayColor"));
-		int mItemLevel = data.getInt("itemLevel");
-		int mSocketNum = 0;
-		
-		try{
-			mSocketNum = data.getJSONObject("attributesRaw").getJSONObject("Sockets").getInt("max");
-		}catch(JSONException ex){}
-		
-		boolean isWepond = false;
-		try{
-			data.getJSONObject("dps");
-			isWepond = true;
-		}catch(JSONException ex){}
-		
-		boolean isShield = false;
-		try{
-			data.getJSONObject("blockChance");
-			isShield = true;
-		}catch(JSONException ex){}
-		
-		double mDps = 0, mAttackPerSec = 0, mMaxDamage = 0, mMinDamage = 0;
-		double mArmor = 0;
-		double mBlockChance = 0, mBlockMin = 0, mBlockMax = 0;
-		if(isWepond){
-			mDps = data.getJSONObject("dps").getDouble("max");
-			mAttackPerSec = data.getJSONObject("attacksPerSecond").getDouble("max");
-			mMaxDamage = data.getJSONObject("maxDamage").getDouble("max");
-			mMinDamage = data.getJSONObject("minDamage").getDouble("max");
-		}
-		else{
-			try{
-				mArmor = data.getJSONObject("armor").getDouble("max");
-			}catch(JSONException ex){ mArmor = -1; }
-			if(isShield){
-				JSONObject rawData = data.getJSONObject("attributesRaw");
-				
-				mBlockChance = data.getJSONObject("blockChance").getDouble("max");
-				mBlockMin = rawData.getJSONObject("Block_Amount_Item_Min").getDouble("max");
-				mBlockMax = mBlockMin + rawData.getJSONObject("Block_Amount_Item_Delta").getDouble("max");
-			}
-		}
-		
-		ArrayList<String> mPrimaryAttr = new ArrayList<String>();
-		ArrayList<String> mSecandaryAttr = new ArrayList<String>();
-		ArrayList<String> mPassiveAttr = new ArrayList<String>();
-		ArrayList<Gem> mGems = new ArrayList<Gem>();
-		
-		try{
-			JSONObject attrs = data.getJSONObject("attributes");
-			
-			JSONArray primary = attrs.getJSONArray("primary");
-			
-			for(int i=0; i<primary.length(); i++)
-				mPrimaryAttr.add(primary.getJSONObject(i).getString("text"));
-			
-			JSONArray secondary = attrs.getJSONArray("secondary");
-			
-			for(int i=0; i<secondary.length(); i++)
-				mSecandaryAttr.add(secondary.getJSONObject(i).getString("text"));
-			
-			JSONArray passive = attrs.getJSONArray("passive");
-			
-			for(int i=0; i<passive.length(); i++)
-				mPassiveAttr.add(passive.getJSONObject(i).getString("text"));
-			
-			JSONArray gems = data.getJSONArray("gems");			
-			
-			for(int i=0; i<gems.length(); i++){
-				JSONObject gem = gems.getJSONObject(i);
-				String name = gem.getJSONObject("item").getString("name");
-				String id = gem.getJSONObject("item").getString("id");
-				GEM_CLASS mClass = getGemClass(id);
-				int level = getGemLevel(id);
-				String attr = gem.getJSONObject("attributes").getJSONArray("primary").getJSONObject(0).getString("text");				
-				mGems.add(new Gem(name, mClass, level, attr));
-			}			
-		}catch(JSONException ex){}
-		
-		// Adjust Max-Min damage with attribute
-		if(isWepond){
-			if(mPrimaryAttr.size() > 0 &&
-			   mPrimaryAttr.get(0).contains("+") && 
-			   mPrimaryAttr.get(0).contains("¡V")){				
-				String dd = mPrimaryAttr.get(0).substring(1, mPrimaryAttr.get(0).indexOf(" "));
-				
-				mMinDamage += Integer.parseInt(dd.substring(0, dd.indexOf("¡V")));
-				mMaxDamage += Integer.parseInt(dd.substring(dd.indexOf("¡V")+1, dd.length()));				
-			}
-		}
-		
-		
-		if(isWepond)
-			return new Equip(mName, mIcon, mColor, 
-							 mItemLevel, mSocketNum, 
-							 mDps, mAttackPerSec, mMaxDamage, mMinDamage, 
-							 mPrimaryAttr, mSecandaryAttr, mPassiveAttr, mGems);
-		else if(isShield)
-			return new Equip(mName, mIcon, mColor, 
-					 		 mItemLevel, mSocketNum, 
-					 		 mArmor, 
-					 		 mPrimaryAttr, mSecandaryAttr, mPassiveAttr, mGems,
-					 		 mBlockChance, mBlockMin, mBlockMax);
-		else
-			return new Equip(mName, mIcon, mColor, 
-			 		 mItemLevel, mSocketNum, 
-			 		 mArmor, 
-			 		 mPrimaryAttr, mSecandaryAttr, mPassiveAttr, mGems);
-	}
-	
-	public static JSONObject downloadJSONData(String url) throws ClientProtocolException, IOException, JSONException{		
+	public static JSONObject downloadJSONData(String url) throws ClientProtocolException, IOException, JSONException{
+		Log.d("MIKE", "Download JSON data from["+url+"]");
 		URL u = new URL(url);
         HttpURLConnection conn = (HttpURLConnection) u.openConnection();
         conn.setRequestMethod("GET");
