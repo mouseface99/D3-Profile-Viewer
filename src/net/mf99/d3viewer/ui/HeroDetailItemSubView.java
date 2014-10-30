@@ -8,7 +8,7 @@ import java.io.IOException;
 import net.mf99.d3viewer.Const.ITEM_COLOR;
 import net.mf99.d3viewer.Const.ServerPath;
 import net.mf99.d3viewer.Utils;
-import net.mf99.d3viewer.data.unit.EquipShort;
+import net.mf99.d3viewer.data.jsonformat.EquipShort;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.os.AsyncTask;
@@ -46,9 +46,9 @@ public class HeroDetailItemSubView {
 	public void setData(EquipShort equip){
 		if(equip != null){
 			mEquip = equip;
-			mColor.setBackgroundResource(Utils.getBackgroundColorResource(equip.mColor));
-			mFile = new File(mCacheDir, equip.mIcon + ".png");
-			setIcon(equip.mIcon);
+			mColor.setBackgroundResource(Utils.getBackgroundColorResource(equip.getItemColor()));
+			mFile = new File(mCacheDir, equip.getIcon() + ".png");
+			setIcon(equip.getIcon());
 		}
 	}
 	

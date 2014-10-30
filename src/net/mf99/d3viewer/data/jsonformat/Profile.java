@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.json.JSONObject;
 
+import net.mf99.d3viewer.Const;
 import net.mf99.d3viewer.Const.SERVER_REGION;
 
 public class Profile extends JsonObjectBase {
@@ -16,7 +17,8 @@ public class Profile extends JsonObjectBase {
 	
 	public Profile(JSONObject jsonData, SERVER_REGION region) {
 		super(jsonData);
-		mServerRegion = region;		
+		mServerRegion = region;
+		Const.PARAGON_LEVEL = getParagonLevel();
 	}
 	
 	public String getBattleTag() {

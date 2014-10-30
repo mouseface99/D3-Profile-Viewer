@@ -1,8 +1,10 @@
 package net.mf99.d3viewer.ui;
 
+import java.text.DecimalFormat;
+
 import net.mf99.d3viewer.Const;
 import net.mf99.d3viewer.R;
-import net.mf99.d3viewer.data.unit.Hero;
+import net.mf99.d3viewer.data.jsonformat.Hero;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface.OnCancelListener;
@@ -13,24 +15,26 @@ import android.widget.TextView;
 
 public class HeroStatsDetailDialog {
 	
-	Context mContext;
-	AlertDialog.Builder mBuilder;	
-	View mView;
+	private Context mContext;
+	private AlertDialog.Builder mBuilder;	
+	private View mView;
 	
-	TextView vLevel, vPLevel, vPSource, vSSource,
+	private TextView vLevel, vPLevel, vPSource, vSSource,
 			 vStr, vDex, vInt, vVit,
 			 vResistPhy, vResistFire, vResistCold, vResistLight, vResistPoison, vResistArcane,
 			 vDamage, vAttkSpeed, vCritChance, vCritDamage, vDamageIncre,
 			 vArmor, vBlockChance, vBlockAmount, vThorns, vDamageReduc,
 			 vLife, vLifeSteal, vLifePerKill, vLifeOnHit, vMF, vGF;
 	
-	TextView vPSourceTitle, vSSourceTitle;
+	private TextView vPSourceTitle, vSSourceTitle;
 	
-	Hero.Stats mStats;
+	private Hero.Stats mStats;
+	private int mProgression;
 
-	public HeroStatsDetailDialog(Context context, LayoutInflater inflater, Hero.Stats stats, OnCancelListener listener) {
+	public HeroStatsDetailDialog(Context context, LayoutInflater inflater, Hero.Stats stats, int progression, OnCancelListener listener) {
 		mContext = context;
 		mStats = stats;
+		this.mProgression = progression;
 		
 		mBuilder = new AlertDialog.Builder(mContext, AlertDialog.THEME_HOLO_DARK);
 		mBuilder.setOnCancelListener(listener);		
@@ -78,12 +82,13 @@ public class HeroStatsDetailDialog {
 	}
 	
 	public void show(){
+		DecimalFormat formatter = new DecimalFormat("#.00");
 		// Info
-		vLevel.setText(String.valueOf(mStats.mLevel));
+		vLevel.setText(String.valueOf(mStats.getLevel()));
 		vPLevel.setText(String.valueOf(Const.PARAGON_LEVEL));
-		vPSource.setText(String.valueOf(mStats.mSourcePrimary));
-		if(mStats.mSourceSecandary > 0)
-			vSSource.setText(String.valueOf(mStats.mSourceSecandary));
+		vPSource.setText(String.valueOf(mStats.getPrimaryResource()));
+		if(mStats.getSecondaryResource() > 0)
+			vSSource.setText(String.valueOf(mStats.getSecondaryResource()));
 		else{
 			vSSource.setVisibility(View.GONE);
 			vSSourceTitle.setVisibility(View.GONE);			
@@ -91,43 +96,43 @@ public class HeroStatsDetailDialog {
 		}
 		
 		// Basic attr
-		vStr.setText(String.valueOf(mStats.mStr));
-		vDex .setText(String.valueOf(mStats.mDex));
-		vInt.setText(String.valueOf(mStats.mInt));
-		vVit.setText(String.valueOf(mStats.mVit));
+		vStr.setText(String.valueOf(mStats.getStrength()));
+		vDex .setText(String.valueOf(mStats.getDexterity()));
+		vInt.setText(String.valueOf(mStats.getIntelligence()));
+		vVit.setText(String.valueOf(mStats.getVitality()));
 		
 		// Resist
-		vResistPhy.setText(String.valueOf(mStats.mResistPhysical));
-		vResistFire.setText(String.valueOf(mStats.mResistFire));
-		vResistCold.setText(String.valueOf(mStats.mResistCold));
-		vResistLight.setText(String.valueOf(mStats.mResistLightning));
-		vResistPoison.setText(String.valueOf(mStats.mResistPoison));
-		vResistArcane.setText(String.valueOf(mStats.mResistArcane));
+		vResistPhy.setText(String.valueOf(mStats.getPhysicalResist()));
+		vResistFire.setText(String.valueOf(mStats.getFireResist()));
+		vResistCold.setText(String.valueOf(mStats.getColdResist()));
+		vResistLight.setText(String.valueOf(mStats.getLightningResist()));
+		vResistPoison.setText(String.valueOf(mStats.getPoisonResist()));
+		vResistArcane.setText(String.valueOf(mStats.getArcaneResist()));
 		
 		// Attack
-		vDamage.setText(String.valueOf(mStats.mDamage));
-		vAttkSpeed.setText(String.valueOf(mStats.mAttackSpeed));
-		vCritChance.setText(String.valueOf(mStats.mCritChance) + "%");
-		vCritDamage.setText("+" + String.valueOf(mStats.mCritDamage*100) + "%");
-		vDamageIncre.setText(String.valueOf(mStats.mDamageIncrease));
+		vDamage.setText(String.valueOf(mStats.getDamage()));
+		vAttkSpeed.setText(formatter.format(mStats.getAttackSpeed()));
+		vCritChance.setText(((mStats.getCritChance() == 0) ? "0" : formatter.format(mStats.getCritChance())) + "%");
+		vCritDamage.setText("+" + ((mStats.getCritDamage() == 0 ) ? "0" : formatter.format(mStats.getCritDamage())) + "%");
+		vDamageIncre.setText(String.valueOf(mStats.getDamageIncrease()));
 		
 		// Defense
-		vArmor.setText(String.valueOf(mStats.mArmor));
-		vBlockChance.setText(String.valueOf(mStats.mBlockChance*100) + "%");
-		vBlockAmount.setText(mStats.mBlockMin + " - " + mStats.mBlockMax);
-		vThorns.setText(String.valueOf(mStats.mThorns));
-		vDamageReduc.setText(String.valueOf(mStats.mDamageReduction));
+		vArmor.setText(String.valueOf(mStats.getArmor()));
+		vBlockChance.setText(((mStats.getBlockChance() == 0 ) ? "0" : formatter.format(mStats.getBlockChance())) + "%");
+		vBlockAmount.setText(mStats.getBlockAmountMin() + " - " + mStats.getBlockAmountMax());
+		vThorns.setText(String.valueOf(mStats.getThorns()));
+		vDamageReduc.setText(String.valueOf(mStats.getDamageReduction()));
 		
 		// Others
-		vLife.setText(String.valueOf(mStats.mLife));
-		vLifeSteal.setText(String.valueOf(mStats.mLifeSteal*100) + "%");
-		vLifePerKill.setText(String.valueOf(mStats.mLifePerKill));
-		vLifeOnHit.setText(String.valueOf(mStats.mLifeOnHit));
-		vMF.setText(String.valueOf(mStats.mMagicFind*100) + "%");
-		vGF.setText(String.valueOf(mStats.mGoldFind*100) + "%");	
+		vLife.setText(String.valueOf(mStats.getLife()));
+		vLifeSteal.setText(((mStats.getLifeSteal() == 0 ) ? "0" : formatter.format(mStats.getLifeSteal())) + "%");
+		vLifePerKill.setText(String.valueOf(mStats.getLifePerKill()));
+		vLifeOnHit.setText(String.valueOf(mStats.getLifeOnHit()));
+		vMF.setText(((mStats.getMagicFind() == 0) ? "0" : formatter.format(mStats.getMagicFind())) + "%");
+		vGF.setText(((mStats.getGoldFind() == 0) ? "0" : formatter.format(mStats.getGoldFind())) + "%");	
 				
 		// Progression
-		setProgression(mStats.mProgression);
+		setProgression(mProgression);
 		
 		mBuilder.setView(mView);		
 		mBuilder.show();

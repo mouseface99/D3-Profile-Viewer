@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import net.mf99.d3viewer.R;
 import net.mf99.d3viewer.Utils;
-import net.mf99.d3viewer.data.unit.Hero;
+import net.mf99.d3viewer.data.jsonformat.Hero;
 import net.mf99.d3viewer.data.jsonformat.HeroShort;
 import net.mf99.d3viewer.data.jsonformat.Profile;
 import android.content.Context;

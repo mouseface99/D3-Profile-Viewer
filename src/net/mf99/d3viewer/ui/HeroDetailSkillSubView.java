@@ -7,7 +7,7 @@ import java.io.IOException;
 
 import net.mf99.d3viewer.Const.ServerPath;
 import net.mf99.d3viewer.Utils;
-import net.mf99.d3viewer.data.unit.Skill;
+import net.mf99.d3viewer.data.jsonformat.Skill;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.os.AsyncTask;
@@ -41,10 +41,10 @@ public class HeroDetailSkillSubView {
 	}
 	
 	public void setData(Skill skill){
-		if(skill != null){
+		if(skill != null && skill.hasSkill()){
 			mSkill = skill;
-			mFile = new File(mCacheDir, mSkill.mIcon + ".png");
-			setIcon(mSkill.mIcon);
+			mFile = new File(mCacheDir, mSkill.getSkill().getIcon() + ".png");
+			setIcon(mSkill.getSkill().getIcon());
 		}
 	}
 	

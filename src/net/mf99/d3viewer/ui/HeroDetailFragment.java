@@ -1,6 +1,8 @@
 package net.mf99.d3viewer.ui;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
 import org.json.JSONException;
@@ -14,6 +16,7 @@ import android.content.DialogInterface.OnCancelListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -24,10 +27,10 @@ import net.mf99.d3viewer.Const;
 import net.mf99.d3viewer.Const.ServerPath;
 import net.mf99.d3viewer.R;
 import net.mf99.d3viewer.Utils;
-import net.mf99.d3viewer.data.unit.EquipList;
-import net.mf99.d3viewer.data.unit.EquipShort;
-import net.mf99.d3viewer.data.unit.Hero;
-import net.mf99.d3viewer.data.unit.Skill;
+import net.mf99.d3viewer.data.jsonformat.EquipList;
+import net.mf99.d3viewer.data.jsonformat.EquipShort;
+import net.mf99.d3viewer.data.jsonformat.Hero;
+import net.mf99.d3viewer.data.jsonformat.Skill;
 
 /**
  * A fragment representing a single Hero detail screen.
@@ -41,13 +44,13 @@ public class HeroDetailFragment extends Fragment
 										   OnRefreshListener, 
 										   OnCancelListener{
 	
-	View mRootView;
+	private View mRootView;
 	
-    HeroDetailItemSubView mHead, mTorso, mWaist, mLeg, mFeets;
-    HeroDetailItemSubView mShoulder, mHand, mRightRing, mMainhand;
-    HeroDetailItemSubView mNeck, mBracers, mLeftRing, mOffhand;
+	private HeroDetailItemSubView mHead, mTorso, mWaist, mLeg, mFeets;
+	private HeroDetailItemSubView mShoulder, mHand, mRightRing, mMainhand;
+	private HeroDetailItemSubView mNeck, mBracers, mLeftRing, mOffhand;
     
-    HeroDetailSkillSubView[] mActiveSkills, mPassiveSkills;
+	private HeroDetailSkillSubView[] mActiveSkills, mPassiveSkills;
 
     private long hID;    
     private Hero mHero;    
@@ -132,39 +135,43 @@ public class HeroDetailFragment extends Fragment
     public void setHeroData(Hero hero){
     	mHero = hero;
     	
-    	getActivity().setTitle(mHero.mName + 
-    						   ", Lv " + mHero.mLevel + " " + getString(Utils.getHeroClassNameSource(mHero.mClass)) + " " +
+    	getActivity().setTitle(mHero.getName() + 
+    						   ", Lv " + mHero.getLevel() + " " + getString(Utils.getHeroClassNameSource(mHero.getHeroClass())) + " " +
     						   getString(R.string.pull_down_to_update));
     	
-    	EquipList mList = mHero.mEquips;
+    	EquipList mList = mHero.getItems();
     	
     	// Set Item data
-    	mHead.setData(mList.mHead);
-    	mTorso.setData(mList.mTorso);
-    	mWaist.setData(mList.mWaist);
-    	mLeg.setData(mList.mLegs);
-    	mFeets.setData(mList.mFeet);
-        mShoulder.setData(mList.mShoulders);
-        mHand.setData(mList.mHands);
-        mRightRing.setData(mList.mRightFinger);
-        mMainhand.setData(mList.mMainHand);
-        mNeck.setData(mList.mNeck);
-        mBracers.setData(mList.mBracers);
-        mLeftRing.setData(mList.mLeftFinger);
-        mOffhand.setData(mList.mOffHand);
+    	mHead.setData(mList.getHead());
+    	mTorso.setData(mList.getTorso());
+    	mWaist.setData(mList.getWaist());
+    	mLeg.setData(mList.getLegs());
+    	mFeets.setData(mList.getFeet());
+        mShoulder.setData(mList.getShoulders());
+        mHand.setData(mList.getHands());
+        mRightRing.setData(mList.getRightFinger());
+        mMainhand.setData(mList.getMainHand());
+        mNeck.setData(mList.getNeck());
+        mBracers.setData(mList.getBracers());
+        mLeftRing.setData(mList.getLeftFinger());
+        mOffhand.setData(mList.getOffHand());
+        
         
         // Set Skills data
-        for(int i=0; i<mHero.mActiveSkills.size(); i++)
-        	mActiveSkills[i].setData(mHero.mActiveSkills.get(i));
+        List<Skill> activeSkills = mHero.getSkills().getActive();
+        List<Skill> passiveSkills = mHero.getSkills().getPassive();
         
-        for(int i=0; i<mHero.mPassiveSkills.size(); i++)
-        	mPassiveSkills[i].setData(mHero.mPassiveSkills.get(i));    
+        for(int i=0; i<mActiveSkills.length; i++)
+    		mActiveSkills[i].setData(activeSkills.get(i));
+    	for(int i=0; i<mPassiveSkills.length; i++)
+    		mPassiveSkills[i].setData(passiveSkills.get(i));
         
         mInfo.setOnClickListener(new OnClickListener(){
 			@Override
-			public void onClick(View arg0) {
+			public void onClick(View button) {
 				HeroStatsDetailDialog dialog = new HeroStatsDetailDialog(getActivity(), 
-															mInflater, mHero.mStats, 
+															mInflater, mHero.getStats(), 
+															mHero.getProgression().getCurrent(),
 															HeroDetailFragment.this);
     			dialog.show();
     			isDialogDisplaying = true;
@@ -177,7 +184,7 @@ public class HeroDetailFragment extends Fragment
 	public void onEquipClick(EquipShort equip) {
     	if(equip != null){
     		if(!isDialogDisplaying){    	
-    			EquipDetailDialog dialog = new EquipDetailDialog(getActivity(), mInflater, equip.mToolkitParam, this);
+    			EquipDetailDialog dialog = new EquipDetailDialog(getActivity(), mInflater, equip.getTooltipParams(), this);
     			dialog.show();
     			isDialogDisplaying = true;
     		}
@@ -186,7 +193,7 @@ public class HeroDetailFragment extends Fragment
     
     @Override
 	public void onSkillClick(Skill skill) {
-    	if(skill != null){
+    	if(skill != null && skill.hasSkill()){
     		if(!isDialogDisplaying){
     			SkillDetailDialog dialog = new SkillDetailDialog(getActivity(), mInflater, skill, this);
     			dialog.show();
@@ -200,15 +207,12 @@ public class HeroDetailFragment extends Fragment
 		@Override
 		protected Hero doInBackground(Long... heroID) {
 			try {
-				return Utils.translateJsonToHero(Utils.downloadJSONData(ServerPath.getHeroPath(heroID[0])));
+				return new Hero(Utils.downloadJSONData(ServerPath.getHeroPath(heroID[0])));				
 			} catch (ClientProtocolException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (JSONException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			

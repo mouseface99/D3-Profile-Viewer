@@ -16,16 +16,13 @@ import org.json.JSONObject;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import net.mf99.d3viewer.Const.GEM_CLASS;
 import net.mf99.d3viewer.Const.HERO_CLASS;
 import net.mf99.d3viewer.Const.ITEM_COLOR;
 import net.mf99.d3viewer.Const.SERVER_REGION;
 import net.mf99.d3viewer.data.unit.Equip;
-import net.mf99.d3viewer.data.unit.EquipList;
-import net.mf99.d3viewer.data.unit.EquipShort;
 import net.mf99.d3viewer.data.unit.Gem;
-import net.mf99.d3viewer.data.unit.Hero;
-import net.mf99.d3viewer.data.unit.Skill;
 
 public class Utils {
 	
@@ -101,7 +98,7 @@ public class Utils {
 		return 0;
 	}
 	
-	public static int getRuneLevel(String lv){
+	public static int getRuneType(String lv){
 		if("a".equals(lv)) return 1;
 		else if("b".equals(lv)) return 2;
 		else if("c".equals(lv)) return 3;
@@ -239,53 +236,6 @@ public class Utils {
 			return GEM_CLASS.TOPAZ;
 		
 		return null;
-	}	
-	
-	public static Hero translateJsonToHero(JSONObject data) throws JSONException{		
-		
-		String mName = data.getString("name");
-		long mId = data.getLong("id");
-		int mLevel = data.getInt("level");
-		HERO_CLASS mClass = Utils.getHeroClass(data.getString("class"));
-		boolean isMale = (data.getInt("gender") == 0 );
-		
-		ArrayList<Skill> mActiveSkills = new ArrayList<Skill>(6);
-		ArrayList<Skill> mPassiveSkills = new ArrayList<Skill>(4);
-		
-		JSONArray activeSkills = data.getJSONObject("skills").getJSONArray("active");
-		for(int i=0; i<activeSkills.length(); i++){
-			try{
-				mActiveSkills.add(toSkill(activeSkills.getJSONObject(i), true));
-			} catch(JSONException ex){}
-		}
-		
-		JSONArray passiveSkills = data.getJSONObject("skills").getJSONArray("passive");
-		for(int i=0; i<passiveSkills.length(); i++){
-			try{
-				mPassiveSkills.add(toSkill(passiveSkills.getJSONObject(i), false));
-			} catch(JSONException ex){}
-		}
-			
-		
-		EquipList mEquips = new EquipList();
-		JSONObject items = data.getJSONObject("items");
-		
-		mEquips.mHead = toEquipShort(items, "head");
-		mEquips.mTorso = toEquipShort(items, "torso");
-		mEquips.mWaist = toEquipShort(items, "waist");
-		mEquips.mLegs = toEquipShort(items, "legs");
-		mEquips.mFeet = toEquipShort(items, "feet");
-		mEquips.mShoulders = toEquipShort(items, "shoulders");
-		mEquips.mHands = toEquipShort(items, "hands");
-		mEquips.mNeck = toEquipShort(items, "neck");
-		mEquips.mBracers = toEquipShort(items, "bracers");
-		mEquips.mMainHand = toEquipShort(items, "mainHand");
-		mEquips.mOffHand = toEquipShort(items, "offHand");
-		mEquips.mRightFinger = toEquipShort(items, "rightFinger");
-		mEquips.mLeftFinger = toEquipShort(items, "leftFinger");
-		
-		return new Hero(mName, mId, mLevel, mClass, isMale, mEquips, mActiveSkills, mPassiveSkills,
-						new Hero.Stats(data.getJSONObject("stats"), mLevel, getProgression(data.getJSONObject("progression"))));
 	}
 	
 	public static Equip translateJsonToEquip(JSONObject data) throws JSONException{		
@@ -399,78 +349,21 @@ public class Utils {
 			 		 mItemLevel, mSocketNum, 
 			 		 mArmor, 
 			 		 mPrimaryAttr, mSecandaryAttr, mPassiveAttr, mGems);
-	}	
-	
-	private static int getProgression(JSONObject progData) throws JSONException{
-		int prog = 5;
-		for(; prog>0; prog--)
-			if(progData.getJSONObject("act" + prog).getBoolean("completed"))
-				break;
-		
-		return prog;
 	}
 	
-	private static Skill toSkill(JSONObject skillData, boolean isActive) throws JSONException{
-		if(skillData == null) return null;
-		
-		JSONObject skill = skillData.getJSONObject("skill");
-		
-		String mName = skill.getString("name");;
-		String mIcon = skill.getString("icon");
-		String mDescription = skill.getString("description");
-		int mLevel = skill.getInt("level");
-		
-		boolean mHasRune = false;
-		
-		String mRuneName = null;
-		String mRuneDescription = null;
-		int mRuneType=0, mRuneLevel = 0;
-		
-		if(isActive){
-			JSONObject rune = skillData.getJSONObject("rune");
-			
-			mHasRune = (rune != null);
-			
-			if(mHasRune){
-				mRuneName = rune.getString("name");
-				mRuneDescription = rune.getString("description");
-				mRuneType = getRuneLevel(rune.getString("type"));
-				mRuneLevel = rune.getInt("level");
-			}
-		}
-		return new Skill(mName, mIcon, mDescription, mLevel, mHasRune,
-						 mRuneName, mRuneDescription, mRuneType, mRuneLevel);		
-	}
-	
-	private static EquipShort toEquipShort(JSONObject itemsData, String pos){		
-		if(itemsData == null) return null;
-		try{
-			JSONObject equipData = itemsData.getJSONObject(pos);
-			String mName = equipData.getString("name");
-			String mIcon = equipData.getString("icon");
-			ITEM_COLOR mColor = getItemColor(equipData.getString("displayColor"));
-			String mToolkitParam = equipData.getString("tooltipParams");
-			
-			return new EquipShort(mName, mIcon, mColor, mToolkitParam);
-		} catch(JSONException ex){}
-		
-		return null;
-		
-	}
-	
-	public static JSONObject downloadJSONData(String url) throws ClientProtocolException, IOException, JSONException{
+	public static JSONObject downloadJSONData(String url) throws ClientProtocolException, IOException, JSONException{		
 		URL u = new URL(url);
-        HttpURLConnection c = (HttpURLConnection) u.openConnection();
-        c.setRequestMethod("GET");
-        c.setUseCaches(false);
-        c.setAllowUserInteraction(false);
-        c.setConnectTimeout(Const.NETWORK_TIMEOUT);
-        c.setReadTimeout(Const.NETWORK_TIMEOUT);
-        c.connect();
-        int status = c.getResponseCode();
+        HttpURLConnection conn = (HttpURLConnection) u.openConnection();
+        conn.setRequestMethod("GET");
+        conn.setUseCaches(false);
+        conn.setAllowUserInteraction(false);
+        conn.setConnectTimeout(Const.NETWORK_TIMEOUT);
+        conn.setReadTimeout(Const.NETWORK_TIMEOUT);
+        conn.connect();
+        int status = conn.getResponseCode();
 
         if(status == 200){// OK
-        	BufferedReader br = new BufferedReader(new InputStreamReader(c.getInputStream()));
+        	BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             StringBuilder sb = new StringBuilder();
             String line;
             while ((line = br.readLine()) != null) {
