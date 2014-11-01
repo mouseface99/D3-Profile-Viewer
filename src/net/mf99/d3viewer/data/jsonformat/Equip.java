@@ -24,7 +24,7 @@ public class Equip extends JsonObjectBase{
 	
 	private AttributeList attributes;
 	private AttributesRaw attributesRaw;	
-	private ArrayList<Gem> gems;
+	private List<Gem> gems;
 	private double mBlockMin, mBlockMax;
 	
 	private ITEM_COLOR mColor;
@@ -137,7 +137,7 @@ public class Equip extends JsonObjectBase{
 		this.attributesRaw = attributesRaw;
 	}
 
-	public ArrayList<Gem> getGems() {
+	public List<Gem> getGems() {
 		if(gems == null)
 			gems = new ArrayList<Gem>();
 		return gems;

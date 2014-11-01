@@ -237,7 +237,7 @@ public class Utils {
 	}	
 	
 	public static JSONObject downloadJSONData(String url) throws ClientProtocolException, IOException, JSONException{
-		Log.d("MIKE", "Download JSON data from["+url+"]");
+		Log.d("D3Viewer", "Download JSON data from["+url+"]");
 		URL u = new URL(url);
         HttpURLConnection conn = (HttpURLConnection) u.openConnection();
         conn.setRequestMethod("GET");
